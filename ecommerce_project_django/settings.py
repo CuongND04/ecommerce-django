@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Các thành phần thêm vào
     'core',
+    'userauths'
 ]
 
 MIDDLEWARE = [
@@ -131,8 +132,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-  'site_header': "Desphixs Shop",
-  'site_brand': "You order, we deliver",
+  'site_header': "You order, we deliver",
+  'site_brand': "Desphixs Shop",
   'site_logo': "/assets/imgs/theme/loading.gif" ,
   'copyright':"desphixs-shop.com"
 }
+
+AUTH_USER_MODEL = 'userauths.User'
