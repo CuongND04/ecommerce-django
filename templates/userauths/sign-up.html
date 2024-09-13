@@ -1,0 +1,101 @@
+{% extends "partials/base.html" %} 
+{% load static %} 
+{% block content %}
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Đăng ký</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Đăng ký</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    
+    <!-- log in section start -->
+    <section class="log-in-section section-b-space">
+        <div class="container-fluid-lg w-100">
+            <div class="row">
+                <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                    <div class="image-contain">
+                        <img src="{% static 'assets/images/inner-page/sign-up.png' %}" class="img-fluid" alt="">
+                    </div>
+                </div>
+                
+                <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                    <div class="log-in-box">
+                        <div class="log-in-title">
+                            <h3>Tạo tài khoản mới</h3>
+                            {% if form.errors %}
+                            <div class="alert alert-danger">
+                              <strong>{{form.errors}}</strong>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="input-box pt-3">
+                            <form class="row g-4" method="POST">
+                              {% csrf_token %}
+                                <div class="col-12">
+                                  <div class="form-floating theme-form-floating">
+                                      {{form.username}}
+                                      <label for="username">Tên người dùng</label>
+                                  </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        {{form.email}}
+                                        <label for="email">Địa chỉ email</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        {{form.password1}}
+                                        <label for="password1">Mật khẩu</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                  <div class="form-floating theme-form-floating">
+                                      {{form.password2}}
+                                      <label for="password2">Xác nhận mật khẩu</label>
+                                  </div>
+                              </div>
+
+
+                                <div class="col-12">
+                                    <button class="btn btn-animation w-100" type="submit">Đăng ký</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div class="sign-up-box">
+                            <h4>Bạn đã có tài khoản?</h4>
+                            <a href="login.html">Đăng nhập</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-7 col-xl-6 col-lg-6"></div>
+            </div>
+        </div>
+    </section>
+    <!-- log in section end -->
+
+{% endblock content %}
+  

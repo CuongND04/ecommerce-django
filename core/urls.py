@@ -5,5 +5,5 @@ from core.views import index
 app_name = "core"
 
 urlpatterns = [
-  path("",index)
+  path("",index,name="index")
 ]

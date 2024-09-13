@@ -22,7 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     # gom tất cả các router con của core vào
-    path("",include("core.urls"))
+    path("",include("core.urls")),
+    path("user/",include("userauths.urls"))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root = settings.STATIC_ROOT)
