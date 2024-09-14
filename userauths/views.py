@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from userauths.forms import UserRegisterForm
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 from django.contrib import messages
+
 from .models import User
 # Create your views here.
 def register_view(request):
@@ -12,7 +13,7 @@ def register_view(request):
     if form.is_valid():
       new_user = form.save()
       username = form.cleaned_data.get("username") # form.cleaned_data chứa các dữ liệu đã được xử lý và xác thực từ form.
-      messages.success(request,f"Hey {username}, Your account was created successfully")
+      messages.success(request,f"Chúc mừng {username}, tài khoản của bạn đã được tạo thành công. ")
 
       new_user = authenticate(username=form.cleaned_data['email'],password=form.cleaned_data['password1']) # Xác thực thông tin đăng nhập 
       login(request,new_user) #  Nếu xác thực thành công, người dùng sẽ được đăng nhập
@@ -27,7 +28,7 @@ def register_view(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        messages.warning(request, f"Hey you are already Logged In.")
+        messages.warning(request, f"Bạn đã đăng nhập.")
         return redirect("core:index")
     
     if request.method == "POST":
@@ -41,15 +42,20 @@ def login_view(request):
 
             if user is not None:
                 login(request, user)
-                messages.success(request, "You are logged in.")
+                messages.success(request, "Bạn đã đăng nhập.")
                 next_url = request.GET.get("next", 'core:index')
                 return redirect(next_url)
             else:
-                messages.warning(request, "User Does Not Exist, create an account.")
+                messages.warning(request, "Tài khoản không tồn tại, hãy tạo tài khoản mới.")
     
         except:
-            messages.warning(request, f"User with {email} does not exist")
+            messages.warning(request, f"Tài khoản với {email} không tồn tại")
         
 
     
     return render(request, "userauths/sign-in.html")
+
+def logout_view(request):
+   logout(request)
+   messages.success(request,"Bạn đã đăng xuất.")
+   return redirect("userauths:sign-in")

@@ -9,11 +9,7 @@
     <meta name="description" content="Fastkart" />
     <meta name="keywords" content="Fastkart" />
     <meta name="author" content="Fastkart" />
-    <link
-      rel="icon"
-      href="assets/images/favicon/1.png"
-      type="image/x-icon"
-    />
+    <link rel="icon" href="assets/images/favicon/1.png" type="image/x-icon" />
     <title>On-demand last-mile delivery</title>
 
     <!-- Google font -->
@@ -45,7 +41,13 @@
     <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" />
 
     <!-- font-awesome css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -106,7 +108,8 @@
 
     <!-- Header Start -->
     <header class="pb-md-4 pb-0">
-      {% comment %} <div class="header-top">
+      {% comment %}
+      <div class="header-top">
         <div class="container-fluid-lg">
           <div class="row">
             <div class="col-xxl-3 d-xxl-block d-none">
@@ -260,7 +263,8 @@
             </div>
           </div>
         </div>
-      </div> {% endcomment %}
+      </div>
+      {% endcomment %}
 
       <div class="top-nav top-header sticky-header">
         <div class="container-fluid-lg">
@@ -277,16 +281,17 @@
                     <i class="fa-solid fa-bars"></i>
                   </span>
                 </button>
-                <a href="index.html" class="web-logo nav-logo">
+                <a href="{% url 'core:index' %}" class="web-logo nav-logo">
                   <img
-                    src="{% static 'assets/images/logo/1.png' %}"
+                    src="{% static 'assets/images/logo/logo.png' %}"
                     class="img-fluid blur-up lazyload"
                     alt=""
                   />
                 </a>
 
                 <div class="middle-box">
-                  {% comment %} <div class="location-box">
+                  {% comment %}
+                  <div class="location-box">
                     <button
                       class="btn location-button"
                       data-bs-toggle="modal"
@@ -298,7 +303,8 @@
                       <span class="locat-name">Your Location</span>
                       <i class="fa-solid fa-angle-down"></i>
                     </button>
-                  </div> {% endcomment %}
+                  </div>
+                  {% endcomment %}
 
                   <div class="search-box">
                     <div class="input-group">
@@ -455,25 +461,57 @@
                           <i data-feather="user"></i>
                         </div>
                         <div class="delivery-detail">
-                          <h6>Hello,</h6>
-                          <h5>My Account</h5>
+                          {% if request.user.is_authenticated %}
+                          <h5>Xin chào <strong>{{username}}</strong></h5>
+                          {% else %}
+                          <h5></h5>
+                          {% endif %}
                         </div>
                       </div>
 
-                      <div class="onhover-div onhover-div-login">
-                        <ul class="user-box-name">
+                      <div class="onhover-div onhover-div-login w-240">
+                        <ul class="user-box-name w-[300px]">
+                          {% if request.user.is_authenticated %}
                           <li class="product-box-contain">
-                            <i></i>
-                            <a href="login.html">Log In</a>
+                            <i class="p-2 fa-solid fa-circle-question"></i>
+                            <a
+                              class="d-inline-block"
+                              href="{% url 'userauths:sign-up' %}"
+                              >Quên mật khẩu</a
+                            >
+                          </li>
+                          <li class="product-box-contain">
+                            <i class="p-2 fa-solid fa-right-from-bracket"></i>
+                            <a
+                              class="d-inline-block"
+                              href="{% url 'userauths:sign-out' %}"
+                              >Đăng xuất</a
+                            >
+                          </li>
+                          {% else %}
+                          <li class="product-box-contain">
+                            <i
+                              class="p-2 fa-sharp fa-solid fa-right-to-bracket"
+                            ></i>
+                            <a
+                              class="d-inline-block"
+                              href="{% url 'userauths:sign-in' %}"
+                              >Đăng nhập</a
+                            >
                           </li>
 
                           <li class="product-box-contain">
-                            <a href="sign-up.html">Register</a>
+                            <i
+                              style="width: 30px; height: 30px"
+                              class="p-2 fa-solid fa-user-plus"
+                            ></i>
+                            <a
+                              class="d-inline-block"
+                              href="{% url 'userauths:sign-up' %}"
+                              >Đăng ký</a
+                            >
                           </li>
-
-                          <li class="product-box-contain">
-                            <a href="forgot.html">Forgot Password</a>
-                          </li>
+                          {% endif %}
                         </ul>
                       </div>
                     </li>
@@ -509,7 +547,10 @@
                   <ul class="category-list">
                     <li class="onhover-category-list">
                       <a href="javascript:void(0)" class="category-name">
-                        <img src="{% static 'assets/svg/1/vegetable.svg' %}" alt="" />
+                        <img
+                          src="{% static 'assets/svg/1/vegetable.svg' %}"
+                          alt=""
+                        />
                         <h6>Vegetables & Fruit</h6>
                         <i class="fa-solid fa-angle-right"></i>
                       </a>
@@ -632,7 +673,10 @@
 
                     <li class="onhover-category-list">
                       <a href="javascript:void(0)" class="category-name">
-                        <img src="{% static 'assets/svg/1/meats.svg' %}" alt="" />
+                        <img
+                          src="{% static 'assets/svg/1/meats.svg' %}"
+                          alt=""
+                        />
                         <h6>Meats & Seafood</h6>
                         <i class="fa-solid fa-angle-right"></i>
                       </a>
@@ -695,7 +739,10 @@
 
                     <li class="onhover-category-list">
                       <a href="javascript:void(0)" class="category-name">
-                        <img src="{% static 'assets/svg/1/breakfast.svg' %}" alt="" />
+                        <img
+                          src="{% static 'assets/svg/1/breakfast.svg' %}"
+                          alt=""
+                        />
                         <h6>Breakfast & Dairy</h6>
                         <i class="fa-solid fa-angle-right"></i>
                       </a>
@@ -785,7 +832,10 @@
 
                     <li class="onhover-category-list">
                       <a href="javascript:void(0)" class="category-name">
-                        <img src="{% static 'assets/svg/1/frozen.svg' %}" alt="" />
+                        <img
+                          src="{% static 'assets/svg/1/frozen.svg' %}"
+                          alt=""
+                        />
                         <h6>Frozen Foods</h6>
                         <i class="fa-solid fa-angle-right"></i>
                       </a>
@@ -818,7 +868,10 @@
 
                     <li class="onhover-category-list">
                       <a href="javascript:void(0)" class="category-name">
-                        <img src="{% static 'assets/svg/1/biscuit.svg' %}" alt="" />
+                        <img
+                          src="{% static 'assets/svg/1/biscuit.svg' %}"
+                          alt=""
+                        />
                         <h6>Biscuits & Snacks</h6>
                         <i class="fa-solid fa-angle-right"></i>
                       </a>
@@ -885,7 +938,10 @@
 
                     <li class="onhover-category-list">
                       <a href="javascript:void(0)" class="category-name">
-                        <img src="{% static 'assets/svg/1/grocery.svg' %}" alt="" />
+                        <img
+                          src="{% static 'assets/svg/1/grocery.svg' %}"
+                          alt=""
+                        />
                         <h6>Grocery & Staples</h6>
                         <i class="fa-solid fa-angle-right"></i>
                       </a>
@@ -1539,6 +1595,18 @@
                 </button>
               </div>
             </div>
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{message.tags}} mt-4">
+                  <strong>{{message}}</strong>
+                </div>
+              {% endfor %}
+            {% endif %}
+            <script>
+              setTimeout(()=>{
+                $(".alert").alert("close");
+              },3000)
+            </script>
           </div>
         </div>
       </div>
@@ -1661,7 +1729,7 @@
                 <div class="theme-logo">
                   <a href="index.html">
                     <img
-                      src="{% static 'assets/images/logo/1.png' %}"
+                      src="{% static 'assets/images/logo/logo.png' %}"
                       class="blur-up lazyload"
                       alt=""
                     />
@@ -2157,29 +2225,31 @@
     <!-- Location Modal End -->
 
     <!-- Cookie Bar Box Start -->
-      {% comment %} <div class="cookie-bar-box">
-        <div class="cookie-box">
-          <div class="cookie-image">
-            <img
-              src="{% static 'assets/images/cookie-bar.png' %}"
-              class="blur-up lazyload"
-              alt=""
-            />
-            <h2>Cookies!</h2>
-          </div>
-
-          <div class="cookie-contain">
-            <h5 class="text-content">
-              We use cookies to make your experience better
-            </h5>
-          </div>
+    {% comment %}
+    <div class="cookie-bar-box">
+      <div class="cookie-box">
+        <div class="cookie-image">
+          <img
+            src="{% static 'assets/images/cookie-bar.png' %}"
+            class="blur-up lazyload"
+            alt=""
+          />
+          <h2>Cookies!</h2>
         </div>
 
-        <div class="button-group">
-          <button class="btn privacy-button">Privacy Policy</button>
-          <button class="btn ok-button">OK</button>
+        <div class="cookie-contain">
+          <h5 class="text-content">
+            We use cookies to make your experience better
+          </h5>
         </div>
-      </div> {% endcomment %}
+      </div>
+
+      <div class="button-group">
+        <button class="btn privacy-button">Privacy Policy</button>
+        <button class="btn ok-button">OK</button>
+      </div>
+    </div>
+    {% endcomment %}
     <!-- Cookie Bar Box End -->
 
     <!-- Deal Box Modal Start -->
@@ -2286,7 +2356,8 @@
 
     <!-- Tap to top start -->
     <div class="theme-option">
-      {% comment %} <div class="setting-box">
+      {% comment %}
+      <div class="setting-box">
         <button class="btn setting-button">
           <i class="fa-solid fa-gear"></i>
         </button>
@@ -2337,12 +2408,11 @@
                   <button class="btn btn-2 rtl-outline">RTL</button>
                 </div>
               </li>
-
-
             </ul>
           </div>
         </div>
-      </div> {% endcomment %}
+      </div>
+      {% endcomment %}
 
       <div class="back-to-top">
         <a id="back-to-top" href="#">
@@ -2351,15 +2421,6 @@
       </div>
     </div>
     <!-- Tap to top end -->
-
-    <div class="setting-box buy-now mt-2">
-      <a
-        class="btn setting-button"
-        href="https://1.envato.market/gbvkjA"
-        target="_blank"
-        ><i class="fa-solid fa fa-cart-flatbed"></i
-      ></a>
-    </div>
 
     <!-- Bg overlay Start -->
     <div class="bg-overlay"></div>
