@@ -10,7 +10,7 @@
     <meta name="keywords" content="Fastkart" />
     <meta name="author" content="Fastkart" />
     <link rel="icon" href="assets/images/favicon/1.png" type="image/x-icon" />
-    <title>On-demand last-mile delivery</title>
+    <title>Fresh Mart</title>
 
     <!-- Google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -38,7 +38,7 @@
     />
 
     <!-- wow css -->
-    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" />
+    {% comment %} <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" /> {% endcomment %}
 
     <!-- font-awesome css -->
     <link
@@ -48,11 +48,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link
+    {% comment %} <link
       rel="stylesheet"
       type="text/css"
       href="{% static 'assets/css/vendors/font-awesome.css' %}"
-    />
+    /> {% endcomment %}
 
     <!-- feather icon css -->
     <link
@@ -74,7 +74,7 @@
     />
 
     <!-- Iconly css -->
-    <link
+    {% comment %} <link
       rel="stylesheet"
       type="text/css"
       href="{% static 'assets/css/bulk-style.css' %}"
@@ -83,7 +83,7 @@
       rel="stylesheet"
       type="text/css"
       href="{% static 'assets/css/vendors/animate.css' %}"
-    />
+    /> {% endcomment %}
 
     <!-- Template css -->
     <link
@@ -95,176 +95,10 @@
   </head>
 
   <body class="bg-effect">
-    <!-- Loader Start -->
-    <!-- <div class="fullpage-loader">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div> -->
-    <!-- Loader End -->
 
     <!-- Header Start -->
     <header class="pb-md-4 pb-0">
-      {% comment %}
-      <div class="header-top">
-        <div class="container-fluid-lg">
-          <div class="row">
-            <div class="col-xxl-3 d-xxl-block d-none">
-              <div class="top-left-header">
-                <i class="iconly-Location icli text-white"></i>
-                <span class="text-white"
-                  >1418 Riverwood Drive, CA 96052, US</span
-                >
-              </div>
-            </div>
 
-            <div class="col-xxl-6 col-lg-9 d-lg-block d-none">
-              <div class="header-offer">
-                <div class="notification-slider">
-                  <div>
-                    <div class="timer-notification">
-                      <h6>
-                        <strong class="me-1">Welcome to Fastkart!</strong>Wrap
-                        new offers/gift every signle day on Weekends.<strong
-                          class="ms-1"
-                          >New Coupon Code: Fast024
-                        </strong>
-                      </h6>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div class="timer-notification">
-                      <h6>
-                        Something you love is now on sale!
-                        <a href="shop-left-sidebar.html" class="text-white"
-                          >Buy Now !</a
-                        >
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-3">
-              <ul class="about-list right-nav-about">
-                <li class="right-nav-list">
-                  <div class="dropdown theme-form-select">
-                    <button
-                      class="btn dropdown-toggle"
-                      type="button"
-                      id="select-language"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <img
-                        src="{% static 'assets/images/country/united-states.png' %}"
-                        class="img-fluid blur-up lazyload"
-                        alt=""
-                      />
-                      <span>English</span>
-                    </button>
-                    <ul
-                      class="dropdown-menu dropdown-menu-end"
-                      aria-labelledby="select-language"
-                    >
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          href="javascript:void(0)"
-                          id="english"
-                        >
-                          <img
-                            src="{% static 'assets/images/country/united-kingdom.png' %}"
-                            class="img-fluid blur-up lazyload"
-                            alt=""
-                          />
-                          <span>English</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          href="javascript:void(0)"
-                          id="france"
-                        >
-                          <img
-                            src="{% static 'assets/images/country/germany.png' %}"
-                            class="img-fluid blur-up lazyload"
-                            alt=""
-                          />
-                          <span>Germany</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          href="javascript:void(0)"
-                          id="chinese"
-                        >
-                          <img
-                            src="{% static 'assets/images/country/turkish.png' %}"
-                            class="img-fluid blur-up lazyload"
-                            alt=""
-                          />
-                          <span>Turki</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="right-nav-list">
-                  <div class="dropdown theme-form-select">
-                    <button
-                      class="btn dropdown-toggle"
-                      type="button"
-                      id="select-dollar"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <span>USD</span>
-                    </button>
-                    <ul
-                      class="dropdown-menu dropdown-menu-end sm-dropdown-menu"
-                      aria-labelledby="select-dollar"
-                    >
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          id="aud"
-                          href="javascript:void(0)"
-                          >AUD</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          id="eur"
-                          href="javascript:void(0)"
-                          >EUR</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          id="cny"
-                          href="javascript:void(0)"
-                          >CNY</a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endcomment %}
 
       <div class="top-nav top-header sticky-header">
         <div class="container-fluid-lg">
@@ -284,27 +118,13 @@
                 <a href="{% url 'core:index' %}" class="web-logo nav-logo">
                   <img
                     src="{% static 'assets/images/logo/logo.png' %}"
-                    class="img-fluid blur-up lazyload"
+                    class="img-fluid"
                     alt=""
                   />
                 </a>
 
                 <div class="middle-box">
-                  {% comment %}
-                  <div class="location-box">
-                    <button
-                      class="btn location-button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#locationModal"
-                    >
-                      <span class="location-arrow">
-                        <i data-feather="map-pin"></i>
-                      </span>
-                      <span class="locat-name">Your Location</span>
-                      <i class="fa-solid fa-angle-down"></i>
-                    </button>
-                  </div>
-                  {% endcomment %}
+
 
                   <div class="search-box">
                     <div class="input-group">
@@ -391,7 +211,7 @@
                                 >
                                   <img
                                     src="{% static 'assets/images/vegetable/product/1.png' %}"
-                                    class="blur-up lazyload"
+                                    class=""
                                     alt=""
                                   />
                                 </a>
@@ -416,7 +236,7 @@
                                 >
                                   <img
                                     src="{% static 'assets/images/vegetable/product/2.png' %}"
-                                    class="blur-up lazyload"
+                                    class="    "
                                     alt=""
                                   />
                                 </a>
@@ -1613,7 +1433,7 @@
     </header>
     <!-- Header End -->
 
-    <!-- mobile fix menu start -->
+    <!-- mobile fix menu start (responsive ) -->
     <div class="mobile-menu d-md-none d-block mobile-cart">
       <ul>
         <li class="active">
@@ -1666,7 +1486,7 @@
                   <div class="service-image">
                     <img
                       src="{% static 'assets/svg/product.svg' %}"
-                      class="blur-up lazyload"
+                      class="    "
                       alt=""
                     />
                   </div>
@@ -1680,7 +1500,7 @@
                   <div class="service-image">
                     <img
                       src="{% static 'assets/svg/delivery.svg' %}"
-                      class="blur-up lazyload"
+                      class="    "
                       alt=""
                     />
                   </div>
@@ -1694,7 +1514,7 @@
                   <div class="service-image">
                     <img
                       src="{% static 'assets/svg/discount.svg' %}"
-                      class="blur-up lazyload"
+                      class="    "
                       alt=""
                     />
                   </div>
@@ -1708,7 +1528,7 @@
                   <div class="service-image">
                     <img
                       src="{% static 'assets/svg/market.svg' %}"
-                      class="blur-up lazyload"
+                      class="    "
                       alt=""
                     />
                   </div>
@@ -1724,13 +1544,13 @@
 
         <div class="main-footer section-b-space section-t-space">
           <div class="row g-md-4 g-3">
-            <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="col-xl-4 col-lg-4 col-sm-6">
               <div class="footer-logo">
                 <div class="theme-logo">
                   <a href="index.html">
                     <img
                       src="{% static 'assets/images/logo/logo.png' %}"
-                      class="blur-up lazyload"
+                      class="    "
                       alt=""
                     />
                   </a>
@@ -1758,7 +1578,7 @@
               </div>
             </div>
 
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
               <div class="footer-title">
                 <h4>Categories</h4>
               </div>
@@ -1799,7 +1619,7 @@
               </div>
             </div>
 
-            <div class="col-xl col-lg-2 col-sm-3">
+            <div class="col-xl-3 col-lg-2 col-sm-3">
               <div class="footer-title">
                 <h4>Useful Links</h4>
               </div>
@@ -1829,44 +1649,7 @@
               </div>
             </div>
 
-            <div class="col-xl-2 col-sm-3">
-              <div class="footer-title">
-                <h4>Help Center</h4>
-              </div>
-
-              <div class="footer-contain">
-                <ul>
-                  <li>
-                    <a href="order-success.html" class="text-content"
-                      >Your Order</a
-                    >
-                  </li>
-                  <li>
-                    <a href="user-dashboard.html" class="text-content"
-                      >Your Account</a
-                    >
-                  </li>
-                  <li>
-                    <a href="order-tracking.html" class="text-content"
-                      >Track Order</a
-                    >
-                  </li>
-                  <li>
-                    <a href="wishlist.html" class="text-content"
-                      >Your Wishlist</a
-                    >
-                  </li>
-                  <li>
-                    <a href="search.html" class="text-content">Search</a>
-                  </li>
-                  <li>
-                    <a href="faq.html" class="text-content">FAQ</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="col-xl-2 col-lg-4 col-sm-6">
               <div class="footer-title">
                 <h4>Contact Us</h4>
               </div>
@@ -1893,7 +1676,7 @@
                     </div>
                   </li>
 
-                  <li class="social-app mb-0">
+                  {% comment %} <li class="social-app mb-0">
                     <h5 class="mb-2 text-content">Download App :</h5>
                     <ul>
                       <li class="mb-0">
@@ -1903,7 +1686,7 @@
                         >
                           <img
                             src="{% static 'assets/images/playstore.svg' %}"
-                            class="blur-up lazyload"
+                            class="    "
                             alt=""
                           />
                         </a>
@@ -1915,13 +1698,13 @@
                         >
                           <img
                             src="{% static 'assets/images/appstore.svg' %}"
-                            class="blur-up lazyload"
+                            class="    "
                             alt=""
                           />
                         </a>
                       </li>
                     </ul>
-                  </li>
+                  </li> {% endcomment %}
                 </ul>
               </div>
             </div>
@@ -1930,16 +1713,16 @@
 
         <div class="sub-footer section-small-space">
           <div class="reserve">
-            <h6 class="text-content">©2022 Fastkart All rights reserved</h6>
+            <h6 class="text-content">©2024 Python</h6>
           </div>
 
-          <div class="payment">
+          {% comment %} <div class="payment">
             <img
               src="{% static 'assets/images/payment/1.png' %}"
-              class="blur-up lazyload"
+              class="    "
               alt=""
             />
-          </div>
+          </div> {% endcomment %}
 
           <div class="social-link">
             <h6 class="text-content">Stay connected :</h6>
@@ -1999,7 +1782,7 @@
                 <div class="slider-image">
                   <img
                     src="{% static 'assets/images/product/category/1.jpg' %}"
-                    class="img-fluid blur-up lazyload"
+                    class="img-fluid     "
                     alt=""
                   />
                 </div>
@@ -2231,7 +2014,7 @@
         <div class="cookie-image">
           <img
             src="{% static 'assets/images/cookie-bar.png' %}"
-            class="blur-up lazyload"
+            class="    "
             alt=""
           />
           <h2>Cookies!</h2>
@@ -2284,7 +2067,7 @@
                     <a href="shop-left-sidebar.html" class="deal-image">
                       <img
                         src="{% static 'assets/images/vegetable/product/10.png' %}"
-                        class="blur-up lazyload"
+                        class="    "
                         alt=""
                       />
                     </a>
@@ -2301,7 +2084,7 @@
                     <a href="shop-left-sidebar.html" class="deal-image">
                       <img
                         src="{% static 'assets/images/vegetable/product/11.png' %}"
-                        class="blur-up lazyload"
+                        class="    "
                         alt=""
                       />
                     </a>
@@ -2318,7 +2101,7 @@
                     <a href="shop-left-sidebar.html" class="deal-image">
                       <img
                         src="{% static 'assets/images/vegetable/product/12.png' %}"
-                        class="blur-up lazyload"
+                        class="    "
                         alt=""
                       />
                     </a>
@@ -2335,7 +2118,7 @@
                     <a href="shop-left-sidebar.html" class="deal-image">
                       <img
                         src="{% static 'assets/images/vegetable/product/13.png' %}"
-                        class="blur-up lazyload"
+                        class="    "
                         alt=""
                       />
                     </a>
@@ -2423,7 +2206,7 @@
     <!-- Tap to top end -->
 
     <!-- Bg overlay Start -->
-    <div class="bg-overlay"></div>
+    {% comment %} <div class="bg-overlay"></div> {% endcomment %}
     <!-- Bg overlay End -->
 
     <!-- latest jquery-->
@@ -2435,14 +2218,14 @@
     <!-- Bootstrap js-->
     <script src="{% static 'assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap/bootstrap-notify.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap/popper.min.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/bootstrap/popper.min.js' %}"></script> {% endcomment %}
 
     <!-- feather icon js-->
     <script src="{% static 'assets/js/feather/feather.min.js' %}"></script>
     <script src="{% static 'assets/js/feather/feather-icon.js' %}"></script>
 
-    <!-- Lazyload Js -->
-    <script src="{% static 'assets/js/lazysizes.min.js' %}"></script>
+    <!--   Js -->
+    {% comment %} <script src="{% static 'assets/js/lazysizes.min.js' %}"></script> {% endcomment %}
 
     <!-- Slick js-->
     <script src="{% static 'assets/js/slick/slick.js' %}"></script>
@@ -2450,25 +2233,25 @@
     <script src="{% static 'assets/js/slick/custom_slick.js' %}"></script>
 
     <!-- Auto Height Js -->
-    <script src="{% static 'assets/js/auto-height.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/auto-height.js' %}"></script> {% endcomment %}
 
     <!-- Timer Js -->
     <script src="{% static 'assets/js/timer1.js' %}"></script>
 
     <!-- Fly Cart Js -->
-    <script src="{% static 'assets/js/fly-cart.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/fly-cart.js' %}"></script> {% endcomment %}
 
     <!-- Quantity js -->
     <script src="{% static 'assets/js/quantity-2.js' %}"></script>
 
     <!-- WOW js -->
-    <script src="{% static 'assets/js/wow.min.js' %}"></script>
-    <script src="{% static 'assets/js/custom-wow.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/custom-wow.js' %}"></script> {% endcomment %}
 
     <!-- script js -->
     <script src="{% static 'assets/js/script.js' %}"></script>
 
     <!-- thme setting js -->
-    <script src="{% static 'assets/js/theme-setting.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/theme-setting.js' %}"></script> {% endcomment %}
   </body>
 </html>
