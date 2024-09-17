@@ -1,80 +1,114 @@
-{% extends "partials/base.html" %} 
-{% load static %} 
-{% block content %}
+{% extends "partials/base.html" %} {% load static %} {% block content %}
 
+<section class="vh-100 mt-5">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid"
+          alt="Sample image"
+        />
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <div
+            class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start"
+          >
+            <p class="lead fw-normal mb-0 me-3">Đăng nhập với</p>
+            <button
+              type="button"
+              data-mdb-button-init
+              data-mdb-ripple-init
+              class="btn btn-primary btn-floating mx-1"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </button>
 
-    <!-- Breadcrumb Section Start -->
-    <section class="breadscrumb-section pt-0">
-        <div class="container-fluid-lg">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadscrumb-contain">
-                        {% comment %} <h2 class="mb-2">Đăng nhập</h2> {% endcomment %}
-                        <nav>
-                            <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item">
-                                    <a href="index.html">
-                                        <i class="fa-solid fa-house"></i>
-                                    </a>
-                                </li>
-                                <li class="breadcrumb-item active">Đăng nhập</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
+            <button
+              type="button"
+              data-mdb-button-init
+              data-mdb-ripple-init
+              class="btn btn-primary btn-floating mx-1"
+            >
+              <i class="fab fa-twitter"></i>
+            </button>
+
+            <button
+              type="button"
+              data-mdb-button-init
+              data-mdb-ripple-init
+              class="btn btn-primary btn-floating mx-1"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </button>
+          </div>
+
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0">Hoặc</p>
+          </div>
+
+        <form method="POST">
+            {% csrf_token %}
+          <!-- Email input -->
+          <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="email">Địa chỉ email</label>
+
+            <input
+              type="email"
+              id="email"
+              class="form-control form-control-lg"
+              placeholder="Enter a valid email address"
+               name="email"
+            />
+          </div>
+
+          <!-- Password input -->
+          <div data-mdb-input-init class="form-outline mb-3">
+            <label class="form-label" for="form3Example4">Mật khẩu</label>
+
+            <input
+            name="password" id="password"
+              type="password"
+              class="form-control form-control-lg"
+              placeholder="Enter password"
+            />
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-0">
+              <input
+                class="form-check-input me-2"
+                type="checkbox"
+                value=""
+                id="form2Example3"
+              />
+              <label class="form-check-label" for="form2Example3">
+                Remember me
+              </label>
             </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
+            <a href="#!" class="text-body">Forgot password?</a>
+          </div>
 
-    <!-- log in section start -->
-    <section class="log-in-section background-image-2 section-b-space">
-        <div class="container-fluid-lg w-100">
-            <div class="row">
-                <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
-                    <div class="image-contain">
-                        <img src="{% static 'assets/images/inner-page/log-in.png' %}" class="img-fluid" alt="">
-                    </div>
-                </div>
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button
+              type="submit"
+              data-mdb-button-init
+              data-mdb-ripple-init
+              class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem"
+            >
+              Đăng nhập
+            </button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">
+              Bạn chưa có tài khoản?
+              <a href="{% url 'userauths:sign-up' %}" class="link-danger">Đăng ký</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
-                    <div class="log-in-box">
-                        <div class="log-in-title">
-                            <h3>Đăng nhập</h3>
-                        </div>
-
-                        <div class="input-box">
-                            <form class="row g-4" method="POST">
-                              {% csrf_token %}
-                                <div class="col-12">
-                                    <div class="form-floating theme-form-floating log-in-form">
-                                        <input type="email" required class="form-control" name="email" id="email" placeholder="Email Address">
-                                        <label for="email">Địa chỉ email</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-floating  theme-form-floating log-in-form">
-                                        <input type="password" required class="form-control" name="password" id="password" placeholder="Password">
-                                        <label for="password">Mật khẩu</label>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-12">
-                                    <button class="btn btn-animation w-100 justify-content-center" type="submit">Đăng nhập</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="sign-up-box">
-                            <h4>Bạn chưa có tài khoản?</h4>
-                            <a href="{% url 'userauths:sign-up' %}">Đăng ký</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- log in section end -->
 {% endblock content %}

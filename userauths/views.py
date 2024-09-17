@@ -42,14 +42,14 @@ def login_view(request):
 
             if user is not None:
                 login(request, user)
-                messages.success(request, "Bạn đã đăng nhập.")
+                messages.success(request, "Bạn vừa đăng nhập thành công.")
                 next_url = request.GET.get("next", 'core:index')
                 return redirect(next_url)
             else:
-                messages.warning(request, "Tài khoản không tồn tại, hãy tạo tài khoản mới.")
+                messages.warning(request, "Tài khoản hoặc mật khẩu không chính xác.")
     
         except:
-            messages.warning(request, f"Tài khoản với {email} không tồn tại")
+            messages.warning(request, f"Tài khoản với \"{email}\" không tồn tại")
         
 
     

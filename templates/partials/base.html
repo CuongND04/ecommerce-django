@@ -1,2257 +1,297 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fastkart" />
-    <meta name="keywords" content="Fastkart" />
-    <meta name="author" content="Fastkart" />
-    <link rel="icon" href="assets/images/favicon/1.png" type="image/x-icon" />
-    <title>Fresh Mart</title>
+<html lang="zxx">
 
-    <!-- Google font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="../../css2?family=Russo+One&display=swap" rel="stylesheet" />
-    <link href="../../css2-1?family=Pacifico&display=swap" rel="stylesheet" />
-    <link
-      href="../../css2-2?family=Kaushan+Script&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="../../css2-3?family=Exo+2:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="../../css2-4?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
 
-    <!-- bootstrap css -->
-    <link
-      id="rtl-link"
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'assets/css/vendors/bootstrap.css' %}"
-    />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="../../css2-4?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Css Styles --> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css">
+   
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
 
-    <!-- wow css -->
-    {% comment %} <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" /> {% endcomment %}
+   
+   
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css">
 
-    <!-- font-awesome css -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    {% comment %} <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'assets/css/vendors/font-awesome.css' %}"
-    /> {% endcomment %}
+   
 
-    <!-- feather icon css -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'assets/css/vendors/feather-icon.css' %}"
-    />
+</head>
 
-    <!-- slick css -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'assets/css/vendors/slick/slick.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'assets/css/vendors/slick/slick-theme.css' %}"
-    />
+<body>
 
-    <!-- Iconly css -->
-    {% comment %} <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'assets/css/bulk-style.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'assets/css/vendors/animate.css' %}"
-    /> {% endcomment %}
+    <!-- Humberger Begin -->
+    {% comment %} <div class="humberger__menu__overlay"></div>
 
-    <!-- Template css -->
-    <link
-      id="color-link"
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'assets/css/style.css' %}"
-    />
-  </head>
-
-  <body class="bg-effect">
-
-    <!-- Header Start -->
-    <header class="pb-md-4 pb-0">
-
-
-      <div class="top-nav top-header sticky-header">
-        <div class="container-fluid-lg">
-          <div class="row">
-            <div class="col-12">
-              <div class="navbar-top">
-                <button
-                  class="navbar-toggler d-xl-none d-inline navbar-menu-button"
-                  type="button"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#primaryMenu"
-                >
-                  <span class="navbar-toggler-icon">
-                    <i class="fa-solid fa-bars"></i>
-                  </span>
-                </button>
-                <a href="{% url 'core:index' %}" class="web-logo nav-logo">
-                  <img
-                    src="{% static 'assets/images/logo/logo.png' %}"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </a>
-
-                <div class="middle-box">
-
-
-                  <div class="search-box">
-                    <div class="input-group">
-                      <input
-                        type="search"
-                        class="form-control"
-                        placeholder="I'm searching for..."
-                        aria-label="Recipient's username"
-                        aria-describedby="button-addon2"
-                      />
-                      <button class="btn" type="button" id="button-addon2">
-                        <i data-feather="search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="rightside-box">
-                  <div class="search-full">
-                    <div class="input-group">
-                      <span class="input-group-text">
-                        <i data-feather="search" class="font-light"></i>
-                      </span>
-                      <input
-                        type="text"
-                        class="form-control search-type"
-                        placeholder="Search here.."
-                      />
-                      <span class="input-group-text close-search">
-                        <i data-feather="x" class="font-light"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <ul class="right-side-menu">
-                    <li class="right-side">
-                      <div class="delivery-login-box">
-                        <div class="delivery-icon">
-                          <div class="search-box">
-                            <i data-feather="search"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="right-side">
-                      <a href="contact-us.html" class="delivery-login-box">
-                        <div class="delivery-icon">
-                          <i data-feather="phone-call"></i>
-                        </div>
-                        <div class="delivery-detail">
-                          <h6>24/7 Delivery</h6>
-                          <h5>+91 888 104 2340</h5>
-                        </div>
-                      </a>
-                    </li>
-                    <li class="right-side">
-                      <a
-                        href="wishlist.html"
-                        class="btn p-0 position-relative header-wishlist"
-                      >
-                        <i data-feather="heart"></i>
-                      </a>
-                    </li>
-                    <li class="right-side">
-                      <div class="onhover-dropdown header-badge">
-                        <button
-                          type="button"
-                          class="btn p-0 position-relative header-wishlist"
-                        >
-                          <i data-feather="shopping-cart"></i>
-                          <span
-                            class="position-absolute top-0 start-100 translate-middle badge"
-                            >2
-                            <span class="visually-hidden">unread messages</span>
-                          </span>
-                        </button>
-
-                        <div class="onhover-div">
-                          <ul class="cart-list">
-                            <li class="product-box-contain">
-                              <div class="drop-cart">
-                                <a
-                                  href="product-left-thumbnail.html"
-                                  class="drop-image"
-                                >
-                                  <img
-                                    src="{% static 'assets/images/vegetable/product/1.png' %}"
-                                    class=""
-                                    alt=""
-                                  />
-                                </a>
-
-                                <div class="drop-contain">
-                                  <a href="product-left-thumbnail.html">
-                                    <h5>Fantasy Crunchy Choco Chip Cookies</h5>
-                                  </a>
-                                  <h6><span>1 x</span> $80.58</h6>
-                                  <button class="close-button close_button">
-                                    <i class="fa-solid fa-xmark"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-
-                            <li class="product-box-contain">
-                              <div class="drop-cart">
-                                <a
-                                  href="product-left-thumbnail.html"
-                                  class="drop-image"
-                                >
-                                  <img
-                                    src="{% static 'assets/images/vegetable/product/2.png' %}"
-                                    class="    "
-                                    alt=""
-                                  />
-                                </a>
-
-                                <div class="drop-contain">
-                                  <a href="product-left-thumbnail.html">
-                                    <h5>
-                                      Peanut Butter Bite Premium Butter Cookies
-                                      600 g
-                                    </h5>
-                                  </a>
-                                  <h6><span>1 x</span> $25.68</h6>
-                                  <button class="close-button close_button">
-                                    <i class="fa-solid fa-xmark"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-
-                          <div class="price-box">
-                            <h5>Total :</h5>
-                            <h4 class="theme-color fw-bold">$106.58</h4>
-                          </div>
-
-                          <div class="button-group">
-                            <a href="cart.html" class="btn btn-sm cart-button"
-                              >View Cart</a
-                            >
-                            <a
-                              href="checkout.html"
-                              class="btn btn-sm cart-button theme-bg-color text-white"
-                              >Checkout</a
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="right-side onhover-dropdown">
-                      <div class="delivery-login-box">
-                        <div class="delivery-icon">
-                          <i data-feather="user"></i>
-                        </div>
-                        <div class="delivery-detail">
-                          {% if request.user.is_authenticated %}
-                          <h5>Xin chào <strong>{{username}}</strong></h5>
-                          {% else %}
-                          <h5></h5>
-                          {% endif %}
-                        </div>
-                      </div>
-
-                      <div class="onhover-div onhover-div-login w-240">
-                        <ul class="user-box-name w-[300px]">
-                          {% if request.user.is_authenticated %}
-                          <li class="product-box-contain">
-                            <i class="p-2 fa-solid fa-circle-question"></i>
-                            <a
-                              class="d-inline-block"
-                              href="{% url 'userauths:sign-up' %}"
-                              >Quên mật khẩu</a
-                            >
-                          </li>
-                          <li class="product-box-contain">
-                            <i class="p-2 fa-solid fa-right-from-bracket"></i>
-                            <a
-                              class="d-inline-block"
-                              href="{% url 'userauths:sign-out' %}"
-                              >Đăng xuất</a
-                            >
-                          </li>
-                          {% else %}
-                          <li class="product-box-contain">
-                            <i
-                              class="p-2 fa-sharp fa-solid fa-right-to-bracket"
-                            ></i>
-                            <a
-                              class="d-inline-block"
-                              href="{% url 'userauths:sign-in' %}"
-                              >Đăng nhập</a
-                            >
-                          </li>
-
-                          <li class="product-box-contain">
-                            <i
-                              style="width: 30px; height: 30px"
-                              class="p-2 fa-solid fa-user-plus"
-                            ></i>
-                            <a
-                              class="d-inline-block"
-                              href="{% url 'userauths:sign-up' %}"
-                              >Đăng ký</a
-                            >
-                          </li>
-                          {% endif %}
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a href="#"><img src="{% static 'assets/img/logo.png' %}" alt=""></a>
         </div>
-      </div>
-
-      <div class="container-fluid-lg">
-        <div class="row">
-          <div class="col-12">
-            <div class="header-nav">
-              <div class="header-nav-left">
-                <button class="dropdown-category">
-                  <i data-feather="align-left"></i>
-                  <span>All Categories</span>
-                </button>
-
-                <div class="category-dropdown">
-                  <div class="category-title">
-                    <h5>Categories</h5>
-                    <button
-                      type="button"
-                      class="btn p-0 close-button text-content"
-                    >
-                      <i class="fa-solid fa-xmark"></i>
-                    </button>
-                  </div>
-
-                  <ul class="category-list">
-                    <li class="onhover-category-list">
-                      <a href="javascript:void(0)" class="category-name">
-                        <img
-                          src="{% static 'assets/svg/1/vegetable.svg' %}"
-                          alt=""
-                        />
-                        <h6>Vegetables & Fruit</h6>
-                        <i class="fa-solid fa-angle-right"></i>
-                      </a>
-
-                      <div class="onhover-category-box">
-                        <div class="list-1">
-                          <div class="category-title-box">
-                            <h5>Organic Vegetables</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)">Potato & Tomato</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Cucumber & Capsicum</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Leafy Vegetables</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Root Vegetables</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Beans & Okra</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Cabbage & Cauliflower</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Gourd & Drumstick</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Specialty</a>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div class="list-2">
-                          <div class="category-title-box">
-                            <h5>Fresh Fruit</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)">Banana & Papaya</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Kiwi, Citrus Fruit</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Apples & Pomegranate</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Seasonal Fruits</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Mangoes</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Fruit Baskets</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="onhover-category-list">
-                      <a href="javascript:void(0)" class="category-name">
-                        <img src="{% static 'assets/svg/1/cup.svg' %}" alt="" />
-                        <h6>Beverages</h6>
-                        <i class="fa-solid fa-angle-right"></i>
-                      </a>
-
-                      <div class="onhover-category-box w-100">
-                        <div class="list-1">
-                          <div class="category-title-box">
-                            <h5>Energy & Soft Drinks</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Soda & Cocktail Mix</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Soda & Cocktail Mix</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Sports & Energy Drinks</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Non Alcoholic Drinks</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Packaged Water</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Spring Water</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Flavoured Water</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="onhover-category-list">
-                      <a href="javascript:void(0)" class="category-name">
-                        <img
-                          src="{% static 'assets/svg/1/meats.svg' %}"
-                          alt=""
-                        />
-                        <h6>Meats & Seafood</h6>
-                        <i class="fa-solid fa-angle-right"></i>
-                      </a>
-
-                      <div class="onhover-category-box">
-                        <div class="list-1">
-                          <div class="category-title-box">
-                            <h5>Meat</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)">Fresh Meat</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Frozen Meat</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Marinated Meat</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Fresh & Frozen Meat</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div class="list-2">
-                          <div class="category-title-box">
-                            <h5>Seafood</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)">Fresh Water Fish</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Dry Fish</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Frozen Fish & Seafood</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Marine Water Fish</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Canned Seafood</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Prawans & Shrimps</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Other Seafood</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="onhover-category-list">
-                      <a href="javascript:void(0)" class="category-name">
-                        <img
-                          src="{% static 'assets/svg/1/breakfast.svg' %}"
-                          alt=""
-                        />
-                        <h6>Breakfast & Dairy</h6>
-                        <i class="fa-solid fa-angle-right"></i>
-                      </a>
-
-                      <div class="onhover-category-box">
-                        <div class="list-1">
-                          <div class="category-title-box">
-                            <h5>Breakfast Cereals</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)">Oats & Porridge</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Kids Cereal</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Muesli</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Flakes</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Granola & Cereal Bars</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Instant Noodles</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Pasta & Macaroni</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Frozen Non-Veg Snacks</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div class="list-2">
-                          <div class="category-title-box">
-                            <h5>Dairy</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)">Milk</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Curd</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Paneer, Tofu & Cream</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Butter & Margarine</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Condensed, Powdered Milk</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Buttermilk & Lassi</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Yogurt & Shrikhand</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Flavoured, Soya Milk</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="onhover-category-list">
-                      <a href="javascript:void(0)" class="category-name">
-                        <img
-                          src="{% static 'assets/svg/1/frozen.svg' %}"
-                          alt=""
-                        />
-                        <h6>Frozen Foods</h6>
-                        <i class="fa-solid fa-angle-right"></i>
-                      </a>
-
-                      <div class="onhover-category-box w-100">
-                        <div class="list-1">
-                          <div class="category-title-box">
-                            <h5>Noodle, Pasta</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)">Instant Noodles</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Hakka Noodles</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Cup Noodles</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Vermicelli</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Instant Pasta</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="onhover-category-list">
-                      <a href="javascript:void(0)" class="category-name">
-                        <img
-                          src="{% static 'assets/svg/1/biscuit.svg' %}"
-                          alt=""
-                        />
-                        <h6>Biscuits & Snacks</h6>
-                        <i class="fa-solid fa-angle-right"></i>
-                      </a>
-
-                      <div class="onhover-category-box">
-                        <div class="list-1">
-                          <div class="category-title-box">
-                            <h5>Biscuits & Cookies</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)">Salted Biscuits</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Marie, Health, Digestive</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Cream Biscuits & Wafers</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Glucose & Milk Biscuits</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Cookies</a>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div class="list-2">
-                          <div class="category-title-box">
-                            <h5>Bakery Snacks</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Bread Sticks & Lavash</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Cheese & Garlic Bread</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Puffs, Patties, Sandwiches</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Breadcrumbs & Croutons</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="onhover-category-list">
-                      <a href="javascript:void(0)" class="category-name">
-                        <img
-                          src="{% static 'assets/svg/1/grocery.svg' %}"
-                          alt=""
-                        />
-                        <h6>Grocery & Staples</h6>
-                        <i class="fa-solid fa-angle-right"></i>
-                      </a>
-
-                      <div class="onhover-category-box">
-                        <div class="list-1">
-                          <div class="category-title-box">
-                            <h5>Grocery</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Lemon, Ginger & Garlic</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Indian & Exotic Herbs</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Organic Vegetables</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Organic Fruits</a>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div class="list-2">
-                          <div class="category-title-box">
-                            <h5>Organic Staples</h5>
-                          </div>
-                          <ul>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Organic Dry Fruits</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Organic Dals & Pulses</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Organic Millet & Flours</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Organic Sugar, Jaggery</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Organic Masalas & Spices</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Organic Rice, Other Rice</a
-                              >
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)">Organic Flours</a>
-                            </li>
-                            <li>
-                              <a href="javascript:void(0)"
-                                >Organic Edible Oil, Ghee</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="header-nav-middle">
-                <div
-                  class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky"
-                >
-                  <div
-                    class="offcanvas offcanvas-collapse order-xl-2"
-                    id="primaryMenu"
-                  >
-                    <div class="offcanvas-header navbar-shadow">
-                      <h5>Menu</h5>
-                      <button
-                        class="btn-close lead"
-                        type="button"
-                        data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="offcanvas-body">
-                      <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                          <a
-                            class="nav-link dropdown-toggle"
-                            href="javascript:void(0)"
-                            data-bs-toggle="dropdown"
-                            >Home</a
-                          >
-
-                          <ul class="dropdown-menu">
-                            <li>
-                              <a class="dropdown-item" href="index.html"
-                                >Kartshop</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="index-2.html"
-                                >Sweetshop</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="index-3.html"
-                                >Organic</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="index-4.html"
-                                >Supershop</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="index-5.html"
-                                >Classic shop</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="index-6.html"
-                                >Furniture</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="index-7.html"
-                                >Search Oriented</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="index-8.html"
-                                >Category Focus</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="index-9.html"
-                                >Fashion</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                          <a
-                            class="nav-link dropdown-toggle"
-                            href="javascript:void(0)"
-                            data-bs-toggle="dropdown"
-                            >Shop</a
-                          >
-
-                          <ul class="dropdown-menu">
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="shop-category-slider.html"
-                                >Shop Category Slider</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="shop-category.html"
-                                >Shop Category Sidebar</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="shop-banner.html"
-                                >Shop Banner</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="shop-left-sidebar.html"
-                                >Shop Left Sidebar</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="shop-list.html"
-                                >Shop List</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="shop-right-sidebar.html"
-                                >Shop Right Sidebar</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="shop-top-filter.html"
-                                >Shop Top Filter</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                          <a
-                            class="nav-link dropdown-toggle"
-                            href="javascript:void(0)"
-                            data-bs-toggle="dropdown"
-                            >Product</a
-                          >
-
-                          <ul class="dropdown-menu">
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="product-4-image.html"
-                                >Product 4 Image</a
-                              >
-                            </li>
-                            <li class="sub-dropdown-hover">
-                              <a href="javascript:void(0)" class="dropdown-item"
-                                >Product Thumbnail</a
-                              >
-                              <ul class="sub-menu">
-                                <li>
-                                  <a href="product-left-thumbnail.html"
-                                    >Left Thumbnail</a
-                                  >
-                                </li>
-
-                                <li>
-                                  <a href="product-right-thumbnail.html"
-                                    >Right Thumbnail</a
-                                  >
-                                </li>
-
-                                <li>
-                                  <a href="product-bottom-thumbnail.html"
-                                    >Bottom Thumbnail</a
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <a
-                                href="product-bundle.html"
-                                class="dropdown-item"
-                                >Product Bundle</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                href="product-slider.html"
-                                class="dropdown-item"
-                                >Product Slider</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                href="product-sticky.html"
-                                class="dropdown-item"
-                                >Product Sticky</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-
-                        <li class="nav-item dropdown dropdown-mega">
-                          <a
-                            class="nav-link dropdown-toggle ps-xl-2 ps-0"
-                            href="javascript:void(0)"
-                            data-bs-toggle="dropdown"
-                            >Mega Menu</a
-                          >
-
-                          <div class="dropdown-menu dropdown-menu-2">
-                            <div class="row">
-                              <div class="dropdown-column col-xl-3">
-                                <h5 class="dropdown-header">
-                                  Daily Vegetables
-                                </h5>
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Beans & Brinjals</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Broccoli & Cauliflower</a
-                                >
-
-                                <a
-                                  href="shop-left-sidebar.html"
-                                  class="dropdown-item"
-                                  >Chilies, Garlic</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Vegetables & Salads</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Gourd, Cucumber</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Herbs & Sprouts</a
-                                >
-
-                                <a
-                                  href="demo-personal-portfolio.html"
-                                  class="dropdown-item"
-                                  >Lettuce & Leafy</a
-                                >
-                              </div>
-
-                              <div class="dropdown-column col-xl-3">
-                                <h5 class="dropdown-header">Baby Tender</h5>
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Beans & Brinjals</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Broccoli & Cauliflower</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Chilies, Garlic</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Vegetables & Salads</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Gourd, Cucumber</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Potatoes & Tomatoes</a
-                                >
-
-                                <a
-                                  href="shop-left-sidebar.html"
-                                  class="dropdown-item"
-                                  >Peas & Corn</a
-                                >
-                              </div>
-
-                              <div class="dropdown-column col-xl-3">
-                                <h5 class="dropdown-header">
-                                  Exotic Vegetables
-                                </h5>
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Asparagus & Artichokes</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Avocados & Peppers</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Broccoli & Zucchini</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Celery, Fennel & Leeks</a
-                                >
-
-                                <a
-                                  class="dropdown-item"
-                                  href="shop-left-sidebar.html"
-                                  >Chilies & Lime</a
-                                >
-                              </div>
-
-                              <div
-                                class="dropdown-column dropdown-column-img col-3"
-                              ></div>
-                            </div>
-                          </div>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                          <a
-                            class="nav-link dropdown-toggle"
-                            href="javascript:void(0)"
-                            data-bs-toggle="dropdown"
-                            >Blog</a
-                          >
-                          <ul class="dropdown-menu">
-                            <li>
-                              <a class="dropdown-item" href="blog-detail.html"
-                                >Blog Detail</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="blog-grid.html"
-                                >Blog Grid</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="blog-list.html"
-                                >Blog List</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-
-                        <li class="nav-item dropdown new-nav-item">
-                          <label class="new-dropdown">New</label>
-                          <a
-                            class="nav-link dropdown-toggle"
-                            href="javascript:void(0)"
-                            data-bs-toggle="dropdown"
-                            >Pages</a
-                          >
-                          <ul class="dropdown-menu">
-                            <li class="sub-dropdown-hover">
-                              <a class="dropdown-item" href="javascript:void(0)"
-                                >Email Template
-                                <span class="new-text"
-                                  ><i
-                                    class="fa-solid fa-bolt-lightning"
-                                  ></i></span
-                              ></a>
-                              <ul class="sub-menu">
-                                <li>
-                                  <a
-                                    href="../email-templete/abandonment-email.html"
-                                    >Abandonment</a
-                                  >
-                                </li>
-                                <li>
-                                  <a
-                                    href="../email-templete/offer-template.html"
-                                    >Offer Template</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="../email-templete/order-success.html"
-                                    >Order Success</a
-                                  >
-                                </li>
-                                <li>
-                                  <a
-                                    href="../email-templete/reset-password.html"
-                                    >Reset Password</a
-                                  >
-                                </li>
-                                <li>
-                                  <a href="../email-templete/welcome.html"
-                                    >Welcome template</a
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="sub-dropdown-hover">
-                              <a class="dropdown-item" href="javascript:void(0)"
-                                >Invoice Template
-                                <span class="new-text"
-                                  ><i
-                                    class="fa-solid fa-bolt-lightning"
-                                  ></i></span
-                              ></a>
-                              <ul class="sub-menu">
-                                <li>
-                                  <a href="../invoice/invoice-1.html"
-                                    >Invoice 1</a
-                                  >
-                                </li>
-
-                                <li>
-                                  <a href="../invoice/invoice-2.html"
-                                    >Invoice 2</a
-                                  >
-                                </li>
-
-                                <li>
-                                  <a href="../invoice/invoice-3.html"
-                                    >Invoice 3</a
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="404.html">404</a>
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="about-us.html"
-                                >About Us</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="cart.html">Cart</a>
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="contact-us.html"
-                                >Contact</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="checkout.html"
-                                >Checkout</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="coming-soon.html"
-                                >Coming Soon</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="compare.html"
-                                >Compare</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="faq.html">Faq</a>
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="order-success.html"
-                                >Order Success</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="order-tracking.html"
-                                >Order Tracking</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="otp.html">OTP</a>
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="search.html"
-                                >Search</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="user-dashboard.html"
-                                >User Dashboard</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="wishlist.html"
-                                >Wishlist</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                          <a
-                            class="nav-link dropdown-toggle"
-                            href="javascript:void(0)"
-                            data-bs-toggle="dropdown"
-                            >Seller</a
-                          >
-                          <ul class="dropdown-menu">
-                            <li>
-                              <a class="dropdown-item" href="seller-become.html"
-                                >Become a Seller</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="seller-dashboard.html"
-                                >Seller Dashboard</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="seller-detail.html"
-                                >Seller Detail</a
-                              >
-                            </li>
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="seller-detail-2.html"
-                                >Seller Detail 2</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="seller-grid.html"
-                                >Seller Grid</a
-                              >
-                            </li>
-                            <li>
-                              <a class="dropdown-item" href="seller-grid-2.html"
-                                >Seller Grid 2</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="header-nav-right">
-                <button
-                  class="btn deal-button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#deal-box"
-                >
-                  <i data-feather="zap"></i>
-                  <span>Deal Today</span>
-                </button>
-              </div>
-            </div>
-            {% if messages %}
-              {% for message in messages %}
-                <div class="alert alert-{{message.tags}} mt-4">
-                  <strong>{{message}}</strong>
-                </div>
-              {% endfor %}
-            {% endif %}
-            <script>
-              setTimeout(()=>{
-                $(".alert").alert("close");
-              },3000)
-            </script>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- Header End -->
-
-    <!-- mobile fix menu start (responsive ) -->
-    <div class="mobile-menu d-md-none d-block mobile-cart">
-      <ul>
-        <li class="active">
-          <a href="index.html">
-            <i class="iconly-Home icli"></i>
-            <span>Home</span>
-          </a>
-        </li>
-
-        <li class="mobile-category">
-          <a href="javascript:void(0)">
-            <i class="iconly-Category icli js-link"></i>
-            <span>Category</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="search.html" class="search-box">
-            <i class="iconly-Search icli"></i>
-            <span>Search</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="wishlist.html" class="notifi-wishlist">
-            <i class="iconly-Heart icli"></i>
-            <span>My Wish</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="cart.html">
-            <i class="iconly-Bag-2 icli fly-cate"></i>
-            <span>Cart</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <!-- mobile fix menu end -->
-
-    {% block content%} {% endblock content%}
-    <!-- Footer Section Start -->
-    <footer class="section-t-space">
-      <div class="container-fluid-lg">
-        <div class="service-section">
-          <div class="row g-3">
-            <div class="col-12">
-              <div class="service-contain">
-                <div class="service-box">
-                  <div class="service-image">
-                    <img
-                      src="{% static 'assets/svg/product.svg' %}"
-                      class="    "
-                      alt=""
-                    />
-                  </div>
-
-                  <div class="service-detail">
-                    <h5>Every Fresh Products</h5>
-                  </div>
-                </div>
-
-                <div class="service-box">
-                  <div class="service-image">
-                    <img
-                      src="{% static 'assets/svg/delivery.svg' %}"
-                      class="    "
-                      alt=""
-                    />
-                  </div>
-
-                  <div class="service-detail">
-                    <h5>Free Delivery For Order Over $50</h5>
-                  </div>
-                </div>
-
-                <div class="service-box">
-                  <div class="service-image">
-                    <img
-                      src="{% static 'assets/svg/discount.svg' %}"
-                      class="    "
-                      alt=""
-                    />
-                  </div>
-
-                  <div class="service-detail">
-                    <h5>Daily Mega Discounts</h5>
-                  </div>
-                </div>
-
-                <div class="service-box">
-                  <div class="service-image">
-                    <img
-                      src="{% static 'assets/svg/market.svg' %}"
-                      class="    "
-                      alt=""
-                    />
-                  </div>
-
-                  <div class="service-detail">
-                    <h5>Best Price On The Market</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="main-footer section-b-space section-t-space">
-          <div class="row g-md-4 g-3">
-            <div class="col-xl-4 col-lg-4 col-sm-6">
-              <div class="footer-logo">
-                <div class="theme-logo">
-                  <a href="index.html">
-                    <img
-                      src="{% static 'assets/images/logo/logo.png' %}"
-                      class="    "
-                      alt=""
-                    />
-                  </a>
-                </div>
-
-                <div class="footer-logo-contain">
-                  <p>
-                    We are a friendly bar serving a variety of cocktails, wines
-                    and beers. Our bar is a perfect place for a couple.
-                  </p>
-
-                  <ul class="address">
-                    <li>
-                      <i data-feather="home"></i>
-                      <a href="javascript:void(0)"
-                        >1418 Riverwood Drive, CA 96052, US</a
-                      >
-                    </li>
-                    <li>
-                      <i data-feather="mail"></i>
-                      <a href="javascript:void(0)">support@fastkart.com</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-              <div class="footer-title">
-                <h4>Categories</h4>
-              </div>
-
-              <div class="footer-contain">
-                <ul>
-                  <li>
-                    <a href="shop-left-sidebar.html" class="text-content"
-                      >Vegetables & Fruit</a
-                    >
-                  </li>
-                  <li>
-                    <a href="shop-left-sidebar.html" class="text-content"
-                      >Beverages</a
-                    >
-                  </li>
-                  <li>
-                    <a href="shop-left-sidebar.html" class="text-content"
-                      >Meats & Seafood</a
-                    >
-                  </li>
-                  <li>
-                    <a href="shop-left-sidebar.html" class="text-content"
-                      >Frozen Foods</a
-                    >
-                  </li>
-                  <li>
-                    <a href="shop-left-sidebar.html" class="text-content"
-                      >Biscuits & Snacks</a
-                    >
-                  </li>
-                  <li>
-                    <a href="shop-left-sidebar.html" class="text-content"
-                      >Grocery & Staples</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-2 col-sm-3">
-              <div class="footer-title">
-                <h4>Useful Links</h4>
-              </div>
-
-              <div class="footer-contain">
-                <ul>
-                  <li>
-                    <a href="index.html" class="text-content">Home</a>
-                  </li>
-                  <li>
-                    <a href="shop-left-sidebar.html" class="text-content"
-                      >Shop</a
-                    >
-                  </li>
-                  <li>
-                    <a href="about-us.html" class="text-content">About Us</a>
-                  </li>
-                  <li>
-                    <a href="blog-list.html" class="text-content">Blog</a>
-                  </li>
-                  <li>
-                    <a href="contact-us.html" class="text-content"
-                      >Contact Us</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="col-xl-2 col-lg-4 col-sm-6">
-              <div class="footer-title">
-                <h4>Contact Us</h4>
-              </div>
-
-              <div class="footer-contact">
-                <ul>
-                  <li>
-                    <div class="footer-number">
-                      <i data-feather="phone"></i>
-                      <div class="contact-number">
-                        <h6 class="text-content">Hotline 24/7 :</h6>
-                        <h5>+91 888 104 2340</h5>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="footer-number">
-                      <i data-feather="mail"></i>
-                      <div class="contact-number">
-                        <h6 class="text-content">Email Address :</h6>
-                        <h5>fastkart@hotmail.com</h5>
-                      </div>
-                    </div>
-                  </li>
-
-                  {% comment %} <li class="social-app mb-0">
-                    <h5 class="mb-2 text-content">Download App :</h5>
-                    <ul>
-                      <li class="mb-0">
-                        <a
-                          href="https://play.google.com/store/apps"
-                          target="_blank"
-                        >
-                          <img
-                            src="{% static 'assets/images/playstore.svg' %}"
-                            class="    "
-                            alt=""
-                          />
-                        </a>
-                      </li>
-                      <li class="mb-0">
-                        <a
-                          href="https://www.apple.com/in/app-store/"
-                          target="_blank"
-                        >
-                          <img
-                            src="{% static 'assets/images/appstore.svg' %}"
-                            class="    "
-                            alt=""
-                          />
-                        </a>
-                      </li>
-                    </ul>
-                  </li> {% endcomment %}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sub-footer section-small-space">
-          <div class="reserve">
-            <h6 class="text-content">©2024 Python</h6>
-          </div>
-
-          {% comment %} <div class="payment">
-            <img
-              src="{% static 'assets/images/payment/1.png' %}"
-              class="    "
-              alt=""
-            />
-          </div> {% endcomment %}
-
-          <div class="social-link">
-            <h6 class="text-content">Stay connected :</h6>
+        <div class="humberger__menu__cart">
             <ul>
-              <li>
-                <a href="https://www.facebook.com/" target="_blank">
-                  <i class="fa-brands fa-facebook-f"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/" target="_blank">
-                  <i class="fa-brands fa-twitter"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.instagram.com/" target="_blank">
-                  <i class="fa-brands fa-instagram"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://in.pinterest.com/" target="_blank">
-                  <i class="fa-brands fa-pinterest-p"></i>
-                </a>
-              </li>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
-          </div>
+            <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
-      </div>
+        <div class="humberger__menu__widget">
+            <div class="header__top__right__language">
+                <img src="{% static 'assets/img/language.png' %}" alt="">
+                <div>English</div>
+                <span class="arrow_carrot-down"></span>
+                <ul>
+                    <li><a href="#">Spanis</a></li>
+                    <li><a href="#">English</a></li>
+                </ul>
+            </div>
+            <div class="header__top__right__auth">
+                <a href="{% url 'userauths:sign-in' %}"><i class="fa fa-user"></i> Login</a>
+                
+            </div>
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li class="active"><a href="kakaka.html">Home</a></li>
+                <li><a href="./shop-grid.html">Shop</a></li>
+                <li><a href="#">Pages</a>
+                    <ul class="header__menu__dropdown">
+                        <li><a href="./shop-details.html">Shop Details</a></li>
+                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                        <li><a href="./checkout.html">Check Out</a></li>
+                        <li><a href="./blog-details.html">Blog Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="./blog.html">Blog</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        </div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                <li>Free Shipping for all Order of $99</li>
+            </ul>
+        </div>
+    </div> {% endcomment %}
+    <!-- Humberger End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                                <li>Free Shipping for all Order of $99</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                            </div>
+                            {% comment %} <div class="header__top__right__language">
+                                <img src="{% static 'assets/img/language.png' %}" alt="">
+                                <div>English</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">Spanis</a></li>
+                                    <li><a href="#">English</a></li>
+                                </ul>
+                            </div> {% endcomment %}
+                            {% if request.user.is_authenticated %}
+                            <h5 class="d-inline-block">Xin chào <strong>{{username}}</strong></h5>
+                            <div class="header__top__right__auth ms-2">
+                                <a href="{% url 'userauths:sign-out' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                            </div>
+                            {% else %}
+                            <div class="header__top__right__auth">
+                                <a href="{% url 'userauths:sign-in' %}"><i class="fa fa-user"></i> Đăng nhập</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="{% url "core:index" %}"><img src="{% static 'assets/img/logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="{% url 'core:index' %}">Home</a></li>
+                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        </ul>
+                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+    
+    
+    {% block content %}
+    {% endblock content %}
+
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="{% static 'assets/img/logo.png' %}" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Address: 60-49 Road 11378 New York</li>
+                            <li>Phone: +65 11.188.888</li>
+                            <li>Email: hello@colorlib.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Useful Links</h6>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">About Our Shop</a></li>
+                            <li><a href="#">Secure Shopping</a></li>
+                            <li><a href="#">Delivery infomation</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Our Sitemap</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Our Services</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Innovation</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Join Our Newsletter Now</h6>
+                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your mail">
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="footer__copyright__payment"><img src="{% static 'assets/img/payment-item.png' %}" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
     <!-- Footer Section End -->
 
-    <!-- Quick View Modal Box Start -->
-    <div
-      class="modal fade theme-modal view-modal"
-      id="view"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down"
-      >
-        <div class="modal-content">
-          <div class="modal-header p-0">
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row g-sm-4 g-2">
-              <div class="col-lg-6">
-                <div class="slider-image">
-                  <img
-                    src="{% static 'assets/images/product/category/1.jpg' %}"
-                    class="img-fluid     "
-                    alt=""
-                  />
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="right-sidebar-modal">
-                  <h4 class="title-name">
-                    Peanut Butter Bite Premium Butter Cookies 600 g
-                  </h4>
-                  <h4 class="price">$36.99</h4>
-                  <div class="product-rating">
-                    <ul class="rating">
-                      <li>
-                        <i data-feather="star" class="fill"></i>
-                      </li>
-                      <li>
-                        <i data-feather="star" class="fill"></i>
-                      </li>
-                      <li>
-                        <i data-feather="star" class="fill"></i>
-                      </li>
-                      <li>
-                        <i data-feather="star" class="fill"></i>
-                      </li>
-                      <li>
-                        <i data-feather="star"></i>
-                      </li>
-                    </ul>
-                    <span class="ms-2">8 Reviews</span>
-                    <span class="ms-2 text-danger"
-                      >6 sold in last 16 hours</span
-                    >
-                  </div>
-
-                  <div class="product-detail">
-                    <h4>Product Details :</h4>
-                    <p>
-                      Candy canes sugar plum tart cotton candy chupa chups sugar
-                      plum chocolate I love. Caramels marshmallow icing dessert
-                      candy canes I love soufflé I love toffee. Marshmallow pie
-                      sweet sweet roll sesame snaps tiramisu jelly bear claw.
-                      Bonbon muffin I love carrot cake sugar plum dessert
-                      bonbon.
-                    </p>
-                  </div>
-
-                  <ul class="brand-list">
-                    <li>
-                      <div class="brand-box">
-                        <h5>Brand Name:</h5>
-                        <h6>Black Forest</h6>
-                      </div>
-                    </li>
-
-                    <li>
-                      <div class="brand-box">
-                        <h5>Product Code:</h5>
-                        <h6>W0690034</h6>
-                      </div>
-                    </li>
-
-                    <li>
-                      <div class="brand-box">
-                        <h5>Product Type:</h5>
-                        <h6>White Cream Cake</h6>
-                      </div>
-                    </li>
-                  </ul>
-
-                  <div class="select-size">
-                    <h4>Cake Size :</h4>
-                    <select class="form-select select-form-size">
-                      <option selected="">Select Size</option>
-                      <option value="1.2">1/2 KG</option>
-                      <option value="0">1 KG</option>
-                      <option value="1.5">1/5 KG</option>
-                      <option value="red">Red Roses</option>
-                      <option value="pink">With Pink Roses</option>
-                    </select>
-                  </div>
-
-                  <div class="modal-button">
-                    <button
-                      onclick="location.href = 'cart.html';"
-                      class="btn btn-md add-cart-button icon"
-                    >
-                      Add To Cart
-                    </button>
-                    <button
-                      onclick="location.href = 'product-left.html';"
-                      class="btn theme-bg-color view-button icon text-white fw-bold btn-md"
-                    >
-                      View More Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Quick View Modal Box End -->
-
-    <!-- Location Modal Start -->
-    <div
-      class="modal location-modal fade theme-modal"
-      id="locationModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Choose your Delivery Location
-            </h5>
-            <p class="mt-1 text-content">
-              Enter your address and we will specify the offer for your area.
-            </p>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="location-list">
-              <div class="search-input">
-                <input
-                  type="search"
-                  class="form-control"
-                  placeholder="Search Your Area"
-                />
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </div>
-
-              <div class="disabled-box">
-                <h6>Select a Location</h6>
-              </div>
-
-              <ul class="location-select custom-height">
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>Alabama</h6>
-                    <span>Min: $130</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>Arizona</h6>
-                    <span>Min: $150</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>California</h6>
-                    <span>Min: $110</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>Colorado</h6>
-                    <span>Min: $140</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>Florida</h6>
-                    <span>Min: $160</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>Georgia</h6>
-                    <span>Min: $120</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>Kansas</h6>
-                    <span>Min: $170</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>Minnesota</h6>
-                    <span>Min: $120</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>New York</h6>
-                    <span>Min: $110</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    <h6>Washington</h6>
-                    <span>Min: $130</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Location Modal End -->
-
-    <!-- Cookie Bar Box Start -->
-    {% comment %}
-    <div class="cookie-bar-box">
-      <div class="cookie-box">
-        <div class="cookie-image">
-          <img
-            src="{% static 'assets/images/cookie-bar.png' %}"
-            class="    "
-            alt=""
-          />
-          <h2>Cookies!</h2>
-        </div>
-
-        <div class="cookie-contain">
-          <h5 class="text-content">
-            We use cookies to make your experience better
-          </h5>
-        </div>
-      </div>
-
-      <div class="button-group">
-        <button class="btn privacy-button">Privacy Policy</button>
-        <button class="btn ok-button">OK</button>
-      </div>
-    </div>
-    {% endcomment %}
-    <!-- Cookie Bar Box End -->
-
-    <!-- Deal Box Modal Start -->
-    <div
-      class="modal fade theme-modal deal-modal"
-      id="deal-box"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-        <div class="modal-content">
-          <div class="modal-header">
-            <div>
-              <h5 class="modal-title w-100" id="deal_today">Deal Today</h5>
-              <p class="mt-1 text-content">Recommended deals for you.</p>
-            </div>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="deal-offer-box">
-              <ul class="deal-offer-list">
-                <li class="list-1">
-                  <div class="deal-offer-contain">
-                    <a href="shop-left-sidebar.html" class="deal-image">
-                      <img
-                        src="{% static 'assets/images/vegetable/product/10.png' %}"
-                        class="    "
-                        alt=""
-                      />
-                    </a>
-
-                    <a href="shop-left-sidebar.html" class="deal-contain">
-                      <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
-                      <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
-                    </a>
-                  </div>
-                </li>
-
-                <li class="list-2">
-                  <div class="deal-offer-contain">
-                    <a href="shop-left-sidebar.html" class="deal-image">
-                      <img
-                        src="{% static 'assets/images/vegetable/product/11.png' %}"
-                        class="    "
-                        alt=""
-                      />
-                    </a>
-
-                    <a href="shop-left-sidebar.html" class="deal-contain">
-                      <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
-                      <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
-                    </a>
-                  </div>
-                </li>
-
-                <li class="list-3">
-                  <div class="deal-offer-contain">
-                    <a href="shop-left-sidebar.html" class="deal-image">
-                      <img
-                        src="{% static 'assets/images/vegetable/product/12.png' %}"
-                        class="    "
-                        alt=""
-                      />
-                    </a>
-
-                    <a href="shop-left-sidebar.html" class="deal-contain">
-                      <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
-                      <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
-                    </a>
-                  </div>
-                </li>
-
-                <li class="list-1">
-                  <div class="deal-offer-contain">
-                    <a href="shop-left-sidebar.html" class="deal-image">
-                      <img
-                        src="{% static 'assets/images/vegetable/product/13.png' %}"
-                        class="    "
-                        alt=""
-                      />
-                    </a>
-
-                    <a href="shop-left-sidebar.html" class="deal-contain">
-                      <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
-                      <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Deal Box Modal End -->
-
-    <!-- Tap to top start -->
-    <div class="theme-option">
-      {% comment %}
-      <div class="setting-box">
-        <button class="btn setting-button">
-          <i class="fa-solid fa-gear"></i>
-        </button>
-
-        <div class="theme-setting-2">
-          <div class="theme-box">
-            <ul>
-              <li>
-                <div class="setting-name">
-                  <h4>Color</h4>
-                </div>
-                <div class="theme-setting-button color-picker">
-                  <form class="form-control">
-                    <label for="colorPick" class="form-label mb-0"
-                      >Theme Color</label
-                    >
-                    <input
-                      type="color"
-                      class="form-control form-control-color"
-                      id="colorPick"
-                      value="#0da487"
-                      title="Choose your color"
-                    />
-                  </form>
-                </div>
-              </li>
-
-              <li>
-                <div class="setting-name">
-                  <h4>Dark</h4>
-                </div>
-                <div class="theme-setting-button">
-                  <button class="btn btn-2 outline" id="darkButton">
-                    Dark
-                  </button>
-                  <button class="btn btn-2 unline" id="lightButton">
-                    Light
-                  </button>
-                </div>
-              </li>
-
-              <li>
-                <div class="setting-name">
-                  <h4>RTL</h4>
-                </div>
-                <div class="theme-setting-button rtl">
-                  <button class="btn btn-2 rtl-unline">LTR</button>
-                  <button class="btn btn-2 rtl-outline">RTL</button>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      {% endcomment %}
-
-      <div class="back-to-top">
-        <a id="back-to-top" href="#">
-          <i class="fas fa-chevron-up"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Tap to top end -->
-
-    <!-- Bg overlay Start -->
-    {% comment %} <div class="bg-overlay"></div> {% endcomment %}
-    <!-- Bg overlay End -->
-
-    <!-- latest jquery-->
-    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
-
-    <!-- jquery ui-->
+    <!-- Js Plugins -->
+     
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/bootstrap.min.js' %}"></script> {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'assets/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'assets/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    {# flash message#}
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+    <script>
+        
 
-    <!-- Bootstrap js-->
-    <script src="{% static 'assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap/bootstrap-notify.min.js' %}"></script>
-    {% comment %} <script src="{% static 'assets/js/bootstrap/popper.min.js' %}"></script> {% endcomment %}
+        {% for message in messages %}  
+            alertify.set('notifier','position', 'top-right');
+            {% comment %} alertify.success("{{message.tag}}"); {% endcomment %}
 
-    <!-- feather icon js-->
-    <script src="{% static 'assets/js/feather/feather.min.js' %}"></script>
-    <script src="{% static 'assets/js/feather/feather-icon.js' %}"></script>
+            {% if 'success' in message.tags %}
+                alertify.success("{{ message }}");
+            {% elif 'warning' in message.tags %}
+                alertify.warning("{{ message }}");
+            {% elif 'error' in message.tags %}
+                alertify.error("{{ message }}");
+            {% else %}
+                alertify.message("{{ message }}");
+            {% endif %}
+        {% endfor %}
 
-    <!--   Js -->
-    {% comment %} <script src="{% static 'assets/js/lazysizes.min.js' %}"></script> {% endcomment %}
+        
+    </script>
 
-    <!-- Slick js-->
-    <script src="{% static 'assets/js/slick/slick.js' %}"></script>
-    <script src="{% static 'assets/js/slick/slick-animation.min.js' %}"></script>
-    <script src="{% static 'assets/js/slick/custom_slick.js' %}"></script>
+</body>
 
-    <!-- Auto Height Js -->
-    {% comment %} <script src="{% static 'assets/js/auto-height.js' %}"></script> {% endcomment %}
-
-    <!-- Timer Js -->
-    <script src="{% static 'assets/js/timer1.js' %}"></script>
-
-    <!-- Fly Cart Js -->
-    {% comment %} <script src="{% static 'assets/js/fly-cart.js' %}"></script> {% endcomment %}
-
-    <!-- Quantity js -->
-    <script src="{% static 'assets/js/quantity-2.js' %}"></script>
-
-    <!-- WOW js -->
-    {% comment %} <script src="{% static 'assets/js/wow.min.js' %}"></script>
-    <script src="{% static 'assets/js/custom-wow.js' %}"></script> {% endcomment %}
-
-    <!-- script js -->
-    <script src="{% static 'assets/js/script.js' %}"></script>
-
-    <!-- thme setting js -->
-    {% comment %} <script src="{% static 'assets/js/theme-setting.js' %}"></script> {% endcomment %}
-  </body>
 </html>
