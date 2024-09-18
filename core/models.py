@@ -92,7 +92,10 @@ class Product(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)
+        Category, on_delete=models.SET_NULL, null=True,related_name="category")
+    vendor = models.ForeignKey(
+        Vendor, on_delete=models.SET_NULL, null=True)
+    
 
     title = models.CharField(max_length=100, default="Fresh Pear")
     image = models.ImageField(
@@ -107,8 +110,7 @@ class Product(models.Model):
     specifications = models.TextField(null=True, blank=True)
     # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
 
-    product_status = models.CharField(
-        choices=STATUS, max_length=10, default="in_review")
+    product_status = models.CharField(choices=STATUS, max_length=10, default="in_review")
 
     status = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)

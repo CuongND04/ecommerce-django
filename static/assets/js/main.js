@@ -222,3 +222,7 @@
     });
 
 })(jQuery);
+
+window.FontAwesomeConfig = {
+    searchPseudoElements: true
+}
