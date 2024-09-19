@@ -4,7 +4,7 @@ from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
 from userauths.models import User
 # Create your models here.
-
+import cloudinary.models
 
 
 STATUS_CHOICE = (
@@ -42,7 +42,7 @@ class Category(models.Model):
     cid = ShortUUIDField(unique=True, length=10, max_length=20,
                          prefix="cat", alphabet="abcdefgh12345")
     title = models.CharField(max_length=100, default="Food")
-    image = models.ImageField(upload_to="category", default="category.jpg")
+    image = cloudinary.models.CloudinaryField('image', folder="fresh_mart")
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -63,8 +63,9 @@ class Vendor(models.Model):
                          prefix="ven", alphabet="abcdefgh12345")
 
     title = models.CharField(max_length=100, default="Nestify")
-    image = models.ImageField(
-        upload_to=user_directory_path, default="vendor.jpg")
+    # image = models.ImageField(
+    #     upload_to=user_directory_path, default="vendor.jpg")
+    image = cloudinary.models.CloudinaryField('image', folder="fresh_mart")
     description = models.TextField(null=True, blank=True,default="I am am Amazing Vendor")
 
     address = models.CharField(max_length=100, default="Vũ trụ thứ 7.")
@@ -98,8 +99,9 @@ class Product(models.Model):
     
 
     title = models.CharField(max_length=100, default="Fresh Pear")
-    image = models.ImageField(
-        upload_to=user_directory_path, default="product.jpg")
+    # image = models.ImageField(
+    #     upload_to=user_directory_path, default="product.jpg")
+    image = cloudinary.models.CloudinaryField('image', folder="fresh_mart")
     description = models.TextField(null=True, blank=True, default="This is the product")
 
     price = models.DecimalField(
@@ -137,8 +139,9 @@ class Product(models.Model):
         return new_price
     
 class ProductImages(models.Model):
-    images = models.ImageField(
-        upload_to="product-images", default="product.jpg")
+    # images = models.ImageField(
+    #     upload_to="product-images", default="product.jpg")
+    images = cloudinary.models.CloudinaryField('images', folder="fresh_mart")
     product = models.ForeignKey(
         Product, related_name="p_images", on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(auto_now_add=True)

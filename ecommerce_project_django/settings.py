@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -139,3 +141,18 @@ JAZZMIN_SETTINGS = {
 }
 
 AUTH_USER_MODEL = 'userauths.User'
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dc4bgvfbj',
+#     'API_KEY': '764698797331329',
+#     'API_SECRET': 'e4ZcGrY9xWNQkbmvnsaMOwZt8Ak',
+# }
+cloudinary.config( 
+  cloud_name = "dc4bgvfbj", 
+  api_key = "764698797331329", 
+  api_secret = "e4ZcGrY9xWNQkbmvnsaMOwZt8Ak"
+)
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'
