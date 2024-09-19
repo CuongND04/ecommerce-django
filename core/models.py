@@ -132,8 +132,8 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    def get_precentage(self):
-        new_price = (self.price / self.old_price) * 100
+    def get_percentage(self):
+        new_price = 100 - (self.price / self.old_price) * 100
         return new_price
     
 class ProductImages(models.Model):

@@ -16,7 +16,7 @@
                       <ul>
                         {% for c in categories %}
                         <li class="categories__item--li">
-                            <a  href="#">{{c.title}}
+                            <a  href="{% url 'core:category-product-list' c.cid %}">{{c.title}}
                                 <span class="categories__item--quantity">{{c.category.count}}</span>
                             </a>
                         </li>
@@ -60,6 +60,7 @@
       </div>
   </section>
   <!-- Hero Section End -->
+   
     <!-- Categories Section Begin -->
    <section class="categories">
       <div class="container">
@@ -118,11 +119,10 @@
                       </div>
                       <div class="featured__item__label">
                         <div class="d-flex justify-content-start align-items-end h-100">
-                          <h5>
-                            {% comment %} <span class="badge bg-primary ms-2">New</span>
-                            <span class="badge bg-success ms-2">Trending</span> {% endcomment %}
-                            <span class="badge bg-danger ms-2">- {{p.get_precentage|floatformat:0}}%</span>
-                          </h5>
+                            <span class="featured__item__label--text">
+                                -{{p.get_percentage|floatformat:0}}%
+                            </span>
+                            
                         </div>
                       </div>
                   </div>
@@ -141,7 +141,9 @@
   </section>
   <!-- Featured Section End -->
 
-  <!-- Banner Begin -->
+  
+  
+    <!-- Banner Begin -->
   <div class="banner">
       <div class="container">
           <div class="row">
@@ -169,62 +171,33 @@
                       <h4>Latest Products</h4>
                       <div class="latest-product__slider owl-carousel">
                           <div class="latest-prdouct__slider__item">
-                              <a href="#" class="latest-product__item">
-                                  <div class="latest-product__item__pic">
-                                      <img src="{% static 'assets/img/latest-product/lp-1.jpg' %}" alt="">
-                                  </div>
-                                  <div class="latest-product__item__text">
-                                      <h6>Crab Pool Security</h6>
-                                      <span>$30.00</span>
-                                  </div>
-                              </a>
-                              <a href="#" class="latest-product__item">
-                                  <div class="latest-product__item__pic">
-                                      <img src="{% static 'assets/img/latest-product/lp-2.jpg' %}" alt="">
-                                  </div>
-                                  <div class="latest-product__item__text">
-                                      <h6>Crab Pool Security</h6>
-                                      <span>$30.00</span>
-                                  </div>
-                              </a>
-                              <a href="#" class="latest-product__item">
-                                  <div class="latest-product__item__pic">
-                                      <img src="{% static 'assets/img/latest-product/lp-3.jpg' %}" alt="">
-                                  </div>
-                                  <div class="latest-product__item__text">
-                                      <h6>Crab Pool Security</h6>
-                                      <span>$30.00</span>
-                                  </div>
-                              </a>
+
+                            {% for p in productLatestOne %}
+                            <a href="#" class="latest-product__item">
+                              <div class="latest-product__item__pic">
+                                  <img src="{{p.image.url}}" alt="">
+                              </div>
+                              <div class="latest-product__item__text">
+                                  <h6>{{p.title}}</h6>
+                                  <span>${{p.price}}</span>
+                              </div>
+                            </a>
+                            {% endfor %}
+
+                              
                           </div>
                           <div class="latest-prdouct__slider__item">
-                              <a href="#" class="latest-product__item">
-                                  <div class="latest-product__item__pic">
-                                      <img src="{% static 'assets/img/latest-product/lp-1.jpg' %}" alt="">
-                                  </div>
-                                  <div class="latest-product__item__text">
-                                      <h6>Crab Pool Security</h6>
-                                      <span>$30.00</span>
-                                  </div>
-                              </a>
-                              <a href="#" class="latest-product__item">
-                                  <div class="latest-product__item__pic">
-                                      <img src="{% static 'assets/img/latest-product/lp-2.jpg' %}" alt="">
-                                  </div>
-                                  <div class="latest-product__item__text">
-                                      <h6>Crab Pool Security</h6>
-                                      <span>$30.00</span>
-                                  </div>
-                              </a>
-                              <a href="#" class="latest-product__item">
-                                  <div class="latest-product__item__pic">
-                                      <img src="{% static 'assets/img/latest-product/lp-3.jpg' %}" alt="">
-                                  </div>
-                                  <div class="latest-product__item__text">
-                                      <h6>Crab Pool Security</h6>
-                                      <span>$30.00</span>
-                                  </div>
-                              </a>
+                            {% for p in productLatestTwo %}
+                            <a href="#" class="latest-product__item">
+                              <div class="latest-product__item__pic">
+                                  <img src="{{p.image.url}}" alt="">
+                              </div>
+                              <div class="latest-product__item__text">
+                                  <h6>{{p.title}}</h6>
+                                  <span>${{p.price}}</span>
+                              </div>
+                            </a>
+                            {% endfor %}
                           </div>
                       </div>
                   </div>
