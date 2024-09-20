@@ -5,10 +5,14 @@ from core.views import *
 app_name = "core"
 
 urlpatterns = [
+  # home
   path("",index,name="index"),
+  # product
   path("products/",product_list_view,name="product-list"),
+  path("products/<pid>/",product_detail_view,name="product-detail"),
+  # category
   path("category/<cid>/",category_product_list_view,name="category-product-list"),
-
+  # vendor
   path("vendor/",vendor_list_view,name="vendor-list"),
-  path("vendor/<vid>",vendor_detail_view,name="vendor-detail")
+  path("vendor/<vid>/",vendor_detail_view,name="vendor-detail")
 ]

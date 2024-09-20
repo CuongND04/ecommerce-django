@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,JsonResponse
 from core.models import CartOrderItems,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
-from django.db.models import F, Q, Count, Sum, ExpressionWrapper, IntegerField
+
 
 # Create your views here.
 #  cài đặt hiển thị ra màn hình
@@ -89,3 +89,17 @@ def vendor_detail_view(request,vid):
     "productLatestTwo":productLatest[3:6],
   }
   return render(request,"core/vendor-detail.html",context)
+
+def product_detail_view(request,pid):
+  product = Product.objects.get(pid=pid)
+  p_images = product.p_images.all()
+  productLatest = Product.objects.order_by('-date')
+  categories  = Category.objects.all()
+  context  = {
+    "product":product,
+    "p_images":p_images,
+    "categories":categories,
+    "productLatestOne":productLatest[0:3],
+    "productLatestTwo":productLatest[3:6],
+  }
+  return render(request,"core/product-detail.html",context)
