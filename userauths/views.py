@@ -2,10 +2,12 @@ from django.shortcuts import render,redirect
 from userauths.forms import UserRegisterForm
 from django.contrib.auth import login,authenticate,logout
 from django.contrib import messages
+from core.models import *
 
 from .models import User
 # Create your views here.
 def register_view(request):
+  categories  = Category.objects.all()
   if request.method == "POST":
     # lấy dữ liệu từ input bằng request.post
     # or None ở đây là tùy chọn, giúp tránh lỗi nếu dữ liệu không có.
@@ -22,11 +24,13 @@ def register_view(request):
     form = UserRegisterForm()
 
   context = {
-    'form':form
+    'form':form,
+    "categories":categories,
   }
   return render(request,"userauths/sign-up.html",context)
 
 def login_view(request):
+    categories  = Category.objects.all()
     if request.user.is_authenticated:
         messages.warning(request, f"Bạn đã đăng nhập.")
         return redirect("core:index")
@@ -52,8 +56,10 @@ def login_view(request):
             messages.warning(request, f"Tài khoản với \"{email}\" không tồn tại")
         
 
-    
-    return render(request, "userauths/sign-in.html")
+    context = {
+    "categories":categories,
+    }
+    return render(request, "userauths/sign-in.html",context)
 
 def logout_view(request):
    logout(request)

@@ -66,3 +66,26 @@ def category_product_list_view(request,cid):
     "productSaleOff":productSaleOff[0:4]
   }
   return render(request,'core/category-product-list.html',context)
+
+def vendor_list_view(request):
+  vendors = Vendor.objects.all();
+  categories  = Category.objects.all()
+  context = {
+    "vendors" : vendors,
+    "categories":categories,
+  }
+  return render(request,"core/vendor-list.html",context)
+
+def vendor_detail_view(request,vid):
+  vendor = Vendor.objects.get(vid=vid);
+  products = Product.objects.filter(product_status="published",vendor=vendor)
+  categories  = Category.objects.all()
+  productLatest = Product.objects.order_by('-date')
+  context = {
+    "vendor" : vendor,
+    "categories":categories,
+    "products":products,
+    "productLatestOne":productLatest[0:3],
+    "productLatestTwo":productLatest[3:6],
+  }
+  return render(request,"core/vendor-detail.html",context)

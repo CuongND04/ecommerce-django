@@ -98,13 +98,13 @@
                 </li>
                 <li>
                   <a href="{% url 'core:product-list' %}">Shop</a>
-                  <ul class="header__menu__dropdown"> 
+                  {% comment %} <ul class="header__menu__dropdown">
                     {% for c in categories %}
                       <li>
                         <a href="{% url 'core:category-product-list' c.cid %} ">{{ c.title }}</a>
                       </li>
                     {% endfor %}
-                  </ul>
+                  </ul> {% endcomment %}
                 </li>
                 <li>
                   <a href="#">Pages</a>
@@ -120,6 +120,9 @@
                     </li>
                     <li>
                       <a href="./blog-details.html">Blog Details</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'core:vendor-list' %}">Vendor List</a>
                     </li>
                   </ul>
                 </li>
@@ -154,6 +157,57 @@
       </div>
     </header>
     <!-- Header Section End -->
+
+    <section class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="hero__categories">
+              <div class="hero__categories__all">
+                <i class="fa fa-bars"></i>
+                <span>All departments<i class="fas fa-chevron-down"></i></span>
+              </div>
+              <ul>
+                {% for c in categories %}
+                  <li class="categories__item--li">
+                    <a href="{% url 'core:category-product-list' c.cid %}">
+                      {{ c.title }}
+                      <span class="categories__item--quantity">{{ c.category.count }}</span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="hero__search">
+              <div class="hero__search__form">
+                <form action="#">
+                  <div class="hero__search__categories">
+                    All Categories
+                    <span class="arrow_carrot-down"></span>
+                  </div>
+                  <input type="text" placeholder="Tìm kiếm tại FreshMart" />
+                  <button type="submit" class="site-btn">SEARCH</button>
+                </form>
+              </div>
+              <div class="hero__search__phone">
+                <div class="hero__search__phone__icon">
+                  <i class="fa fa-phone"></i>
+                </div>
+                <div class="hero__search__phone__text">
+                  <h5>+65 11.188.888</h5>
+                  <span>support 24/7 time</span>
+                </div>
+              </div>
+            </div>
+            {% block index %}
+
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </section>
 
     {% block content %}
 
