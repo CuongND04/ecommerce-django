@@ -67,7 +67,7 @@
                 </ul>
               </div>
               <div class="featured__item__text">
-                <h6><a href="#">{{ p.title }}</a></h6>
+                <h6><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h6>
                 <h5>${{ p.price }}</h5>
                 <h5><span class="text-body-tertiary">By</span> {{ p.vendor }}</h5>
               </div>
@@ -113,7 +113,7 @@
             <div class="latest-product__slider owl-carousel">
               <div class="latest-prdouct__slider__item">
                 {% for p in productLatestOne %}
-                  <a href="#" class="latest-product__item">
+                  <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                     <div class="latest-product__item__pic">
                       <img src="{{ p.image.url }}" alt="" />
                     </div>
@@ -126,7 +126,7 @@
               </div>
               <div class="latest-prdouct__slider__item">
                 {% for p in productLatestTwo %}
-                  <a href="#" class="latest-product__item">
+                  <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                     <div class="latest-product__item__pic">
                       <img src="{{ p.image.url }}" alt="" />
                     </div>
@@ -147,7 +147,7 @@
             <div class="latest-product__slider owl-carousel">
               <div class="latest-prdouct__slider__item">
                 {% for p in productFeatured %}
-                  <a href="#" class="latest-product__item">
+                  <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                     <div class="latest-product__item__pic">
                       <img src="{{ p.image.url }}" alt="" />
                     </div>
@@ -159,7 +159,7 @@
                 {% endfor %}
               </div>
               <div class="latest-prdouct__slider__item">
-                <a href="#" class="latest-product__item">
+                <a href="" class="latest-product__item">
                   <div class="latest-product__item__pic">
                     <img src="{% static 'assets/img/latest-product/lp-1.jpg' %}" alt="" />
                   </div>
@@ -168,7 +168,7 @@
                     <span>$30.00</span>
                   </div>
                 </a>
-                <a href="#" class="latest-product__item">
+                <a href="" class="latest-product__item">
                   <div class="latest-product__item__pic">
                     <img src="{% static 'assets/img/latest-product/lp-2.jpg' %}" alt="" />
                   </div>
@@ -177,7 +177,7 @@
                     <span>$30.00</span>
                   </div>
                 </a>
-                <a href="#" class="latest-product__item">
+                <a href="" class="latest-product__item">
                   <div class="latest-product__item__pic">
                     <img src="{% static 'assets/img/latest-product/lp-3.jpg' %}" alt="" />
                   </div>

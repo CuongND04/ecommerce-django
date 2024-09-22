@@ -92,6 +92,8 @@ def vendor_detail_view(request,vid):
 
 def product_detail_view(request,pid):
   product = Product.objects.get(pid=pid)
+  products = Product.objects.filter(category = product.category).exclude(pid=pid)[:4]
+  #  lấy hết hình ảnh của sản phẩm
   p_images = product.p_images.all()
   productLatest = Product.objects.order_by('-date')
   categories  = Category.objects.all()
@@ -101,5 +103,6 @@ def product_detail_view(request,pid):
     "categories":categories,
     "productLatestOne":productLatest[0:3],
     "productLatestTwo":productLatest[3:6],
+    "products":products
   }
   return render(request,"core/product-detail.html",context)
