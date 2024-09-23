@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # thêm thẻ tag vào sản phẩm
+    "taggit",
     # Các thành phần thêm vào
     'core',
     'userauths'
@@ -142,11 +144,6 @@ JAZZMIN_SETTINGS = {
 
 AUTH_USER_MODEL = 'userauths.User'
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'dc4bgvfbj',
-#     'API_KEY': '764698797331329',
-#     'API_SECRET': 'e4ZcGrY9xWNQkbmvnsaMOwZt8Ak',
-# }
 cloudinary.config( 
   cloud_name = "dc4bgvfbj", 
   api_key = "764698797331329", 

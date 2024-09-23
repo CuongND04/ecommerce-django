@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,JsonResponse
 from core.models import CartOrderItems,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
-
+from taggit.models import Tag
 
 # Create your views here.
 #  cài đặt hiển thị ra màn hình
@@ -106,3 +106,15 @@ def product_detail_view(request,pid):
     "products":products
   }
   return render(request,"core/product-detail.html",context)
+
+def tag_list_request(request,tag_slug = None):
+  products = Product.objects.filter(product_status="published").order_by("-id")
+  tag = None
+  if tag_slug:
+    tag = get_object_or_404(Tag,slug=tag_slug)
+    products = products.filter(tags__in=[tag])
+  context = {
+    "products" : products,
+    "tag":tag
+  }
+  return render(request,"core/tag.html",context)

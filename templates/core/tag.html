@@ -7,12 +7,12 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <div class="breadcrumb__text">
-            <h2 style="color: #7ed957;">{{ category.title }}</h2>
+            <h2 style="color: #7ed957;">#{{ tag.name }}</h2>
             <div class="breadcrumb__option">
               <i class="fa-solid fa-house-chimney fa-lg" style="color: #7ed957;">&nbsp</i>
               <a href="{% url 'core:index' %}">Home</a>
               <a href="{% url 'core:index' %}" style="color: #ffffff;">Category</a>
-              <span>{{ category.title }}</span>
+              <span>{{ tag.name }}</span>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
                 </ul>
               </div>
               <div class="featured__item__text">
-                <h6><a href="#">{{ p.title }}</a></h6>
+                <h6><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h6>
                 <h5>${{ p.price }}</h5>
                 <h5><span class="text-body-tertiary">By</span> {{ p.vendor }}</h5>
               </div>

@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <div class="breadcrumb__text">
-            <h2>{{ product.title }}</h2>
+            <h2 style="color: #7ed957;">{{ product.title }}</h2>
             <div class="breadcrumb__option">
               <a href="{% url 'core:index' %}">Home</a>
               <a href="{% url 'core:index' %}">Vendor</a>
@@ -77,7 +77,12 @@
                 <b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span>
               </li>
               <li>
-                <b>Weight</b> <span>0.5 kg</span>
+                <b>Weight</b>
+                <span>
+                  {% for tag in product.tags.all %}
+                    <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'core:tags' tag.slug %}">#{{ tag.name }},</a>
+                  {% endfor %}
+                </span>
               </li>
               <li>
                 <b>Share on</b>
