@@ -3,6 +3,7 @@ from django.db import models
 from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
 from userauths.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 #  upload ảnh 
 import cloudinary.models
@@ -68,7 +69,8 @@ class Vendor(models.Model):
     # image = models.ImageField(
     #     upload_to=user_directory_path, default="vendor.jpg")
     image = cloudinary.models.CloudinaryField('image', folder="fresh_mart")
-    description = models.TextField(null=True, blank=True,default="I am am Amazing Vendor")
+    # description = models.TextField(null=True, blank=True,default="I am am Amazing Vendor")
+    description = RichTextUploadingField(null=True, blank=True,default="I am am Amazing Vendor")
 
     address = models.CharField(max_length=100, default="Vũ trụ thứ 7.")
     contact = models.CharField(max_length=100, default="+123 (456) 789")
@@ -105,14 +107,16 @@ class Product(models.Model):
     # image = models.ImageField(
     #     upload_to=user_directory_path, default="product.jpg")
     image = cloudinary.models.CloudinaryField('image', folder="fresh_mart")
-    description = models.TextField(null=True, blank=True, default="This is the product")
+    # description = models.TextField(null=True, blank=True, default="This is the product")
+    description = RichTextUploadingField(null=True, blank=True, default="This is the product")
 
     price = models.DecimalField(
         max_digits=12, decimal_places=2, default="1.99")
     old_price = models.DecimalField(
         max_digits=12, decimal_places=2, default="2.99")
 
-    specifications = models.TextField(null=True, blank=True)
+    # specifications = models.TextField(null=True, blank=True)
+    specifications = RichTextUploadingField(null=True, blank=True)
     type = models.CharField(max_length=100,default="Organic",null=True,blank=True)
     stock_count = models.CharField(max_length=100,default="10",null=True,blank=True)
     life = models.CharField(max_length=100,default="100 Days",null=True,blank=True)

@@ -43,10 +43,29 @@ INSTALLED_APPS = [
 
     # thêm thẻ tag vào sản phẩm
     "taggit",
+    
     # Các thành phần thêm vào
     'core',
-    'userauths'
+    'userauths',
+    "ckeditor",
+    'ckeditor_uploader',
 ]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+        'filebrowserUploadUrl': '/ckeditor/custom-upload/',  # URL tùy chỉnh
+    },
+}
+
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,7 +108,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+cloudinary.config( 
+  cloud_name = "dc4bgvfbj", 
+  api_key = "764698797331329", 
+  api_secret = "e4ZcGrY9xWNQkbmvnsaMOwZt8Ak"
+)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -144,12 +169,4 @@ JAZZMIN_SETTINGS = {
 
 AUTH_USER_MODEL = 'userauths.User'
 
-cloudinary.config( 
-  cloud_name = "dc4bgvfbj", 
-  api_key = "764698797331329", 
-  api_secret = "e4ZcGrY9xWNQkbmvnsaMOwZt8Ak"
-)
 
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-MEDIA_URL = '/media/'

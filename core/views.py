@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,JsonResponse
 from core.models import CartOrderItems,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
 from taggit.models import Tag
-
 # Create your views here.
 #  cài đặt hiển thị ra màn hình
 def index(request):

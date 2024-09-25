@@ -18,12 +18,15 @@ from django.urls import path,include
 from django.conf import settings
 #  thiết lập file đẫn file tĩnh
 from django.conf.urls.static import static
-
+from .views import ckeditor_image_upload
 urlpatterns = [
+    path('ckeditor/custom-upload/', ckeditor_image_upload, name='ckeditor_custom_upload'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
     # gom tất cả các router con của core vào
     path("",include("core.urls")),
-    path("user/",include("userauths.urls"))
+    path("user/",include("userauths.urls")),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root = settings.STATIC_ROOT)
