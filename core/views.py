@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,JsonResponse
 from core.models import CartOrderItems,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
 from taggit.models import Tag
+from django.db.models import *
 # Create your views here.
 #  cài đặt hiển thị ra màn hình
 def index(request):
@@ -12,8 +13,6 @@ def index(request):
   productFeatured = Product.objects.filter(product_status="published",featured=True)
   # lấy ra sản phẩm mới nhất
   productLatest = Product.objects.order_by('-date')
-  # lấy ra các nhãn
-  categories  = Category.objects.all()
 
   productSaleOff= Product.objects.all()
   productSaleOff = sorted(productSaleOff, key= lambda Product: -Product.get_percentage())
@@ -21,7 +20,6 @@ def index(request):
     'username':username,
     "products":products,
     "productFeatured":productFeatured,
-    "categories":categories,
     "productLatestOne":productLatest[0:3],
     "productLatestTwo":productLatest[3:6],
     "productSaleOff":productSaleOff[0:4]
@@ -31,8 +29,6 @@ def index(request):
 def product_list_view(request):
   # tìm tất cả sản phẩm được phát hành
   products = Product.objects.filter(product_status="published")
-  # lấy ra các nhãn
-  categories  = Category.objects.all()
   # lấy ra sản phẩm mới nhất
   productLatest = Product.objects.order_by('-date')
   # lấy ra các sản phẩm được giảm giá nhiều nhất
@@ -42,7 +38,6 @@ def product_list_view(request):
     print(p.get_percentage())
   context = {
     "products":products,
-    "categories":categories,
     "productLatestOne":productLatest[0:3],
     "productLatestTwo":productLatest[3:6],
     "productSaleOff":productSaleOff[0:4]
@@ -50,7 +45,6 @@ def product_list_view(request):
   return render(request,'core/product-list.html',context)
 
 def category_product_list_view(request,cid):
-  categories  = Category.objects.all()
   category = Category.objects.get(cid=cid)
   products = Product.objects.filter(product_status="published",category=category)
   # lấy ra các sản phẩm được giảm giá nhiều nhất
@@ -61,28 +55,23 @@ def category_product_list_view(request,cid):
   context = {
     "category":category,
     "products":products,
-    "categories":categories,
     "productSaleOff":productSaleOff[0:4]
   }
   return render(request,'core/category-product-list.html',context)
 
 def vendor_list_view(request):
   vendors = Vendor.objects.all();
-  categories  = Category.objects.all()
   context = {
     "vendors" : vendors,
-    "categories":categories,
   }
   return render(request,"core/vendor-list.html",context)
 
 def vendor_detail_view(request,vid):
   vendor = Vendor.objects.get(vid=vid);
   products = Product.objects.filter(product_status="published",vendor=vendor)
-  categories  = Category.objects.all()
   productLatest = Product.objects.order_by('-date')
   context = {
     "vendor" : vendor,
-    "categories":categories,
     "products":products,
     "productLatestOne":productLatest[0:3],
     "productLatestTwo":productLatest[3:6],
@@ -94,15 +83,20 @@ def product_detail_view(request,pid):
   products = Product.objects.filter(category = product.category).exclude(pid=pid)[:4]
   #  lấy hết hình ảnh của sản phẩm
   p_images = product.p_images.all()
+
+  # Lấy đánh giá sản phẩm
+  reviews = ProductReview.objects.filter(product=product).order_by('-date')
+  # Tính đánh giá trung bình
+  average_rating = ProductReview.objects.filter(product=product).aggregate(rating = Avg("rating"))
   productLatest = Product.objects.order_by('-date')
-  categories  = Category.objects.all()
   context  = {
     "product":product,
     "p_images":p_images,
-    "categories":categories,
     "productLatestOne":productLatest[0:3],
     "productLatestTwo":productLatest[3:6],
-    "products":products
+    "products":products,
+    "reviews":reviews,
+    "average_rating":average_rating
   }
   return render(request,"core/product-detail.html",context)
 
