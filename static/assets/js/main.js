@@ -7,7 +7,6 @@
     Created: Colorlib
 ---------------------------------------------------------  */
 
-'use strict';
 
 (function ($) {
 
@@ -53,8 +52,8 @@
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+        Navigation
+    --------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
@@ -96,7 +95,7 @@
     });
 
 
-    $('.hero__categories__all').on('click', function(){
+    $('.hero__categories__all').on('click', function () {
         $('.hero__categories ul').slideToggle(400);
     });
 
@@ -160,8 +159,8 @@
     });
 
     /*-----------------------
-		Price Range Slider
-	------------------------ */
+        Price Range Slider
+    ------------------------ */
     var rangeSlider = $(".price-range"),
         minamount = $("#minamount"),
         maxamount = $("#maxamount"),
@@ -186,8 +185,8 @@
     $("select").niceSelect();
 
     /*------------------
-		Single Product
-	--------------------*/
+        Single Product
+    --------------------*/
     $('.product__details__pic__slider img').on('click', function () {
 
         var imgurl = $(this).data('imgbigurl');
@@ -200,8 +199,8 @@
     });
 
     /*-------------------
-		Quantity change
-	--------------------- */
+        Quantity change
+    --------------------- */
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
@@ -226,3 +225,68 @@
 window.FontAwesomeConfig = {
     searchPseudoElements: true
 }
+
+function changeTimeFormat(date) {
+    let n = date.toLocaleString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+    return n;
+}
+
+$("#commentForm").submit(function (e) {
+    e.preventDefault();
+    let dt = new Date()
+    console.log(dt.getMonth())
+    let time = changeTimeFormat(dt) + ", " + dt.getDate() + "/" + (+dt.getMonth() + 1) + "/" + dt.getFullYear()
+
+    $.ajax({
+        data: $(this).serialize(),
+
+        method: $(this).attr("method"),
+
+        url: $(this).attr("action"),
+
+        dataType: "json",
+
+        success: function (res) {
+            console.log("Comment Saved to DB...");
+            if (res.bool == true) {
+                $("#review-res").html("Review added successfully.")
+                $(".hide-comment-form").hide()
+                $(".add-review").hide()
+                let rating = "";
+                for (var i = 1; i <= res.context.rating; i++) {
+                    rating += '<i class="fas fa-star text-warning"></i>';
+                }
+                let _html = `<li>
+                          <div class="people-box">
+                            <div>
+                              <div class="people-image">
+                                <img src="https://static-00.iconduck.com/assets.00/avatar-default-icon-1975x2048-2mpk4u9k.png" class="img-fluid blur-up lazyload" alt="" />
+                              </div>
+                            </div>
+
+                            <div class="people-comment">
+                              <a class="name" href="javascript:void(0)">${res.context.user}</a>
+                              <div class="date-time">
+                                <h6 class="text-content">${time}</h6>
+
+                                <div class="product-rating">
+                                  <ul class="rating">${rating}</ul>
+                                </div>
+                              </div>
+
+                              <div class="reply">
+                                <p>${res.context.review}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </li>`
+                $(".review-list").prepend(_html)
+                console.log(_html)
+            }
+
+        }
+    })
+})

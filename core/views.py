@@ -3,6 +3,7 @@ from django.http import HttpResponse,JsonResponse
 from core.models import CartOrderItems,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
 from taggit.models import Tag
 from django.db.models import *
+from core.forms import ProductReviewForm
 # Create your views here.
 #  cài đặt hiển thị ra màn hình
 def index(request):
@@ -89,6 +90,14 @@ def product_detail_view(request,pid):
   # Tính đánh giá trung bình
   average_rating = ProductReview.objects.filter(product=product).aggregate(rating = Avg("rating"))
   productLatest = Product.objects.order_by('-date')
+  # Product Review Form
+  review_form = ProductReviewForm()
+  # Mỗi người dùng chỉ được comment một lần
+  make_review = True
+  if request.user.is_authenticated:
+    user_review_count = ProductReview.objects.filter(user=request.user,product = product).count()
+    if user_review_count > 0:
+      make_review = False
   context  = {
     "product":product,
     "p_images":p_images,
@@ -96,7 +105,9 @@ def product_detail_view(request,pid):
     "productLatestTwo":productLatest[3:6],
     "products":products,
     "reviews":reviews,
-    "average_rating":average_rating
+    "average_rating":average_rating,
+    "review_form":review_form,
+    "make_review":True
   }
   return render(request,"core/product-detail.html",context)
 
@@ -111,3 +122,28 @@ def tag_list_request(request,tag_slug = None):
     "tag":tag
   }
   return render(request,"core/tag.html",context)
+
+def ajax_add_review(request,pid):
+  product = Product.objects.get(pk = pid)
+  user = request.user
+
+  review = ProductReview.objects.create(
+        user=user,
+        product=product,
+        review = request.POST['review'],
+        rating = request.POST['rating'],
+    )
+
+  context = {
+        'user': user.username,
+        'review': request.POST['review'],
+        'rating': request.POST['rating'],
+    }
+  average_reviews = ProductReview.objects.filter(product=product).aggregate(rating=Avg("rating"))
+  return JsonResponse(
+       {
+         'bool': True,
+        'context': context,
+        'average_reviews': average_reviews
+       }
+    )

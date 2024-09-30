@@ -177,7 +177,12 @@
                                 <h6 class="text-content">{{ r.date|date:'h:i A, d/m/y' }}</h6>
 
                                 <div class="product-rating">
-                                  <ul class="rating">{{ r.rating }}</ul>
+                                  {% comment %} {% Star = { 1: '★☆☆☆☆', 2: '★★☆☆☆', 3: '★★★☆☆', 4: '★★★★☆', 5: '★★★★★' } n=r.rating %} {% endcomment %}
+                                  <ul class="rating">
+                                    {% for s in r.rating|ljust:r.rating %}
+                                      <i class="fas fa-star text-warning"></i>
+                                    {% endfor %}
+                                  </ul>
                                 </div>
                               </div>
 
@@ -190,49 +195,30 @@
                       {% endfor %}
                     </ul>
                   </div>
-
-                  <div class="col-6 d-inline-block my-5">
-                    <div class="review-title">
-                      <h4 class="fw-500">Add a review</h4>
-                    </div>
-
-                    <div class="row g-4">
-                      <div class="col-md-6">
-                        <div class="form-floating theme-form-floating">
-                          <input type="text" class="form-control" id="name" placeholder="Name" />
-                          <label for="name">Your Name</label>
+                  {% if make_review == True %}
+                    {% if request.user.is_authenticated %}
+                      <div class="col-6 d-inline-block my-5">
+                        <div class="review-title">
+                          <h4 class="fw-500 add-review">Add a review</h4>
+                          <strong class="text-success" id="review-res"></strong>
                         </div>
-                      </div>
 
-                      <div class="col-md-6">
-                        <div class="form-floating theme-form-floating">
-                          <input type="email" class="form-control" id="email" placeholder="Email Address" />
-                          <label for="email">Email Address</label>
-                        </div>
-                      </div>
+                        <form class="hide-comment-form" action="{% url 'core:ajax-add-review' product.id %}" id="commentForm" method="POST">
+                          {% csrf_token %}
+                          <div class="row g-4">
+                            <div class="col-md-12">
+                              <div class="form-floating theme-form-floating">{{ review_form.review }}</div>
+                            </div>
 
-                      <div class="col-md-6">
-                        <div class="form-floating theme-form-floating">
-                          <input type="url" class="form-control" id="website" placeholder="Website" />
-                          <label for="website">Website</label>
-                        </div>
+                            <div class="col-md-12">
+                              <div class="form-floating theme-form-floating">{{ review_form.rating }}</div>
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn-success mt-3">Send</button>
+                        </form>
                       </div>
-
-                      <div class="col-md-6">
-                        <div class="form-floating theme-form-floating">
-                          <input type="url" class="form-control" id="review1" placeholder="Give your review a title" />
-                          <label for="review1">Review Title</label>
-                        </div>
-                      </div>
-
-                      <div class="col-12">
-                        <div class="form-floating theme-form-floating">
-                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                          <label for="floatingTextarea2">Write Your Comment</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    {% endif %}
+                  {% endif %}
                 </div>
               </div>
               <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
