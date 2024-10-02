@@ -30,10 +30,23 @@
               <ul>
                 {% for c in categories %}
                   <li class="d-inline-block">
-                    <a class="d-inline-block bg-secondary-subtle p-1 my-2 mx-2" href="#">
+                    <span class="d-inline-block bg-secondary-subtle p-2 my-2 " href="#">
+                      <input data-filter="category" class="form-check-input filter-checkbox " type="checkbox" name="checkbox" id="exampleCheckbox2" value="{{ c.id }}" />
                       {{ c.title }}
-                      <span class=""></span>
-                    </a>
+                    </span>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="sidebar__item">
+              <h4>Nhà cung cấp</h4>
+              <ul>
+                {% for v in vendors %}
+                  <li class="d-inline-block">
+                    <span class="d-inline-block bg-secondary-subtle p-2 my-2 " href="#">
+                      <input data-filter="vendor" class="form-check-input filter-checkbox " type="checkbox" name="checkbox" id="exampleCheckbox1" value="{{ v.id }}" />
+                      {{ v.title }}
+                    </span>
                   </li>
                 {% endfor %}
               </ul>
@@ -149,7 +162,7 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row" id="filtered-product">
             {% for p in products %}
               <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="product__item border border-dark-subtle">

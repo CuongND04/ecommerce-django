@@ -286,7 +286,30 @@ $("#commentForm").submit(function (e) {
                 $(".review-list").prepend(_html)
                 console.log(_html)
             }
-
         }
+    })
+})
+
+$(document).ready(function () {
+    $(".filter-checkbox").on("click", function () {
+        let filter_object = {}
+        $(".filter-checkbox").each(function () {
+            let filter_value = $(this).val()
+            let filter_key = $(this).data("filter")
+            filter_object[filter_key] = Array.from(document.querySelectorAll('input[data-filter=' + filter_key + ']:checked')).map(function (element) {
+                return element.value
+            })
+        })
+        console.log(filter_object)
+        $.ajax({
+            url: "/filter-products",
+            data: filter_object,
+            dataType: 'json',
+            beforeSend: function () {
+            },
+            success: function (response) {
+                $("#filtered-product").html(response.data)
+            }
+        })
     })
 })
