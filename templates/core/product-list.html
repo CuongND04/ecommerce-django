@@ -1,6 +1,39 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
+<head>
+  <style>
+      input[type="range"] {
+      -webkit-appearance: none;
+      margin-right: 15px;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 5px;
+      background-image: linear-gradient(#3bb77e, #3bb77e);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #3bb77e;
+      cursor: ew-resize;
+      box-shadow: 0 0 2px 0 #555;
+      transition: background .3s ease-in-out;
+      }
+
+      input[type=range]::-webkit-slider-runnable-track  {
+      -webkit-appearance: none;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+      }
+  </style>
+
+</head> 
   <!-- Breadcrumb Section Begin -->
   <section class="breadcrumb-section set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
     <div class="container">
@@ -53,7 +86,7 @@
             </div>
             <div class="sidebar__item">
               <h4>Price</h4>
-              <div class="price-range-wrap">
+              {% comment %} <div class="price-range-wrap">
                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
                   <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                   <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -65,7 +98,24 @@
                     <input type="text" id="maxamount" />
                   </div>
                 </div>
-              </div>
+              </div> {% endcomment %}
+              <div class="sidebar-widget price_range range">
+                <div class="price-filter mb-20">
+                    <div class="price-filter-inner">
+                        <div id="slidder-range" class="mb-20"></div>
+                        <input type="range" name="range" value="{{min_max_price.price__max|floatformat:2}}" value="" class="slider-range" id="range" min="{{min_max_price.price__min|floatformat:2}}" max="{{min_max_price.price__max|floatformat:2}}" oninput="max_price.value=this.value">
+                        <div class="d-flex justify-content-between" style="width: 200px">
+                            <div class="caption">From: <strong id="slider-range-value1" class="text-brand">{{min_max_price.price__min|floatformat:2}}$</strong></div>
+                            <div class="caption">To: <strong id="slider-range-value2" class="text-brand">{{min_max_price.price__max|floatformat:2}}$</strong></div>
+                        </div>
+                        <input type="number"  name="" value="{{min_max_price.price__max|floatformat:2}}" id="max_price" min="{{min_max_price.price__min|floatformat:2}}" max="{{min_max_price.price__max|floatformat:2}}" placeholder="Current Price" onkeyup="range.value=this.value">
+                    </div>
+                </div>
+                <div class="custome-checkbox mt-2">
+                    <button class="btn text-white bg-success" type="button" id="price-filter-btn">Filter</button>
+                    <!-- <h3>{{ min_max_price }}</h3> -->
+                </div>
+            </div>
             </div>
             <div class="sidebar__item sidebar__item__color--option">
               <h4>Colors</h4>
