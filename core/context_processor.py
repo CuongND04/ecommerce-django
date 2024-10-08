@@ -4,7 +4,7 @@ from django.db.models import Min,Max
 def default(request):
   categories  = Category.objects.all()
   vendors = Vendor.objects.all()
-
+  username = request.user
   min_max_price = Product.objects.aggregate(Min("price"),Max("price"))
 
 
@@ -12,4 +12,5 @@ def default(request):
     "categories":categories,
     "vendors":vendors,
     "min_max_price":min_max_price,
+    "username":username
   }

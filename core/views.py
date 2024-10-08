@@ -5,10 +5,10 @@ from taggit.models import Tag
 from django.db.models import *
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
+from django.contrib import messages
 # Create your views here.
 #  cài đặt hiển thị ra màn hình
 def index(request):
-  username = request.user
   # lấy ra tất cả sản phẩm trong model Product
   # products = Product.objects.all()
   products = Product.objects.filter(product_status="published")
@@ -19,7 +19,6 @@ def index(request):
   productSaleOff= Product.objects.all()
   productSaleOff = sorted(productSaleOff, key= lambda Product: -Product.get_percentage())
   context =  {
-    'username':username,
     "products":products,
     "productFeatured":productFeatured,
     "productLatestOne":productLatest[0:3],
@@ -176,3 +175,59 @@ def filter_product(request):
   
     data = render_to_string("core/async/product-list.html", {"products": products})
     return JsonResponse({"data": data})
+
+def add_to_cart(request):
+    #  lưu trữ thông tin của sản phẩm được thêm vào giỏ hàng.
+    cart_product = {}
+    # Thông tin sản phẩm được lấy từ các tham số của yêu cầu GET
+
+    # Tạo một mục mới trong cart_product với khóa là id của sản phẩm
+    cart_product[str(request.GET['id'])] = {
+        'title': request.GET['title'],
+        'qty': request.GET['qty'],
+        'price': request.GET['price'],
+        'image': request.GET['image'],
+        'pid': request.GET['pid'],
+    }
+
+    if 'cart_data_obj' in request.session:
+        # Nếu cart_data_obj (giỏ hàng) đã tồn tại trong session, 
+        # thì kiểm tra xem sản phẩm với ID cụ thể này đã có trong giỏ hàng hay chưa.
+        if str(request.GET['id']) in request.session['cart_data_obj']:
+            # Nếu sản phẩm đã có trong giỏ hàng, mã sẽ cập nhật 
+            # số lượng (qty) của sản phẩm đó trong session.
+
+            # Lấy dữ liệu giỏ hàng hiện tại từ session và gán vào cart_data.
+            cart_data = request.session['cart_data_obj']
+            # Cập nhật số lượng (qty) của sản phẩm trong 
+            # cart_data bằng giá trị mới từ cart_product.
+            cart_data[str(request.GET['id'])]['qty'] = int(cart_product[str(request.GET['id'])]['qty'])
+
+            cart_data.update(cart_data)
+            # Lưu cart_data đã cập nhật lại vào session.
+            request.session['cart_data_obj'] = cart_data
+            
+        else:
+            # Nếu sản phẩm chưa có trong giỏ hàng:
+
+            #Lấy giỏ hàng hiện tại từ session.
+            cart_data = request.session['cart_data_obj']
+            # Thêm cart_product vào cart_data bằng phương thức update.
+            cart_data.update(cart_product)
+            # Lưu lại cart_data đã cập nhật vào session.
+            request.session['cart_data_obj'] = cart_data
+
+    else: # Nếu cart_data_obj chưa tồn tại trong session:
+        
+        # Tạo một giỏ hàng mới (cart_data_obj) với cart_product 
+        # là sản phẩm đầu tiên và lưu vào session.
+        request.session['cart_data_obj'] = cart_product
+
+
+      #Trả về một phản hồi JSON chứa hai thông tin:
+      # data: là giỏ hàng hiện tại sau khi thêm sản phẩm, lấy từ session.
+      # totalcartitems: là tổng số lượng sản phẩm trong giỏ hàng, tính bằng độ dài của cart_data_obj
+    
+    return JsonResponse({"data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj'])})
+
+ 

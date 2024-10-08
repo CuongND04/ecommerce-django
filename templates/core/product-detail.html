@@ -37,6 +37,7 @@
             </div>
           </div>
         </div>
+
         <div class="col-lg-5 col-md-8">
           <button type="button" style="font-weight: 500;
           padding: calc(8px +(10 - 8)*((100vw - 320px) /(1920 - 320))) calc(12px +(16 - 12)*((100vw - 320px) /(1920 - 320)));
@@ -56,18 +57,22 @@
               <span>(18 reviews)</span>
             </div>
             <div class="product__details__price text-success fw-bold">
-              {{ product.price }} VNĐ<div class="text-decoration-line-through text-muted fs-6">${{ product.old_price }}</div>
+              <span class="current-product-price-{{ product.id }}">{{ product.price }}</span> VNĐ<div class="text-decoration-line-through text-muted fs-6">${{ product.old_price }}</div>
             </div>
 
-            <p>{{ product.description|truncatechars:100 }}.</p>
+            {% comment %} <p>{{ product.description|truncatechars:100 }}.</p> {% endcomment %}
             <div class="product__details__quantity">
               <div class="quantity">
                 <div class="pro-qty">
-                  <input type="text" value="1" />
+                  <input type="text" value="1" class="product-quantity-{{ product.id }}" />
                 </div>
               </div>
             </div>
-            <a href="#" class="primary-btn btn btn-animation btn-outline-success"><i class="fa-solid fa-cart-shopping me-2"></i>ADD TO CARD</a>
+            <input type="hidden" class="product-pid-{{ product.id }}" value="{{ product.pid }}" />
+            <input type="hidden" class="product-image-{{ product.id }}" value="{{ p.image.url }}" />
+            <input type="hidden" class="product-id-{{ product.id }}" value="{{ product.id }}" />
+            <input type="hidden" class="product-title-{{ product.id }}" value="{{ product.title }}" />
+            <button type="submit" data-index="{{ product.id }}" class="primary-btn btn btn-animation btn-outline-success add-to-cart-btn"><i class="fa-solid fa-cart-shopping me-2"></i>ADD TO CARD</button>
             <a href="#" class="heart-icon"><i class="fa-solid fa-heart"></i></a>
             <ul>
               <li>
@@ -269,10 +274,18 @@
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-retweet"></i></a>
+                    <a href="{% url 'core:product-detail' p.pid %}"><i class="fa-solid fa-eye"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <input type="hidden" value="1" class="product-quantity-{{ p.id }}" />
+                    <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}" />
+                    <input type="hidden" class="product-image-{{ p.id }}" value="{{ p.image.url }}" />
+                    <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}" />
+                    <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}" />
+                    <button data-index="{{ p.id }}" class="bg-transparent border border-0 add add-to-cart-btn" id="add-to-cart-btn">
+                      {% comment %}thêm thuộc tính đê vô hiệu hóa href{% endcomment %}
+                      <a href="#" style="pointer-events: none; color: inherit; text-decoration: none;"><i class="fa fa-shopping-cart"></i></a>
+                    </button>
                   </li>
                 </ul>
               </div>
