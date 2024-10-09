@@ -291,6 +291,7 @@ $("#commentForm").submit(function (e) {
 })
 
 $(document).ready(function () {
+    // lọc sản phẩm
     $(".filter-checkbox,#price-filter-btn").on("click", function () {
         let filter_object = {}
 
@@ -320,6 +321,7 @@ $(document).ready(function () {
             }
         })
     })
+    // lọc theo giá cao nhất
     $("#max_price").on("blur", function () {
         let min_price = $(this).attr("min")
         let max_price = $(this).attr("max")
@@ -349,55 +351,115 @@ $(document).ready(function () {
         }
 
     })
-})
+    // thêm sản phâm vào giỏ hàng
+    $(".add-to-cart-btn").on("click", function () {
+        console.log("1")
+        let this_val = $(this)
+        let index = this_val.attr("data-index")
 
-// thêm sản phâm vào giỏ hàng
-$(".add-to-cart-btn").on("click", function () {
-    console.log("1")
-    let this_val = $(this)
-    let index = this_val.attr("data-index")
+        let quantity = $(".product-quantity-" + index).val()
+        let product_title = $(".product-title-" + index).val()
 
-    let quantity = $(".product-quantity-" + index).val()
-    let product_title = $(".product-title-" + index).val()
+        let product_id = $(".product-id-" + index).val()
+        let product_price = +($(".current-product-price-" + index).text())
 
-    let product_id = $(".product-id-" + index).val()
-    let product_price = $(".current-product-price-" + index).text()
-
-    let product_pid = $(".product-pid-" + index).val()
-    let product_image = $(".product-image-" + index).val()
+        let product_pid = $(".product-pid-" + index).val()
+        let product_image = $(".product-image-" + index).val()
 
 
-    console.log("Quantity:", quantity);
-    console.log("Title:", product_title);
-    console.log("Price:", product_price);
-    console.log("ID:", product_id);
-    console.log("PID:", product_pid);
-    console.log("Image:", product_image);
-    console.log("Index:", index);
-    console.log("Currrent Element:", this_val);
+        console.log("Quantity:", quantity);
+        console.log("Title:", product_title);
+        console.log("Price:", product_price);
+        console.log("ID:", product_id);
+        console.log("PID:", product_pid);
+        console.log("Image:", product_image);
+        console.log("Index:", index);
+        console.log("Currrent Element:", this_val);
 
-    $.ajax({
-        url: '/add-to-cart',
-        data: {
-            'id': product_id,
-            'pid': product_pid,
-            'image': product_image,
-            'qty': quantity,
-            'title': product_title,
-            'price': product_price,
-        },
-        dataType: 'json',
-        beforeSend: function () {
-            console.log("Adding Product to Cart...");
-        },
-        success: function (response) {
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success("Sản phẩm đã được thêm vào giỏ hàng!");
-            this_val.html("<i style='color:green;' class='d-inline-block p-2 fas fa-check-circle'></i>")
-            // this_val.html("✓")
-            console.log("Added Product to Cart!");
-            $(".cart-items-count").text(response.totalcartitems)
-            this_val.prop("disabled", true); // Thay đổi thuộc tính disabled
-        }
+        $.ajax({
+            url: '/add-to-cart',
+            data: {
+                'id': product_id,
+                'pid': product_pid,
+                'image': product_image,
+                'qty': quantity,
+                'title': product_title,
+                'price': product_price,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                console.log("Adding Product to Cart...");
+            },
+            success: function (response) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success("Sản phẩm đã được thêm vào giỏ hàng!");
+                this_val.html("<i style='color:green;' class='d-inline-block p-2 fas fa-check-circle'></i>")
+                // this_val.html("✓")
+                console.log("Added Product to Cart!");
+                $(".cart-items-count").text(response.totalcartitems)
+                this_val.prop("disabled", true); // Thay đổi thuộc tính disabled
+            }
+        })
+    })
+    // xóa sản phâm trong giỏ hàng
+    $(document).on("click", '.delete-product', function () {
+
+        let product_id = $(this).attr("data-product")
+        let this_val = $(this)
+
+        console.log("PRoduct ID:", product_id);
+        console.log("this_val :", this_val);
+
+        $.ajax({
+            url: "/delete-from-cart",
+            data: {
+                "id": product_id
+            },
+            dataType: "json",
+            beforeSend: function () {
+                this_val.hide()
+            },
+            success: function (response) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success("Đã xóa sản phẩm khỏi giỏ hàng!");
+                this_val.show()
+                $(".cart-items-count").text(response.totalcartitems)
+                $("#cart-list").html(response.data)
+            }
+        })
+
+    })
+    // cập nhật lại số lượng
+    $(".update-product").on("click", function () {
+
+        let product_id = $(this).attr("data-product")
+        let this_val = $(this)
+        let product_quantity = $(".product-qty-" + product_id).val()
+
+        console.log("PRoduct ID:", product_id);
+        console.log("PRoduct QTY:", product_quantity);
+
+        $.ajax({
+            url: "/update-cart",
+            data: {
+                "id": product_id,
+                "qty": product_quantity,
+            },
+            dataType: "json",
+            beforeSend: function () {
+                this_val.hide()
+            },
+            success: function (response) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success("Cập nhật số lượng thành công!");
+                this_val.show()
+                $(".cart-items-count").text(response.totalcartitems)
+                $("#cart-list").html(response.data)
+                // window.location.reload()
+
+            }
+        })
+
     })
 })
+

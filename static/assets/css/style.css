@@ -4096,3 +4096,14 @@ ol {
 }
 
 /*End Review Section*/
+
+
+/* Cart */
+.shoping__cart__item__close button:hover {
+  color: red;
+  transition: ease 0.3s;
+}
+
+
+
+/* End Cart */

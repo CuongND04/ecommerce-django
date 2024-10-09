@@ -25,6 +25,11 @@ urlpatterns = [
   # filter 
   path("filter-products/",filter_product,name="filter-product"),
   # add to cart
-  path("add-to-cart/",add_to_cart,name="add-to-cart") 
-
+  path("add-to-cart/",add_to_cart,name="add-to-cart"),
+  # xem giỏ hàng  
+  path("cart/", cart_view, name="cart"),
+  # xóa sản phẩm
+  path("delete-from-cart/", delete_item_from_cart, name="delete-from-cart"),
+  # cập nhật số lượng từ trang giỏ hàng
+  path("update-cart/", update_cart, name="update-cart"),
 ]

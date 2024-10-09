@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse,JsonResponse
 from core.models import CartOrderItems,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
 from taggit.models import Tag
@@ -35,8 +35,8 @@ def product_list_view(request):
   # lấy ra các sản phẩm được giảm giá nhiều nhất
   productSaleOff= Product.objects.all()
   productSaleOff = sorted(productSaleOff, key= lambda Product: -Product.get_percentage())
-  for p in productSaleOff[0:4]:
-    print(p.get_percentage())
+  # for p in productSaleOff[0:4]:
+  #   print(p.get_percentage())
   context = {
     "products":products,
     "productLatestOne":productLatest[0:3],
@@ -51,8 +51,8 @@ def category_product_list_view(request,cid):
   # lấy ra các sản phẩm được giảm giá nhiều nhất
   productSaleOff= Product.objects.all()
   productSaleOff = sorted(productSaleOff, key= lambda Product: -Product.get_percentage())
-  for p in products.values():
-    print(p)
+  # for p in products.values():
+  #   print(p)
   context = {
     "category":category,
     "products":products,
@@ -177,19 +177,22 @@ def filter_product(request):
     return JsonResponse({"data": data})
 
 def add_to_cart(request):
+    
     #  lưu trữ thông tin của sản phẩm được thêm vào giỏ hàng.
     cart_product = {}
     # Thông tin sản phẩm được lấy từ các tham số của yêu cầu GET
-
+    product = Product.objects.get(pid=request.GET['pid'])
+    
     # Tạo một mục mới trong cart_product với khóa là id của sản phẩm
     cart_product[str(request.GET['id'])] = {
-        'title': request.GET['title'],
+        'title': product.title,
         'qty': request.GET['qty'],
-        'price': request.GET['price'],
-        'image': request.GET['image'],
+        # price mặc định là decimal nên phải chuyển qua kiểu khác
+        'price': str(product.price),
+        'image': product.image.url,
         'pid': request.GET['pid'],
     }
-
+    # print( cart_product[str(request.GET['id'])]['price'])
     if 'cart_data_obj' in request.session:
         # Nếu cart_data_obj (giỏ hàng) đã tồn tại trong session, 
         # thì kiểm tra xem sản phẩm với ID cụ thể này đã có trong giỏ hàng hay chưa.
@@ -209,7 +212,9 @@ def add_to_cart(request):
             
         else:
             # Nếu sản phẩm chưa có trong giỏ hàng:
-
+            
+            # print(product.price)
+            # cart_product[str(request.GET['id'])]['price'] = product.price
             #Lấy giỏ hàng hiện tại từ session.
             cart_data = request.session['cart_data_obj']
             # Thêm cart_product vào cart_data bằng phương thức update.
@@ -230,4 +235,56 @@ def add_to_cart(request):
     
     return JsonResponse({"data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj'])})
 
- 
+def cart_view(request):
+  cart_total_amount = 0
+  if 'cart_data_obj' in request.session:
+      for p_id, item in request.session['cart_data_obj'].items():
+          print("item",item)
+          cart_total_amount += int(item['qty']) * float(item['price'])
+      return render(request, "core/cart.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
+  else:
+      messages.warning(request, "Your cart is empty")
+      return redirect("core:index")
+  
+def delete_item_from_cart(request):
+    # lấy id của sản phâm bị xóa
+    product_id = str(request.GET['id'])
+    # kiểm tra có id của giỏ hàng trong session chưa
+    if 'cart_data_obj' in request.session:
+        # kiểm tra xem có id của sp đó trong giỏ hàng không
+        if product_id in request.session['cart_data_obj']:
+            # lấy dữ liệu giỏ hàng về biến 
+            cart_data = request.session['cart_data_obj']
+
+            # xóa sản phẩm đó
+            del request.session['cart_data_obj'][product_id]
+
+            # cập nhật giỏ hàng
+            request.session['cart_data_obj'] = cart_data
+    # tính toán lại tổng giá khi xóa sản phẩm
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+
+    context = render_to_string("core/async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
+    return JsonResponse({"data": context, 'totalcartitems': len(request.session['cart_data_obj'])})
+
+
+def update_cart(request):
+    product_id = str(request.GET['id'])
+    product_qty = request.GET['qty']
+
+    if 'cart_data_obj' in request.session:
+        if product_id in request.session['cart_data_obj']:
+            cart_data = request.session['cart_data_obj']
+            cart_data[str(request.GET['id'])]['qty'] = product_qty
+            request.session['cart_data_obj'] = cart_data
+    
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+
+    context = render_to_string("core/async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
+    return JsonResponse({"data": context, 'totalcartitems': len(request.session['cart_data_obj'])})

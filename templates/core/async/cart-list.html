@@ -1,0 +1,140 @@
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad" id="cart-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shoping__cart__table">
+          <table>
+            <thead>
+              <tr>
+                <th class="shoping__product">Products</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for product_id, item in cart_data.items %}
+                <tr>
+                  <td class="shoping__cart__item">
+                    <img style="height: 120px;width: 120px;" src="{{ item.image }}" alt="image" />
+                    <a href="{% url 'core:product-detail' item.pid %}"><h5>{{ item.title }}</h5></a>
+                  </td>
+                  <td class="shoping__cart__price">${{ item.price|floatformat:2 }}</td>
+                  <td class="shoping__cart__quantity">
+                    <div class="quantity">
+                      <div class="pro-qty">
+                        <input type="text" value="{{ item.qty }}" class="product-qty-{{ product_id }}" />
+                      </div>
+                    </div>
+                  </td>
+                  <td class="shoping__cart__total">
+                    ${% widthratio item.price 1 item.qty %}
+                  </td>
+                  <td class="shoping__cart__item__close">
+                    <button class="bg-transparent border border-0 update-product" data-product="{{ product_id }}"><i class="fa-solid fa-arrows-rotate"></i></button>
+                  </td>
+                  <td class="shoping__cart__item__close">
+                    <button class="bg-transparent border border-0 delete-product" data-product="{{ product_id }}"><i class="fa-solid fa-trash-can"></i></button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shoping__cart__btns">
+          <a href="{% url 'core:product-list' %}" class="primary-btn cart-btn bg-success text-white">CONTINUE SHOPPING</a>
+          <a href="#" class="primary-btn cart-btn cart-btn-right">
+            <span class="icon_loading"></span>
+            Upadate Cart
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="shoping__continue">
+          <div class="shoping__discount">
+            <h5>Discount Codes</h5>
+            <form action="#">
+              <input type="text" placeholder="Enter your coupon code" />
+              <button type="submit" class="site-btn">APPLY COUPON</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        {% if totalcartitems %}
+          <div class="shoping__checkout">
+            <h5>Cart Total</h5>
+            <ul>
+              <li>
+                Subtotal <span>$454.98</span>
+              </li>
+              <li>
+                Total <span>${{ cart_total_amount|floatformat:2 }}</span>
+              </li>
+            </ul>
+            <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Shoping Cart Section End -->
+{% load static %}
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+{% comment %} <script>
+  var proQty = $('.pro-qty')
+  proQty.prepend('<span class="dec qtybtn">-</span>')
+  proQty.append('<span class="inc qtybtn">+</span>')
+  proQty.on('click', '.qtybtn', function () {
+    var $button = $(this)
+    var oldValue = $button.parent().find('input').val()
+    if ($button.hasClass('inc')) {
+      var newVal = parseFloat(oldValue) + 1
+    } else {
+      // Don't allow decrementing below zero
+      if (oldValue > 0) {
+        var newVal = parseFloat(oldValue) - 1
+      } else {
+        newVal = 0
+      }
+    }
+    $button.parent().find('input').val(newVal)
+  })
+  
+  $('.update-product').on('click', function () {
+    let product_id = $(this).attr('data-product')
+    let this_val = $(this)
+    let product_quantity = $('.product-qty-' + product_id).val()
+  
+    console.log('PRoduct ID:', product_id)
+    console.log('PRoduct QTY:', product_quantity)
+  
+    $.ajax({
+      url: '/update-cart',
+      data: {
+        id: product_id,
+        qty: product_quantity
+      },
+      dataType: 'json',
+      beforeSend: function () {
+        this_val.hide()
+      },
+      success: function (response) {
+        alertify.set('notifier', 'position', 'top-right')
+        alertify.success('Cập nhật số lượng thành công!')
+        this_val.show()
+        $('.cart-items-count').text(response.totalcartitems)
+        $('#cart-list').html(response.data)
+        // window.location.reload()
+      }
+    })
+  })
+</script> {% endcomment %}

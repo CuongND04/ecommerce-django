@@ -142,7 +142,7 @@
                   <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-shopping-bag"></i> <span class="cart-items-count">{{ request.session.cart_data_obj|length }}</span></a>
+                  <a href="{% url 'core:cart' %}"><i class="fa fa-shopping-bag"></i> <span class="cart-items-count">{{ request.session.cart_data_obj|length }}</span></a>
                 </li>
               </ul>
               <div class="header__cart__price">
