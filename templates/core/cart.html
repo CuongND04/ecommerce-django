@@ -99,7 +99,7 @@
                   Total <span>${{ cart_total_amount|floatformat:2 }}</span>
                 </li>
               </ul>
-              <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+              <a href="{% url 'core:checkout' %}" class="primary-btn">PROCEED TO CHECKOUT</a>
             </div>
           {% endif %}
         </div>

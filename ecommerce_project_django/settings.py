@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     # thêm thẻ tag vào sản phẩm
     "taggit",
+    # tích hợp thanh toán paypal
+    'paypal.standard.ipn',
     
     # Các thành phần thêm vào
     'core',
@@ -167,7 +169,9 @@ JAZZMIN_SETTINGS = {
   'site_logo': "/assets/imgs/theme/loading.gif" ,
   'copyright':"desphixs-shop.com"
 }
-
+LOGIN_URL = "userauths:sign-in"
 AUTH_USER_MODEL = 'userauths.User'
 
-
+# đây là tài khoản của chủ cửa hàng
+PAYPAL_RECEIVER_EMAIL = 'sb-p7kn733382796@business.example.com'
+PAYPAL_TEST = True

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import *
 from core.views import *
 
 # cài đặt các route trang web 
@@ -32,4 +32,14 @@ urlpatterns = [
   path("delete-from-cart/", delete_item_from_cart, name="delete-from-cart"),
   # cập nhật số lượng từ trang giỏ hàng
   path("update-cart/", update_cart, name="update-cart"),
+
+
+  path("checkout/", checkout_view, name="checkout"),
+
+
+  path('paypal/', include('paypal.standard.ipn.urls')),
+
+  path("payment-completed/", payment_completed_view, name="payment-completed"),
+
+  path("payment-failed/", payment_failed_view, name="payment-failed"),
 ]
