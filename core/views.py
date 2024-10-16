@@ -337,22 +337,33 @@ def checkout_view(request):
     "cancel_url":"http://{}{}".format(host,reverse("core:payment-failed")),
   }
   paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
+
+  # cart_total_amount = 0
+  # if 'cart_data_obj' in request.session:
+  #   for p_id, item in request.session['cart_data_obj'].items():
+  #     cart_total_amount += int(item['qty']) * float(item['price'])
+
+  context = {
+    "cart_data":request.session['cart_data_obj'], 
+    'totalcartitems': len(request.session['cart_data_obj']), 
+    'cart_total_amount':cart_total_amount,
+    'paypal_payment_button': paypal_payment_button
+  }
+  return render(request, "core/checkout.html", context)
+  
+@login_required
+def payment_completed_view(request):
   cart_total_amount = 0
   if 'cart_data_obj' in request.session:
     for p_id, item in request.session['cart_data_obj'].items():
       cart_total_amount += int(item['qty']) * float(item['price'])
 
-    context = {
-      "cart_data":request.session['cart_data_obj'], 
-      'totalcartitems': len(request.session['cart_data_obj']), 
-      'cart_total_amount':cart_total_amount,
-      'paypal_payment_button': paypal_payment_button
-    }
-    return render(request, "core/checkout.html", context)
-  
-@login_required
-def payment_completed_view(request):
-  return render(request, 'core/payment-completed.html')
+  context = {
+    "cart_data":request.session['cart_data_obj'], 
+    'totalcartitems': len(request.session['cart_data_obj']), 
+    'cart_total_amount':cart_total_amount,
+  }
+  return render(request, 'core/payment-completed.html', context)
 
 @login_required
 def payment_failed_view(request):
