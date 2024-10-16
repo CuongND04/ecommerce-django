@@ -8,7 +8,7 @@
     <meta name="keywords" content="Fresh, Mart, Fresh Mart" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Ogani | Template</title>
+    <title>Fresh Mart</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet" />
@@ -69,7 +69,41 @@
                   </ul>
                 </div> {% endcomment %}
                 {% if request.user.is_authenticated %}
-                  <h5 class="d-inline-block">Xin chào <strong>{{ username }}</strong></h5>
+                  <div class="menu-container">
+                    <h5 class="d-inline-block">Xin chào <strong>{{ username }}</strong></h5>
+                    <div class="menu menu-username">
+                      <ul>
+                        <li>
+                          <a href="{% url 'core:dashboard' %}">Tài khoản</a>
+                        </li>
+                        <li>
+                          <a href="#option2">Option 2</a>
+                        </li>
+                        <li>
+                          <a href="#option3">Option 3</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {% comment %} <a href="#">Pages</a>
+                  <ul class="header__menu__dropdown">
+                    <li>
+                      <a href="./shop-details.html">Shop Details</a>
+                    </li>
+                    <li>
+                      <a href="./shoping-cart.html">Shoping Cart</a>
+                    </li>
+                    <li>
+                      <a href="./checkout.html">Check Out</a>
+                    </li>
+                    <li>
+                      <a href="./blog-details.html">Blog Details</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'core:vendor-list' %}">Vendor List</a>
+                    </li>
+                  </ul> {% endcomment %}
                   <div class="header__top__right__auth ms-2">
                     <a href="{% url 'userauths:sign-out' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                   </div>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      .sidebar {
+        height: 100vh;
+        background-color: #343a40;
+        color: white;
+        padding-top: 20px;
+      }
+      .sidebar a {
+        color: white;
+        padding: 10px 15px;
+        display: block;
+        text-decoration: none;
+      }
+      .sidebar a:hover {
+        background-color: #495057;
+        color: #fff;
+      }
+      .content {
+        padding: 20px;
+      }
+      .section-content {
+        display: none;
+      }
+      .active-section {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">My Dashboard</a>
+        <span class="navbar-text">Welcome, <strong>{{ username }}</strong></span>
+      </div>
+    </nav>
+
+    <!-- Main Dashboard Layout -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 sidebar">
+          <h5 class="text-center">Menu</h5>
+          <a href="{% url 'core:dashboard' %}" onclick="showSection('profile')">Profile</a>
+          <a href="#" onclick="showSection('settings')">Settings</a>
+          <a href="#" onclick="showSection('messages')">Your Order</a>
+          <a class="disabled" href="#" onclick="showSection('detail')">Chi tiết đơn hàng</a>
+          <a href="#" onclick="showSection('analytics')">Analytics</a>
+          <a href="#logout">Logout</a>
+        </div>
+
+        <!-- Content Area -->
+        <div class="col-md-9 col-lg-10 content">
+          <div id="profile" class="section-content active-section">
+            <h2>Profile</h2>
+            <p>This is the profile section where you can view and edit your profile information.</p>
+          </div>
+          <div id="settings" class="section-content">
+            <h2>Settings</h2>
+            <p>This is the settings section where you can adjust your preferences and configurations.</p>
+          </div>
+          <div id="messages" class="section-content">
+            <h2>Your Order</h2>
+            <div class="container border">
+              <table class="table align-middle mb-0 bg-white">
+                <thead class="bg-light">
+                  <tr>
+                    <th>Order</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Paid Status</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for o in orders_list %}
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          {% comment %} <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" /> {% endcomment %}
+                          <div class="ms-3">
+                            <p class="fw-medium mb-1">INVOICE_NO-{{ o.id }}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="fw-normal mb-1">{{ o.order_date }}</p>
+                        {% comment %} <p class="text-muted mb-0">IT department</p> {% endcomment %}
+                      </td>
+                      <td>
+                        {% if o.product_status == 'processing' %}
+                          <span class="badge text-bg-warning">{{ o.product_status|title }}</span>
+                        {% elif o.product_status == 'shipped' %}
+                          <span class="badge text-bg-info">{{ o.product_status|title }}</span>
+                        {% elif o.product_status == 'delivered' %}
+                          <span class="badge text-bg-success">{{ o.product_status|title }}</span>
+                        {% endif %}
+                      </td>
+
+                      <td>
+                        {% if o.paid_status %}
+                          <span class="badge text-bg-success">{{ o.paid_status|title }}</span>
+                        {% else %}
+                          <span class="badge text-bg-danger">{{ o.paid_status|title }}</span>
+                        {% endif %}
+                      </td>
+                      <td>${{ o.price }}</td>
+                      <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded"><a href="{% url 'core:order-detail' o.id %}">View</a></button>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            {% comment %} {% block dashboard %}
+
+            {% endblock %} {% endcomment %}
+          </div>
+          <div id="analytics" class="section-content">
+            <h2>Analytics</h2>
+            <p>This is the analytics section where you can view your performance and other stats.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript for Section Toggle -->
+    <script>
+      function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.section-content').forEach(function (section) {
+          section.classList.remove('active-section')
+        })
+        // Show the selected section
+        document.getElementById(sectionId).classList.add('active-section')
+      }
+    </script>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
