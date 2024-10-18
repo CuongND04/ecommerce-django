@@ -202,7 +202,7 @@ class ProductReview(models.Model):
     rating = models.IntegerField(choices=RATING, default=None)
     date = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
+    class Meta: 
         verbose_name_plural = "Product Reviews"
 
     def __str__(self):

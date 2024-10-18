@@ -46,4 +46,7 @@ urlpatterns = [
   path("dashboard/", customer_dashboard, name="dashboard"),
 
   path("dashboard/order/<int:id>", order_detail, name="order-detail"),
+
+  # đặt làm địa chỉ mặc định
+  path("make-default-address/", make_address_default, name="make-default-address"),
 ]
