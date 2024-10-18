@@ -173,7 +173,7 @@
             <div class="header__cart">
               <ul>
                 <li>
-                  <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
+                  <a href="{% url 'core:wishlist' %}"><i class="fa fa-heart"></i> <span>{{ wishlist.count }}</span></a>
                 </li>
                 <li>
                   <a href="{% url 'core:cart' %}"><i class="fa fa-shopping-bag"></i> <span class="cart-items-count">{{ request.session.cart_data_obj|length }}</span></a>

@@ -493,5 +493,33 @@ $(document).ready(function () {
             }
         })
     })
+
+    // Adding to wishlist
+    $(document).on("click", ".add-to-wishlist", function () {
+        let product_id = $(this).attr("data-product-item")
+        let this_val = $(this)
+
+
+        // console.log("Product ID IS", product_id);
+
+        $.ajax({
+            url: "/add-to-wishlist",
+            data: {
+                "id": product_id
+            },
+            dataType: "json",
+            beforeSend: function () {
+                console.log("Adding to wishlist...")
+            },
+            success: function (response) {
+                // this_val.html("✓")
+                this_val.html("<i class='fas fa-heart text-danger'></i>")
+                if (response.bool === true) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success("Đã thêm vào danh sách yêu thích!");
+                }
+            }
+        })
+    })
 })
 

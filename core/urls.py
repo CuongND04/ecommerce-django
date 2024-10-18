@@ -49,4 +49,7 @@ urlpatterns = [
 
   # đặt làm địa chỉ mặc định
   path("make-default-address/", make_address_default, name="make-default-address"),
+  # thêm vào danh sách yêu thích
+  path("add-to-wishlist/", add_to_wishlist, name="add-to-wishlist"),
+  path("wishlist/", wishlist_view, name="wishlist"),
 ]
