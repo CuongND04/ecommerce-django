@@ -52,4 +52,5 @@ urlpatterns = [
   # thêm vào danh sách yêu thích
   path("add-to-wishlist/", add_to_wishlist, name="add-to-wishlist"),
   path("wishlist/", wishlist_view, name="wishlist"),
+  path("remove-from-wishlist/", remove_wishlist, name="remove-from-wishlist"),
 ]

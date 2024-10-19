@@ -9,6 +9,7 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import *
 
+from django.core import serializers
 # tính năng paypal
 from django.urls import reverse
 from django.conf import settings
@@ -454,3 +455,23 @@ def add_to_wishlist(request):
         }
 
     return JsonResponse(context)
+
+def remove_wishlist(request):
+    # Hàm lấy giá trị id từ query string của request HTTP
+    pid = request.GET['id']
+    # Lọc tất cả các mục trong mô hình WishList thuộc về người dùng hiện tại (request.user).
+    wishlist = WishList.objects.filter(user=request.user)
+    # lấy một mục cụ thể trong WishList theo id
+    wishlist_d = WishList.objects.get(id=pid)
+    # xoá sản phẩm khỏi cơ sở dữ liệu.
+    delete_product = wishlist_d.delete()
+    
+    context = {
+        "bool":True, # trạng thái thành công
+        "wishlist":wishlist # danh sách yêu thích còn lại
+    }
+    # chuyển đổi danh sách yêu thích (wishlist) sang 
+    # định dạng JSON. Dữ liệu này sẽ được trả về cho client.
+    wishlist_json = serializers.serialize('json', wishlist)
+    t = render_to_string('core/async/wishlist-list.html', context)
+    return JsonResponse({'data':t,'wishlistp':wishlist_json})

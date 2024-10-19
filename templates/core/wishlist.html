@@ -20,7 +20,7 @@
   <!-- Breadcrumb Section End -->
 
   <!-- Shoping Cart Section Begin -->
-  <section class="shoping-cart spad" id="cart-list">
+  <section class="shoping-cart spad" id="wishlist-list">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -52,6 +52,9 @@
                         {% comment %}thêm thuộc tính đê vô hiệu hóa href{% endcomment %}
                         <a href="#" style="pointer-events: none; color: inherit; text-decoration: none;"><i class="fa fa-shopping-cart"></i></a>
                       </button>
+                      <div class="remove-hover-red">
+                        <button style="border: none; background: none;" data-wishlist-product="{{ w.id }}" class="delete-wishlist-product"><i class="fa-solid fa-trash-can"></i></button>
+                      </div>
                     </td>
                   </tr>
                 {% empty %}

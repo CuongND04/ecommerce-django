@@ -494,7 +494,7 @@ $(document).ready(function () {
         })
     })
 
-    // Adding to wishlist
+    // thêm sản phẩm ra khỏi danh sách yêu thích
     $(document).on("click", ".add-to-wishlist", function () {
         let product_id = $(this).attr("data-product-item")
         let this_val = $(this)
@@ -518,6 +518,30 @@ $(document).ready(function () {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.success("Đã thêm vào danh sách yêu thích!");
                 }
+            }
+        })
+    })
+
+    // xóa sản phẩm ra khỏi danh sách yêu thích
+    $(document).on("click", ".delete-wishlist-product", function () {
+        let wishlist_id = $(this).attr("data-wishlist-product")
+        let this_val = $(this)
+
+        console.log("wishlist id is:", wishlist_id);
+
+        $.ajax({
+            url: "/remove-from-wishlist",
+            data: {
+                "id": wishlist_id
+            },
+            dataType: "json",
+            beforeSend: function () {
+                console.log("Deleting product from wishlist...");
+            },
+            success: function (response) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success("Xóa thành công");
+                $("#wishlist-list").html(response.data)
             }
         })
     })

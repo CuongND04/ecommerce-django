@@ -4208,3 +4208,13 @@ ol {
 .menu-container:hover .menu {
   display: block;
 }
+
+/* wishlist */
+.remove-hover-red {
+  display: inline-block;
+}
+
+.remove-hover-red button:hover {
+  color: red;
+  transition: ease 0.3s;
+}
