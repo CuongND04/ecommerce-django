@@ -15,6 +15,9 @@ from django.urls import reverse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from paypal.standard.forms import PayPalPaymentsForm
+
+import calendar
+from django.db.models.functions import ExtractMonth
 # Create your views here.
 #  cài đặt hiển thị ra màn hình
 def index(request):
@@ -380,6 +383,32 @@ def customer_dashboard(request):
   orders_list = CartOrder.objects.filter(user=request.user).order_by("-id")
   address = Address.objects.filter(user=request.user)
 
+  # Hàm annotate được dùng để thêm
+  #  một trường mới vào mỗi đối tượng trong truy vấn. 
+  # Ở đây, trường mới được thêm là month, được lấy 
+  # bằng cách sử dụng hàm ExtractMonth("order_date"), tức 
+  # là trích xuất tháng từ trường order_date (ngày đặt hàng). Mỗi 
+  # đơn hàng sẽ có thêm một thuộc tính month đại diện cho tháng 
+  # mà đơn hàng đó được đặt.
+
+  # .values("month") được dùng để tạo một danh sách chỉ chứa giá trị của cột month từ các đơn hàng.
+
+  # lại sử dụng annotate, nhưng lần này là
+  #  để thêm trường count, trong đó Count("id") sẽ đếm số lượng đơn hàng có cùng tháng. 
+  # Kết quả là, mỗi tháng sẽ có một giá trị count 
+  # đại diện cho tổng số đơn hàng trong tháng đó.
+
+  # .values("month", "count") được dùng để chỉ lấy hai trường month và count
+  orders = CartOrder.objects.annotate(month=ExtractMonth("order_date")).values("month").annotate(count=Count("id")).values("month", "count")
+  month = []
+  total_orders = []
+
+  for i in orders:
+    month.append(calendar.month_name[i["month"]])
+    total_orders.append(i["count"])
+
+
+
   if request.method == "POST":
     address = request.POST.get("address")
     mobile = request.POST.get("mobile")
@@ -397,8 +426,11 @@ def customer_dashboard(request):
 
 
   context = {
-    "address":address,
+    "orders": orders,
     "orders_list": orders_list,
+    "address": address,
+    "month": month,
+    "total_orders": total_orders,
   }
   return render(request,'core/dashboard.html',context)
 
