@@ -164,10 +164,49 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-  'site_header': "You order, we deliver",
-  'site_brand': "Desphixs Shop",
-  'site_logo': "/assets/imgs/theme/loading.gif" ,
-  'copyright':"desphixs-shop.com"
+  "site_title": "FreshMart Admin",
+  'site_header': "Fresh Mart",
+  'site_brand': "Fresh Mart",
+  'site_logo': "/assets/img/haha.jpg" ,
+  'copyright':"freshmart.com",
+  "topmenu_links": [
+        # external url that opens in a new window (Permissions can be added)
+        {"name": "Back To Store", "url": "http://127.0.0.1:8000/", "new_window": True},
+    ],
+    # "show_ui_builder": True,
+     
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-success",
+    "accent": "accent-navy",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-success",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "flatly",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
 }
 LOGIN_URL = "userauths:sign-in"
 AUTH_USER_MODEL = 'userauths.User'

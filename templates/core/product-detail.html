@@ -73,7 +73,8 @@
             <input type="hidden" class="product-id-{{ product.id }}" value="{{ product.id }}" />
             <input type="hidden" class="product-title-{{ product.id }}" value="{{ product.title }}" />
             <button type="submit" data-index="{{ product.id }}" class="primary-btn btn btn-animation btn-outline-success add-to-cart-btn"><i class="fa-solid fa-cart-shopping me-2"></i>ADD TO CARD</button>
-            <a href="#" class="heart-icon"><i class="fa-solid fa-heart"></i></a>
+            <a class="action-btn add-to-wishlist heart-icon" data-product-item="{{ product.id }}"><i class="fa fa-heart"></i></a>
+            {% comment %} <a href="#" class="heart-icon"><i class="fa-solid fa-heart"></i></a> {% endcomment %}
             <ul>
               <li>
                 <b>Availability</b> <span>{{ product.stock_count }} sản phẩm trong kho</span>

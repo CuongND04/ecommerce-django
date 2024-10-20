@@ -545,5 +545,44 @@ $(document).ready(function () {
             }
         })
     })
+    // chức năng contact
+    $(document).on("submit", "#contact-form-ajax", function (e) {
+        e.preventDefault()
+        console.log("Submited...");
+
+        let full_name = $("#full_name").val()
+        let email = $("#email").val()
+        let phone = $("#phone").val()
+        let subject = $("#subject").val()
+        let message = $("#message").val()
+
+        console.log("Name:", full_name);
+        console.log("Email:", email);
+        console.log("Phone:", phone);
+        console.log("Subject:", subject);
+        console.log("MEssage:", message);
+
+        $.ajax({
+            url: "/ajax-contact-form",
+            data: {
+                "full_name": full_name,
+                "email": email,
+                "phone": phone,
+                "subject": subject,
+                "message": message,
+            },
+            dataType: "json",
+            beforeSend: function () {
+                console.log("Sending Data to Server...");
+            },
+            success: function (res) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success("Gửi thành công");
+                console.log("Sent Data to server!");
+                $("#contact-form-ajax").hide()
+                $("#message-response").html("Cảm ơn bạn đã liên hệ với chúng tôi! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.")
+            }
+        })
+    })
 })
 

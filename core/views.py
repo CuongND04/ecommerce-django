@@ -6,7 +6,7 @@ from django.db.models import *
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
-
+from userauths.models import ContactUs
 from django.contrib.auth.decorators import *
 
 from django.core import serializers
@@ -440,10 +440,11 @@ def order_detail(request, id):
     order = CartOrder.objects.get(user=request.user, id=id)
     order_items = CartOrderItems.objects.filter(order=order)
 
-    
+    address = Address.objects.filter(user=request.user)
     context = {
         "order_items": order_items,
         "orders_list": orders_list,
+        "address" : address
     }
     return render(request, 'core/order-detail.html', context)
 
@@ -507,3 +508,29 @@ def remove_wishlist(request):
     wishlist_json = serializers.serialize('json', wishlist)
     t = render_to_string('core/async/wishlist-list.html', context)
     return JsonResponse({'data':t,'wishlistp':wishlist_json})
+
+# Other Pages 
+def contact(request):
+  return render(request, "core/contact.html")
+
+def ajax_contact_form(request):
+    full_name = request.GET['full_name']
+    email = request.GET['email']
+    phone = request.GET['phone']
+    subject = request.GET['subject']
+    message = request.GET['message']
+
+    contact = ContactUs.objects.create(
+        full_name=full_name,
+        email=email,
+        phone=phone,
+        subject=subject,
+        message=message,
+    )
+
+    data = {
+        "bool": True,
+        "message": "Message Sent Successfully"
+    }
+
+    return JsonResponse({"data":data})

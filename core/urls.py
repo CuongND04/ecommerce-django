@@ -53,4 +53,8 @@ urlpatterns = [
   path("add-to-wishlist/", add_to_wishlist, name="add-to-wishlist"),
   path("wishlist/", wishlist_view, name="wishlist"),
   path("remove-from-wishlist/", remove_wishlist, name="remove-from-wishlist"),
+
+  path("contact/", contact, name="contact"),
+
+  path("ajax-contact-form/", ajax_contact_form, name="ajax-contact-form"),
 ]
