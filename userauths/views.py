@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
-from userauths.forms import UserRegisterForm
+from userauths.forms import UserRegisterForm,ProfileForm
 from django.contrib.auth import login,authenticate,logout
 from django.contrib import messages
 from core.models import *
-
+from userauths.models import Profile, User
 from .models import User
 # Create your views here.
 def register_view(request):
@@ -65,3 +65,23 @@ def logout_view(request):
    logout(request)
    messages.success(request,"Bạn đã đăng xuất.")
    return redirect("userauths:sign-in")
+
+def profile_update(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == "POST":
+      form = ProfileForm(request.POST, request.FILES, instance=profile)
+      if form.is_valid():
+        new_form = form.save(commit=False)
+        new_form.user = request.user
+        new_form.save()
+        messages.success(request, "Cập nhật thành công.")
+        return redirect("core:dashboard")
+    else:
+      form = ProfileForm(instance=profile)
+    print("form:",form)
+    context = {
+      "form": form,
+      "profile": profile,
+    }
+
+    return render(request, "userauths/profile-edit.html", context)

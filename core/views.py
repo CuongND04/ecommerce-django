@@ -6,7 +6,7 @@ from django.db.models import *
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
-from userauths.models import ContactUs
+from userauths.models import ContactUs,Profile
 from django.contrib.auth.decorators import *
 
 from django.core import serializers
@@ -418,14 +418,16 @@ def customer_dashboard(request):
         address=address,
         mobile=mobile,
     )
+    
     messages.success(request, "Thêm địa chỉ mới thành công.")
     return redirect("core:dashboard")
   else:
     print("Error")
 
 
-
+  user_profile = Profile.objects.get(user=request.user)
   context = {
+    "user_profile": user_profile,
     "orders": orders,
     "orders_list": orders_list,
     "address": address,

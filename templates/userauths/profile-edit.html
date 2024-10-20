@@ -80,7 +80,7 @@
 
         <!-- Content Area -->
         <div class="col-md-9 col-lg-10 content">
-          <div id="profile" class="section-content active-section">
+          <div id="profile" class="section-content">
             <h2 class="fw-semibold">Bảng điều khiển</h2>
             {% comment %} <p>{{ month }}</p>
             <p>{{ total_orders }}</p> {% endcomment %}
@@ -107,7 +107,7 @@
                         {% comment %} <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> {% endcomment %}
                         <div class="d-flex justify-content-center mb-2">
                           {% comment %} <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Follow</button> {% endcomment %}
-                          <a href="{% url 'userauths:profile-update' %}" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-success ms-1">Chỉnh sửa</a>
+                          <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-success ms-1">Chỉnh sửa</button>
                         </div>
                       </div>
                     </div>
@@ -165,6 +165,55 @@
                 </div>
               </div>
             </section>
+          </div>
+          <div id="edit-profile" class="section-content active-section">
+            <h2 class="fw-semibold">Chỉnh sửa thông tin</h2>
+            <hr />
+            <form class="row" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <!-- left column -->
+              <div class="col-md-3">
+                <div class="text-center">
+                  {% if profile.image %}
+                    <img src="{{ profile.image.url }}" class="avatar img-circle" alt="avatar" style="width: 150px;" />
+                  {% else %}
+                    <img src="{% static 'assets/img/Default_pfp.svg.png' %}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
+                  {% endif %}
+
+                  <h6>Thay ảnh đại diện</h6>
+                  {{ form.image }}
+                </div>
+              </div>
+
+              <!-- edit form column -->
+              <div class="col-md-9 personal-info">
+                <h3>Thông tin cá nhân</h3>
+
+                <div class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">First name:</label>
+                    <div class="col-lg-8">{{ form.full_name }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Bio:</label>
+                    <div class="col-lg-8">{{ form.bio }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Phone:</label>
+                    <div class="col-lg-8">{{ form.phone }}</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                      <button type="submit" class="btn btn-success">Lưu</button>
+                      <span></span>
+                      <input onclick="showSection('settings')" type="reset" class="btn btn-default" value="Cancel" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
           <div id="messages" class="section-content">
             <h2 class="fw-semibold">Đơn hàng</h2>
