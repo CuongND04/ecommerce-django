@@ -30,7 +30,7 @@
       <button type="submit" class="site-btn mb-4"><i class="fa-solid fa-angles-left"></i><a class="text-white ms-2" href="{% url 'core:cart' %}">Back to cart</a></button>
       <div class="checkout__form">
         <h4>Billing Details</h4>
-        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+        <form method="post">
           <div class="row">
             <div class="col-lg-8 col-md-6">
               <div class="row">
@@ -67,18 +67,22 @@
                   Items <span>Total</span>
                 </div> {% endcomment %}
                 <form class="coupon-form">
+                  {% csrf_token %}
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Coupon" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                    <button class="btn btn-outline-success" type="button" id="button-addon2">Apply</button>
+                    <input name="code" type="text" class="form-control" placeholder="Coupon" aria-label="Recipient's username" />
+                    <button class="btn btn-outline-success" type="submit" id="button-addon2">Apply</button>
                   </div>
                 </form>
 
                 <div class="checkout__order__subtotal">
-                  Discount <span>${{ order.saved }}</span>
+                  Tổng tiền hàng <span>${{ old_price|floatformat:2 }}</span>
+                </div>
+                <div class="checkout__order__subtotal">
+                  Giảm giá <span>${{ order.saved }}</span>
                 </div>
 
                 <div class="checkout__order__total">
-                  Total <span>${{ cart_total_amount|floatformat:2 }}</span>
+                  Thành tiền <span>${{ order.price|floatformat:2 }}</span>
                 </div>
 
                 <div class="checkout__input__checkbox">
@@ -100,16 +104,42 @@
                     <span class="checkmark"></span>
                   </label>
                 </div>
-
-                {% comment %} <button type="submit" class="site-btn">PLACE ORDER</button> {% endcomment %}
+                <button type="button" class="btn w-100" id="checkout-button" style="background-color: green;color: white;">Pay With Stripe</button>
+                <div id="paypal-button-container" class="mt-2"></div>
               </div>
-              <div class="w-50">{{ paypal_payment_button.render }}</div>
             </div>
           </div>
-          {% comment %} <button type="submit" class="site-btn">PLACE ORDER</button> {% endcomment %}
         </form>
       </div>
     </div>
   </section>
   <!-- Checkout Section End -->
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD" data-namespace="paypal_sdk"></script>
+
+  <script>
+    paypal_sdk
+      .Buttons({
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: '{{order.price}}'
+                }
+              }
+            ]
+          })
+        },
+    
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (Detail) {
+            console.log(Detail)
+            if (Detail.status === 'COMPLETED') {
+              window.location.href = `/payment-completed/{{ order.oid }}/?status=${Detail.status}`
+            }
+          })
+        }
+      })
+      .render('#paypal-button-container')
+  </script>
 {% endblock %}

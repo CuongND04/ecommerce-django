@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse,JsonResponse
-from core.models import CartOrderItems,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
+from core.models import CartOrderItems, Coupon,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
 from taggit.models import Tag
 from django.db.models import *
 from core.forms import ProductReviewForm
@@ -398,6 +398,8 @@ def save_checkout_info(request):
           total_amount += int(item['qty']) * float(item['price'])
 
 
+      request.session['total_amount'] = total_amount
+
       full_name = request.session['full_name']
       email = request.session['email']
       phone = request.session['mobile']
@@ -446,32 +448,31 @@ def save_checkout_info(request):
 def checkout(request, oid):
   order = CartOrder.objects.get(oid=oid)
   order_items = CartOrderItems.objects.filter(order=order)
-
-  
+  old_price = request.session.get('total_amount')
+  print("old_price: ",old_price)
   if request.method == "POST":
       code = request.POST.get("code")
-      print("code ========", code)
-      # coupon = Coupon.objects.filter(code=code, active=True).first()
-      # if coupon:
-      #     if coupon in order.coupons.all():
-      #         messages.warning(request, "Coupon already activated")
-      #         return redirect("core:checkout", order.oid)
-      #     else:
-      #         discount = order.price * coupon.discount / 100 
+      coupon = Coupon.objects.filter(code=code, active=True).first()
+      if coupon:
+          if coupon in order.coupons.all():
+              messages.warning(request, "Mã giảm giá này đã được sử dụng, không thể áp dụng lại.")
+              return redirect("core:checkout", order.oid)
+          else:
+              discount = order.price * coupon.discount / 100 
 
-      #         order.coupons.add(coupon)
-      #         order.price -= discount
-      #         order.saved += discount
-      # #         order.save()
-
-      #         messages.success(request, "Coupon Activated")
-      #         return redirect("core:checkout", order.oid)
-      # else:
-      #     messages.error(request, "Coupon Does Not Exists")
+              order.coupons.add(coupon)
+              order.price -= discount
+              order.saved += discount
+              order.save()
+              messages.success(request, "Mã giảm giá đã được áp dụng thành công!")
+              return redirect("core:checkout", order.oid)
+      else:
+          messages.error(request, "Mã giảm giá không hợp lệ, vui lòng kiểm tra lại.")
 
       
 
   context = {
+     "old_price":old_price,
       "order": order,
       "order_items": order_items,
       # "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
@@ -480,21 +481,50 @@ def checkout(request, oid):
   return render(request, "core/checkout.html", context)
 
 
+def create_checkout_session(request, oid):
+    order = CartOrder.objects.get(oid=oid)
+  # stripe.api_key = settings.STRIPE_SECRET_KEY
 
+  # checkout_session = stripe.checkout.Session.create(
+  #     customer_email = order.email,
+  #     payment_method_types=['card'],
+  #     line_items = [
+  #         {
+  #             'price_data': {
+  #                 'currency': 'USD',
+  #                 'product_data': {
+  #                     'name': order.full_name
+  #                 },
+  #                 'unit_amount': int(order.price * 100)
+  #             },
+  #             'quantity': 1
+  #         }
+  #     ],
+  #     mode = 'payment',
+  #     success_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid])) + "?session_id={CHECKOUT_SESSION_ID}",
+  #     cancel_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid]))
+  # )
+
+  # order.paid_status = False
+  # order.stripe_payment_intent = checkout_session['id']
+  # order.save()
+
+  # print("checkkout session", checkout_session)
+  # return JsonResponse({"sessionId": checkout_session.id})
 
 @login_required
-def payment_completed_view(request):
-  cart_total_amount = 0
-  if 'cart_data_obj' in request.session:
-    for p_id, item in request.session['cart_data_obj'].items():
-      cart_total_amount += int(item['qty']) * float(item['price'])
-
-  context = {
-    "cart_data":request.session['cart_data_obj'], 
-    'totalcartitems': len(request.session['cart_data_obj']), 
-    'cart_total_amount':cart_total_amount,
-  }
-  return render(request, 'core/payment-completed.html', context)
+def payment_completed_view(request, oid):
+    order = CartOrder.objects.get(oid=oid)
+    
+    if order.paid_status == False:
+        order.paid_status = True
+        order.save()
+        
+    context = {
+        "order": order,
+        # "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
+    }
+    return render(request, 'core/payment-completed.html',  context)
 
 @login_required
 def payment_failed_view(request):

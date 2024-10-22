@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import CartOrderItems,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
+from core.models import CartOrderItems, Coupon,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
 # Cài đặt các trường hiển thị trong admin của từng model
 class ProductImagesAdmin(admin.TabularInline):
     model = ProductImages
@@ -45,3 +45,4 @@ admin.site.register(CartOrderItems, CartOrderItemsAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
 admin.site.register(WishList, WishListAdmin)
 admin.site.register(Address, AddressAdmin)
+admin.site.register(Coupon)

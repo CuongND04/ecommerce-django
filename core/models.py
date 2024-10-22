@@ -179,7 +179,7 @@ class CartOrder(models.Model):
 
     price = models.DecimalField(max_digits=12, decimal_places=2, default="0.00")
     saved = models.DecimalField(max_digits=12, decimal_places=2, default="0.00")
-    # coupons = models.ManyToManyField("core.Coupon", blank=True)
+    coupons = models.ManyToManyField("core.Coupon", blank=True)
     
     shipping_method = models.CharField(max_length=100, null=True, blank=True)
     tracking_id = models.CharField(max_length=100, null=True, blank=True)
@@ -253,3 +253,12 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = "Address"
 
+
+class Coupon(models.Model):
+    code = models.CharField(max_length=1000)
+    discount = models.IntegerField(default=1)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.code}"
+    
