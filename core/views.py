@@ -360,6 +360,128 @@ def checkout_view(request):
   }
   return render(request, "core/checkout.html", context)
   
+def save_checkout_info(request):
+  cart_total_amount = 0
+  total_amount = 0
+  if request.method == "POST":
+    full_name = request.POST.get("full_name")
+    email = request.POST.get("email")
+    mobile = request.POST.get("mobile")
+    address = request.POST.get("address")
+    city = request.POST.get("city")
+    state = request.POST.get("state")
+    country = request.POST.get("country")
+
+    print(full_name)
+    print(email)
+    print(mobile)
+    print(address)
+    print(city)
+    print(state)
+    print(country)
+
+    # gán các thông tin lấy được vào session
+    request.session['full_name'] = full_name
+    request.session['email'] = email
+    request.session['mobile'] = mobile
+    request.session['address'] = address
+    request.session['city'] = city
+    request.session['state'] = state
+    request.session['country'] = country
+
+
+    # Nếu có dữ liệu giỏ hàng cart_data trong session
+    if 'cart_data_obj' in request.session:
+
+      # tính tổng số tiền phải thanh toán
+      for p_id, item in request.session['cart_data_obj'].items():
+          total_amount += int(item['qty']) * float(item['price'])
+
+
+      full_name = request.session['full_name']
+      email = request.session['email']
+      phone = request.session['mobile']
+      address = request.session['address']
+      city = request.session['city']
+      state = request.session['state']
+      country = request.session['country']
+
+      # Create ORder Object
+      order = CartOrder.objects.create(
+          user=request.user,
+          price=total_amount,
+          full_name=full_name,
+          email=email,
+          phone=phone,
+          address=address,
+          city=city,
+          state=state,
+          country=country,
+      )
+
+      del request.session['full_name']
+      del request.session['email']
+      del request.session['mobile']
+      del request.session['address']
+      del request.session['city']
+      del request.session['state']
+      del request.session['country']
+
+      # Getting total amount for The Cart
+      for p_id, item in request.session['cart_data_obj'].items():
+          cart_total_amount += int(item['qty']) * float(item['price'])
+
+          cart_order_products = CartOrderItems.objects.create(
+              order=order,
+              invoice_no="INVOICE_NO-" + str(order.id), # INVOICE_NO-5,
+              item=item['title'],
+              image=item['image'],
+              qty=item['qty'],
+              price=item['price'],
+              total=float(item['qty']) * float(item['price'])
+          )
+    return redirect("core:checkout", order.oid)
+  return redirect("core:checkout", order.oid) 
+
+def checkout(request, oid):
+  order = CartOrder.objects.get(oid=oid)
+  order_items = CartOrderItems.objects.filter(order=order)
+
+  
+  if request.method == "POST":
+      code = request.POST.get("code")
+      print("code ========", code)
+      # coupon = Coupon.objects.filter(code=code, active=True).first()
+      # if coupon:
+      #     if coupon in order.coupons.all():
+      #         messages.warning(request, "Coupon already activated")
+      #         return redirect("core:checkout", order.oid)
+      #     else:
+      #         discount = order.price * coupon.discount / 100 
+
+      #         order.coupons.add(coupon)
+      #         order.price -= discount
+      #         order.saved += discount
+      # #         order.save()
+
+      #         messages.success(request, "Coupon Activated")
+      #         return redirect("core:checkout", order.oid)
+      # else:
+      #     messages.error(request, "Coupon Does Not Exists")
+
+      
+
+  context = {
+      "order": order,
+      "order_items": order_items,
+      # "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
+
+  }
+  return render(request, "core/checkout.html", context)
+
+
+
+
 @login_required
 def payment_completed_view(request):
   cart_total_amount = 0

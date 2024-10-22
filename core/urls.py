@@ -34,7 +34,7 @@ urlpatterns = [
   path("update-cart/", update_cart, name="update-cart"),
 
 
-  path("checkout/", checkout_view, name="checkout"),
+  path("checkout/<oid>/", checkout, name="checkout"),
 
 
   path('paypal/', include('paypal.standard.ipn.urls')),
@@ -57,4 +57,6 @@ urlpatterns = [
   path("contact/", contact, name="contact"),
 
   path("ajax-contact-form/", ajax_contact_form, name="ajax-contact-form"),
+
+   path("save_checkout_info/", save_checkout_info, name="save_checkout_info"),
 ]
