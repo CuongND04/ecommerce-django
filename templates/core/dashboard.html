@@ -169,7 +169,7 @@
           <div id="messages" class="section-content">
             <h2 class="fw-semibold">Đơn hàng</h2>
             <div class="container border">
-              <table class="table align-middle mb-0 bg-white">
+              <table class="table align-middle mb-0 bg-white table-hover text-center">
                 <thead class="bg-light">
                   <tr>
                     <th>Order</th>
@@ -215,6 +215,12 @@
                       <td>${{ o.price }}</td>
                       <td>
                         <button type="button" class="btn btn-outline-success"><a href="{% url 'core:order-detail' o.id %}">View</a></button>
+                        {% if o.paid_status %}
+                          <button disabled type="button" class="btn btn-outline-success"><a href="{% url 'core:checkout' o.oid %}">Checkout</a></button>
+                        {% else %}
+                          <button type="button" class="btn btn-outline-success"><a href="{% url 'core:checkout' o.oid %}">Checkout</a></button>
+                        {% endif %}
+                        <button type="button" class="btn btn-outline-success"><a href="{% url 'core:checkout' o.oid %}">Delete</a></button>
                       </td>
                     </tr>
                   {% endfor %}
@@ -350,18 +356,6 @@
       </div>
     </div>
 
-    <!-- JavaScript for Section Toggle -->
-    <script>
-      function showSection(sectionId) {
-        // Hide all sections
-        document.querySelectorAll('.section-content').forEach(function (section) {
-          section.classList.remove('active-section')
-        })
-        // Show the selected section
-        document.getElementById(sectionId).classList.add('active-section')
-      }
-    </script>
-
     <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
     {% comment %} <script src="{% static 'assets/js/bootstrap.min.js' %}"></script> {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -376,20 +370,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        {% for message in messages %}  
-            alertify.set('notifier','position', 'top-right');
-            {% comment %} alertify.success("{{message.tag}}"); {% endcomment %}
+      {% for message in messages %}  
+        alertify.set('notifier','position', 'top-right');
+        {% comment %} alertify.success("{{message.tag}}"); {% endcomment %}
+        let displayTime = 5; // Tính bằng giây
 
-            {% if 'success' in message.tags %}
-                alertify.success("{{ message }}");
-            {% elif 'warning' in message.tags %}
-                alertify.warning("{{ message }}");
-            {% elif 'error' in message.tags %}
-                alertify.error("{{ message }}");
-            {% else %}
-                alertify.message("{{ message }}");
-            {% endif %}
-        {% endfor %}
+        {% if 'success' in message.tags %}
+          showNotification("s","{{ message }}")
+        {% elif 'warning' in message.tags %}
+          showNotification("w","{{ message }}")
+        {% elif 'error' in message.tags %}
+        showNotification("e","{{ message }}")
+        {% else %}
+          showNotification("","{{ message }}")
+        {% endif %}
+    {% endfor %}
     </script>
 
     <script>

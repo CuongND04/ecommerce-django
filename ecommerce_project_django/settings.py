@@ -14,6 +14,11 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+
+# cài đặt biến môi trường
+from environs import Env
+env = Env()
+env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -214,3 +219,6 @@ AUTH_USER_MODEL = 'userauths.User'
 # đây là tài khoản của chủ cửa hàng
 PAYPAL_RECEIVER_EMAIL = 'sb-p7kn733382796@business.example.com'
 PAYPAL_TEST = True
+
+STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
+STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")

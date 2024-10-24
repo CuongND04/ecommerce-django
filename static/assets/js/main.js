@@ -1,12 +1,53 @@
-/*  ---------------------------------------------------
-    Template Name: Ogani
-    Description:  Ogani eCommerce  HTML Template
-    Author: Colorlib
-    Author URI: https://colorlib.com
-    Version: 1.0
-    Created: Colorlib
----------------------------------------------------------  */
 
+//
+// hiển thị section
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.section-content').forEach(function (section) {
+        section.classList.remove('active-section')
+    })
+    // Show the selected section
+    document.getElementById(sectionId).classList.add('active-section')
+}
+
+
+// hàm hiển thị thông báo
+function showNotification(tag, message) {
+    // Cài đặt vị trí thông báo
+    alertify.set('notifier', 'position', 'top-right');
+    let duration = 5;
+    let backgroundColor = '';
+    let icon = ""
+    switch (tag) {
+        // success
+        case 's':
+            backgroundColor = '#56ed0b'; // Xanh lá
+            icon = "https://cdn-icons-png.flaticon.com/512/190/190411.png"
+            break;
+        // failed
+        case 'e':
+            backgroundColor = '#fd3e13';
+            icon = "https://cdn-icons-png.flaticon.com/512/753/753345.png"
+            break;
+        // warning
+        case 'w':
+            backgroundColor = '#e19d14'; // Vàng
+            icon = "https://cdn-icons-png.flaticon.com/512/595/595067.png"
+            break;
+        default:
+            backgroundColor = '#ccc'; // Màu xám mặc định nếu tag không hợp lệ
+    }
+
+    // Tạo thông báo tùy chỉnh
+    alertify.notify(`
+        <div class="custom-alertify">
+            <img src="${icon}" class="alertify-icon" />
+            <div class="alertify-content">
+                <strong>${message}</strong></div>
+            <div class="progress-bar" style="background-color:${backgroundColor};animation-duration: ${duration}s;"></div>
+        </div>
+    `, 'custom', duration).dismissOthers();
+}
 
 (function ($) {
 
@@ -391,9 +432,10 @@ $(document).ready(function () {
                 console.log("Adding Product to Cart...");
             },
             success: function (response) {
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.success("Sản phẩm đã được thêm vào giỏ hàng!");
-                this_val.html("<i style='color:green;' class='d-inline-block p-2 fas fa-check-circle'></i>")
+                // alertify.set('notifier', 'position', 'top-right');
+                // alertify.success("Sản phẩm đã được thêm vào giỏ hàng!").dismissOthers();
+                showNotification('s', "Sản phẩm đã được thêm vào giỏ hàng!")
+                this_val.html("<i style='color:green;' class='d-inline-block  fas fa-check-circle'></i>")
                 // this_val.html("✓")
                 console.log("Added Product to Cart!");
                 $(".cart-items-count").text(response.totalcartitems)
@@ -407,8 +449,8 @@ $(document).ready(function () {
         let product_id = $(this).attr("data-product")
         let this_val = $(this)
 
-        console.log("PRoduct ID:", product_id);
-        console.log("this_val :", this_val);
+        // console.log("PRoduct ID:", product_id);
+        // console.log("this_val :", this_val);
 
         $.ajax({
             url: "/delete-from-cart",
@@ -420,8 +462,10 @@ $(document).ready(function () {
                 this_val.hide()
             },
             success: function (response) {
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.success("Đã xóa sản phẩm khỏi giỏ hàng!");
+                // alertify.set('notifier', 'position', 'top-right');
+                // //  khi nó nổi lên nó sẽ xóa mấy thông báo khác
+                // alertify.success("Đã xóa sản phẩm khỏi giỏ hàng!").dismissOthers();
+                showNotification('s', "Đã xóa sản phẩm khỏi giỏ hàng!")
                 this_val.show()
                 $(".cart-items-count").text(response.totalcartitems)
                 $("#cart-list").html(response.data)
@@ -436,8 +480,8 @@ $(document).ready(function () {
         let this_val = $(this)
         let product_quantity = $(".product-qty-" + product_id).val()
 
-        console.log("PRoduct ID:", product_id);
-        console.log("PRoduct QTY:", product_quantity);
+        // console.log("PRoduct ID:", product_id);
+        // console.log("PRoduct QTY:", product_quantity);
 
         $.ajax({
             url: "/update-cart",
@@ -451,7 +495,8 @@ $(document).ready(function () {
             },
             success: function (response) {
                 alertify.set('notifier', 'position', 'top-right');
-                alertify.success("Cập nhật số lượng thành công!");
+                // alertify.success("Cập nhật số lượng thành công!").dismissOthers();
+                showNotification('s', "Cập nhật số lượng thành công!")
                 this_val.show()
                 $(".cart-items-count").text(response.totalcartitems)
                 $("#cart-list").html(response.data)
@@ -478,8 +523,9 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (response) {
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.success("Cập nhật địa chỉ thành công!");
+                // alertify.set('notifier', 'position', 'top-right');
+                // alertify.success("Cập nhật địa chỉ thành công!").dismissOthers();
+                showNotification("s", "Cập nhật địa chỉ thành công!")
                 // console.log("Address Made Default....");
                 if (response.boolean == true) {
 
@@ -515,8 +561,7 @@ $(document).ready(function () {
                 // this_val.html("✓")
                 this_val.html("<i class='fas fa-heart text-danger'></i>")
                 if (response.bool === true) {
-                    alertify.set('notifier', 'position', 'top-right');
-                    alertify.success("Đã thêm vào danh sách yêu thích!");
+                    showNotification("s", "Đã thêm vào danh sách yêu thích!")
                 }
             }
         })
@@ -539,8 +584,7 @@ $(document).ready(function () {
                 console.log("Deleting product from wishlist...");
             },
             success: function (response) {
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.success("Xóa thành công");
+                showNotification("s", "Xóa thành công!")
                 $("#wishlist-list").html(response.data)
             }
         })
@@ -576,8 +620,9 @@ $(document).ready(function () {
                 console.log("Sending Data to Server...");
             },
             success: function (res) {
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.success("Gửi thành công");
+                // alertify.set('notifier', 'position', 'top-right');
+                // alertify.success("Gửi thành công").dismissOthers();
+                showNotification("s", "Gửi thành công!")
                 console.log("Sent Data to server!");
                 $("#contact-form-ajax").hide()
                 $("#message-response").html("Cảm ơn bạn đã liên hệ với chúng tôi! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.")

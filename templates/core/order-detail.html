@@ -8,7 +8,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    {% comment %} <link rel="preconnect" href="https://fonts.gstatic.com" /> {% endcomment %}
     {% comment %} <link href="../../css2-4?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" /> {% endcomment %}
     <!-- Css Styles -->
 
@@ -59,8 +59,8 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">My Dashboard</a>
-        <span class="navbar-text">Welcome, <strong>{{ username }}</strong></span>
+        <a class="navbar-brand" href="#">Trung tâm tài khoản</a>
+        <span class="navbar-text">Xin chào, <strong>{{ username }}</strong></span>
       </div>
     </nav>
 
@@ -69,9 +69,9 @@
       <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 col-lg-2 sidebar" style="height: inherit;min-height: 100vh;">
-          <h5 class="text-center">Menu</h5>
+          {% comment %} <h5 class="text-center">Hoạt động</h5> {% endcomment %}
           <a href="{% url 'core:dashboard' %}" onclick="showSection('profile')">Bảng điều khiển</a>
-          <a href="#" onclick="showSection('settings')">Settings</a>
+          <a href="#" onclick="showSection('settings')">Thông tin</a>
           <a href="#" onclick="showSection('messages')">Đơn hàng</a>
           <a href="#" onclick="showSection('address')">Địa chỉ</a>
           <a href="#" onclick="showSection('analytics')">Analytics</a>
@@ -81,7 +81,7 @@
         <!-- Content Area -->
         <div class="col-md-9 col-lg-10 content">
           <div id="profile" class="section-content">
-            <h2>Bảng điều khiển</h2>
+            <h2 class="fw-semibold">Bảng điều khiển</h2>
             {% comment %} <p>{{ month }}</p>
             <p>{{ total_orders }}</p> {% endcomment %}
             <div style="height: 800px; width: 800px; object-fit: cover;">
@@ -89,11 +89,85 @@
             </div>
           </div>
           <div id="settings" class="section-content">
-            <h2>Settings</h2>
-            <p>This is the settings section where you can adjust your preferences and configurations.</p>
+            <h2 class="fw-semibold">Thông tin</h2>
+
+            <section>
+              <div class="container py-5">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="card mb-4">
+                      <div class="card-body text-center">
+                        {% if user_profile.image %}
+                          <img src="{{ user_profile.image.url }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
+                        {% else %}
+                          <img src="{% static 'assets/img/Default_pfp.svg.png' %}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
+                        {% endif %}
+                        <h5 class="my-3">{{ user_profile.full_name }}</h5>
+                        <p class="text-muted mb-1">{{ user_profile.bio }}</p>
+                        {% comment %} <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> {% endcomment %}
+                        <div class="d-flex justify-content-center mb-2">
+                          {% comment %} <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Follow</button> {% endcomment %}
+                          <a href="{% url 'userauths:profile-update' %}" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-success ms-1">Chỉnh sửa</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0 text-black">Full Name</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ user_profile.full_name }}</p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0 text-black">Email</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">example@example.com</p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0 text-black">Phone</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ user_profile.phone }}</p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0 text-black">Mobile</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">(098) 765-4321</p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0 text-black">Address</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ user_profile.address }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <div id="messages" class="section-content">
-            <h2>Đơn hàng</h2>
+            <h2 class="fw-semibold">Đơn hàng</h2>
             <div class="container border">
               <table class="table align-middle mb-0 bg-white">
                 <thead class="bg-light">
@@ -192,8 +266,8 @@
             <div>
               <form class="mb-4" method="POST">
                 {% csrf_token %}
-                <div class="card-hdeader">
-                  <h5>Thêm địa chỉ mới</h5>
+                <div class="card-hdeader mb-2">
+                  <h5 style="font-weight: 700;">Thêm địa chỉ mới</h5>
                 </div>
                 <div class="row">
                   <div class="form-group col-md-6">
@@ -208,7 +282,7 @@
                 </div>
               </form>
             </div>
-            <h2>Thông tin địa chỉ</h2>
+            <h2 class="fw-semibold">Thông tin địa chỉ</h2>
 
             <div class="container border">
               <table class="table align-middle mb-0 bg-white">
@@ -251,7 +325,7 @@
           </div>
 
           <div id="analytics" class="section-content">
-            <h2>Analytics</h2>
+            <h2 class="fw-semibold">Analytics</h2>
             <p>This is the analytics section where you can view your performance and other stats.</p>
           </div>
         </div>
@@ -284,20 +358,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        {% for message in messages %}  
-            alertify.set('notifier','position', 'top-right');
-            {% comment %} alertify.success("{{message.tag}}"); {% endcomment %}
+      {% for message in messages %}  
+        alertify.set('notifier','position', 'top-right');
+        {% comment %} alertify.success("{{message.tag}}"); {% endcomment %}
+        let displayTime = 5; // Tính bằng giây
 
-            {% if 'success' in message.tags %}
-                alertify.success("{{ message }}");
-            {% elif 'warning' in message.tags %}
-                alertify.warning("{{ message }}");
-            {% elif 'error' in message.tags %}
-                alertify.error("{{ message }}");
-            {% else %}
-                alertify.message("{{ message }}");
-            {% endif %}
-        {% endfor %}
+        {% if 'success' in message.tags %}
+          showNotification("s","{{ message }}")
+        {% elif 'warning' in message.tags %}
+          showNotification("w","{{ message }}")
+        {% elif 'error' in message.tags %}
+        showNotification("e","{{ message }}")
+        {% else %}
+          showNotification("","{{ message }}")
+        {% endif %}
+    {% endfor %}
     </script>
 
     <script>
@@ -306,9 +381,16 @@
       const data = {
         labels: labels,
         datasets: [{
-          label: 'Orders',
-          backgroundColor: 'rgb(59, 183, 126)',
-          borderColor: 'rgb(59, 183, 126)',
+          label: 'Đơn hàng',
+          backgroundColor: [
+           
+            'rgba(75, 192, 192, 0.8)',
+          ],
+          borderColor: [
+            'rgba(75, 192, 192, 1)',
+
+          ],
+          borderWidth: 2,
           data: {{ total_orders|safe }}
         }],
 
@@ -317,11 +399,29 @@
 
 
       const config = {
-        type: 'bar',
+        type: 'line',
         data: data,
         options: {
           tooltips: {enabled: false},
           hover: {mode: null},
+          plugins: {
+            title: {
+                display: true,
+                text: 'Thống kê số lượng đơn hàng theo tháng',
+                padding: {
+                    top: 10,
+                    bottom: 10
+                },
+                font : {
+                  size: 20
+                }
+            }
+          },
+          scales: {
+            y: {
+                beginAtZero: true
+            }
+          }
         }
       };
 

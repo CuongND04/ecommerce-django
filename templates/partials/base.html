@@ -362,17 +362,15 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
     <script>
         {% for message in messages %}  
-            alertify.set('notifier','position', 'top-right');
-            {% comment %} alertify.success("{{message.tag}}"); {% endcomment %}
 
             {% if 'success' in message.tags %}
-                alertify.success("{{ message }}");
+              showNotification("s","{{ message }}")
             {% elif 'warning' in message.tags %}
-                alertify.warning("{{ message }}");
+              showNotification("w","{{ message }}")
             {% elif 'error' in message.tags %}
-                alertify.error("{{ message }}");
+            showNotification("e","{{ message }}")
             {% else %}
-                alertify.message("{{ message }}");
+              showNotification("","{{ message }}")
             {% endif %}
         {% endfor %}
     </script>

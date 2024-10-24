@@ -56,10 +56,10 @@
                         ${% widthratio item.price 1 item.qty %}
                       </td>
                       <td class="shoping__cart__item__close">
-                        <button class="bg-transparent border border-0 update-product" data-product="{{ product_id }}"><i class="fa-solid fa-arrows-rotate"></i></button>
+                        <button type="button" class="bg-transparent border border-0 update-product" data-product="{{ product_id }}"><i class="fa-solid fa-arrows-rotate"></i></button>
                       </td>
                       <td class="shoping__cart__item__close">
-                        <button class="bg-transparent border border-0 delete-product" data-product="{{ product_id }}"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="button" class="bg-transparent border border-0 delete-product" data-product="{{ product_id }}"><i class="fa-solid fa-trash-can"></i></button>
                       </td>
                     </tr>
                   {% endfor %}
@@ -73,10 +73,12 @@
           <div class="col-12">
             <div class="shoping__cart__btns">
               <a href="{% url 'core:product-list' %}" class="primary-btn cart-btn bg-success text-white">CONTINUE SHOPPING</a>
-              <a href="#" class="primary-btn cart-btn cart-btn-right">
-                <span class="icon_loading"></span>
-                Upadate Cart
-              </a>
+              {% comment %} <a href="#" class="primary-btn cart-btn cart-btn-right">
+                {% endcomment %}
+                {% comment %} <span class="icon_loading"></span> {% endcomment %}
+                {% comment %}Upadate Cart{% endcomment %}
+                {% comment %}
+              </a> {% endcomment %}
             </div>
           </div>
 
@@ -85,15 +87,15 @@
             <div class="row">
               <div class="form-group col-lg-12">
                 <label for="">Full Name</label>
-                <input class="form-control my-2" type="text" required="" name="full_name" value="{{ request.user.username|title }}" placeholder="Full Name" />
+                <input disabled class="form-control my-2" type="text" required="" name="full_name" value="{{ request.user.username|title }}" placeholder="Full Name" />
               </div>
               <div class="form-group col-lg-6">
                 <label for="">Email</label>
-                <input class="form-control my-2" type="text" required="" name="email" placeholder="mobile *" value="{{ request.user.email }}" />
+                <input disabled class="form-control my-2" type="text" required="" name="email" placeholder="mobile *" value="{{ request.user.email }}" />
               </div>
               <div class="form-group col-lg-6">
                 <label for="">Mobile</label>
-                <input class="form-control my-2" type="text" name="mobile" value="{{ request.user.profile.phone }}" required="" placeholder="Address *" />
+                <input disabled class="form-control my-2" type="text" name="mobile" value="{{ request.user.profile.phone }}" required="" placeholder="Address *" />
               </div>
             </div>
             <h4 class="mb-30">Chi tiết địa chỉ</h4>
@@ -119,13 +121,7 @@
 
           <div class="col-8">
             <div class="shoping__continue">
-              <div class="shoping__discount">
-                <h5>Discount Codes</h5>
-                <form action="#">
-                  <input type="text" placeholder="Enter your coupon code" />
-                  <button type="submit" class="site-btn">APPLY COUPON</button>
-                </form>
-              </div>
+              <div class="shoping__discount"></div>
             </div>
           </div>
           <div class="col-lg-4">

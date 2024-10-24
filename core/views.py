@@ -18,6 +18,9 @@ from paypal.standard.forms import PayPalPaymentsForm
 
 import calendar
 from django.db.models.functions import ExtractMonth
+
+
+import stripe
 # Create your views here.
 #  cài đặt hiển thị ra màn hình
 def index(request):
@@ -301,65 +304,7 @@ def update_cart(request):
     context = render_to_string("core/async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
     return JsonResponse({"data": context, 'totalcartitems': len(request.session['cart_data_obj'])}) 
 
-@login_required
-def checkout_view(request):
 
-  cart_total_amount = 0
-  total_amount = 0
-  if 'cart_data_obj' in request.session:
-    for p_id, item in request.session['cart_data_obj'].items():
-      total_amount += int(item['qty']) * float(item['price'])
-
-    order = CartOrder.objects.create(
-      user = request.user,
-      price = total_amount
-    )
-
-    for p_id, item in request.session['cart_data_obj'].items():
-      cart_total_amount += int(item['qty']) * float(item['price'])
-
-      cart_order_products = CartOrderItems.objects.create(
-        order=order,
-        invoice_no="INVOICE_NO-" + str(order.id), # INVOICE_NO-5,
-        item=item['title'],
-        image=item['image'],
-        qty=item['qty'],
-        price=item['price'],
-        total=float(item['qty']) * float(item['price'])
-      )
-
-
-  host = request.get_host()
-  paypal_dict = {
-    'business' : settings.PAYPAL_RECEIVER_EMAIL,
-    'amount': cart_total_amount,
-    'item_name': "Order-Item-No-"+str(order.id),
-    'invoice': 'INVOICE_NO-'+str(order.id),
-    "currency_code":"USD",
-    "notify_url":"http://{}{}".format(host,reverse("core:paypal-ipn")),
-    "return_url":"http://{}{}".format(host,reverse("core:payment-completed")),
-    "cancel_url":"http://{}{}".format(host,reverse("core:payment-failed")),
-  }
-  paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
-
-  # cart_total_amount = 0
-  # if 'cart_data_obj' in request.session:
-  #   for p_id, item in request.session['cart_data_obj'].items():
-  #     cart_total_amount += int(item['qty']) * float(item['price'])
-
-  active_address = Address.objects.get(user=request.user,status = True)
-
-
-
-  context = {
-    "cart_data":request.session['cart_data_obj'], 
-    'totalcartitems': len(request.session['cart_data_obj']), 
-    'cart_total_amount':cart_total_amount,
-    'paypal_payment_button': paypal_payment_button,
-    "active_address": active_address
-  }
-  return render(request, "core/checkout.html", context)
-  
 def save_checkout_info(request):
   cart_total_amount = 0
   total_amount = 0
@@ -475,42 +420,43 @@ def checkout(request, oid):
      "old_price":old_price,
       "order": order,
       "order_items": order_items,
-      # "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
+      "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
 
   }
   return render(request, "core/checkout.html", context)
 
 
+@csrf_exempt
 def create_checkout_session(request, oid):
-    order = CartOrder.objects.get(oid=oid)
-  # stripe.api_key = settings.STRIPE_SECRET_KEY
+  order = CartOrder.objects.get(oid=oid)
+  stripe.api_key = settings.STRIPE_SECRET_KEY
 
-  # checkout_session = stripe.checkout.Session.create(
-  #     customer_email = order.email,
-  #     payment_method_types=['card'],
-  #     line_items = [
-  #         {
-  #             'price_data': {
-  #                 'currency': 'USD',
-  #                 'product_data': {
-  #                     'name': order.full_name
-  #                 },
-  #                 'unit_amount': int(order.price * 100)
-  #             },
-  #             'quantity': 1
-  #         }
-  #     ],
-  #     mode = 'payment',
-  #     success_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid])) + "?session_id={CHECKOUT_SESSION_ID}",
-  #     cancel_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid]))
-  # )
+  checkout_session = stripe.checkout.Session.create(
+      customer_email = order.email,
+      payment_method_types=['card'],
+      line_items = [ 
+          {
+              'price_data': {
+                  'currency': 'USD',
+                  'product_data': {
+                      'name': order.full_name
+                  },
+                  'unit_amount': int(order.price * 100)
+              },
+              'quantity': 1
+          }
+      ],
+      mode = 'payment',
+      success_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid])) + "?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid]))
+  )
 
-  # order.paid_status = False
-  # order.stripe_payment_intent = checkout_session['id']
-  # order.save()
+  order.paid_status = False
+  order.stripe_payment_intent = checkout_session['id']
+  order.save()
 
-  # print("checkkout session", checkout_session)
-  # return JsonResponse({"sessionId": checkout_session.id})
+  print("checkkout session", checkout_session)
+  return JsonResponse({"sessionId": checkout_session.id})
 
 @login_required
 def payment_completed_view(request, oid):
@@ -590,6 +536,7 @@ def customer_dashboard(request):
 
 
 def order_detail(request, id):
+    user_profile = Profile.objects.get(user=request.user)
     orders_list = CartOrder.objects.filter(user=request.user).order_by("-id")
     order = CartOrder.objects.get(user=request.user, id=id)
     order_items = CartOrderItems.objects.filter(order=order)
@@ -597,6 +544,7 @@ def order_detail(request, id):
     address = Address.objects.filter(user=request.user)
     context = {
         "order_items": order_items,
+        "user_profile": user_profile,
         "orders_list": orders_list,
         "address" : address
     }
@@ -688,3 +636,4 @@ def ajax_contact_form(request):
     }
 
     return JsonResponse({"data":data})
+

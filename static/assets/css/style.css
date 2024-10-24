@@ -4187,3 +4187,55 @@ ol {
 }
 
 /* coupon */
+
+/* Tùy chỉnh container thông báo */
+
+.alertify-notifier .ajs-message.ajs-visible {
+  padding: 2px;
+}
+
+.custom-alertify {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f8fbf8;
+  /* Màu nền xanh thành công */
+  color: rgb(25, 23, 23);
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+/* Nội dung văn bản bên trái */
+.custom-alertify .alertify-content {
+  flex-grow: 1;
+  text-align: left;
+  margin-left: 10px;
+}
+
+/* Icon thành công ở bên phải */
+.custom-alertify .alertify-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* Thanh tiến trình thời gian */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  animation: progressAnimation linear forwards;
+}
+
+/* Hiệu ứng thanh tiến trình */
+@keyframes progressAnimation {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0;
+  }
+}
