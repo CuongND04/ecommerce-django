@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # Các thành phần thêm vào
     'core',
     'userauths',
+    'dashboard',
     "ckeditor",
     'ckeditor_uploader',
 ]

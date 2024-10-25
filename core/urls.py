@@ -43,11 +43,10 @@ urlpatterns = [
   path("payment-failed/", payment_failed_view, name="payment-failed"),
   path("save_checkout_info/", save_checkout_info, name="save_checkout_info"),
   path("api/create_checkout_session/<oid>/", create_checkout_session, name="api_checkout_session"),
+
+  # User
+  # path("dashboard/", customer_dashboard, name="dashboard"),
   
-  # Dashboard
-  path("dashboard/", customer_dashboard, name="dashboard"),
-  path("dashboard/order/<int:id>", order_detail, name="order-detail"),
-  path("make-default-address/", make_address_default, name="make-default-address"),
   
 
    # wishlist

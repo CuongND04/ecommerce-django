@@ -26,6 +26,7 @@ urlpatterns = [
     # gom tất cả các router con của core vào
     path("",include("core.urls")),
     path("user/",include("userauths.urls")),
+    path("dashboard/",include("dashboard.urls")),
     
 ]
 if settings.DEBUG:

@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" type="text/css" />
+    {% comment %}dùng cho all departments{% endcomment %}
     <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" />
   </head>
@@ -69,12 +70,12 @@
                   </ul>
                 </div> {% endcomment %}
                 {% if request.user.is_authenticated %}
-                  <div class="menu-container">
+                  {% comment %} <div class="menu-container">
                     <h5 class="d-inline-block">Xin chào <strong>{{ username }}</strong></h5>
                     <div class="menu menu-username">
                       <ul>
                         <li>
-                          <a href="{% url 'core:dashboard' %}">Tài khoản</a>
+                          <a href="{% url 'dashboard:index' %}">Tài khoản</a>
                         </li>
                         <li>
                           <a href="#option2">Option 2</a>
@@ -84,29 +85,25 @@
                         </li>
                       </ul>
                     </div>
+                  </div> {% endcomment %}
+                  <div class="menu-container dropdown-center">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Xin chào <strong>{{ username }}</strong></button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="{% url 'dashboard:index' %}">Tài khoản</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'userauths:sign-out' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                      </li>
+                    </ul>
                   </div>
-
-                  {% comment %} <a href="#">Pages</a>
-                  <ul class="header__menu__dropdown">
-                    <li>
-                      <a href="./shop-details.html">Shop Details</a>
-                    </li>
-                    <li>
-                      <a href="./shoping-cart.html">Shoping Cart</a>
-                    </li>
-                    <li>
-                      <a href="./checkout.html">Check Out</a>
-                    </li>
-                    <li>
-                      <a href="./blog-details.html">Blog Details</a>
-                    </li>
-                    <li>
-                      <a href="{% url 'core:vendor-list' %}">Vendor List</a>
-                    </li>
-                  </ul> {% endcomment %}
-                  <div class="header__top__right__auth ms-2">
-                    <a href="{% url 'userauths:sign-out' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-                  </div>
+                  <div class="header__top__right__auth ms-2"></div>
                 {% else %}
                   <div class="header__top__right__auth">
                     <a href="{% url 'userauths:sign-in' %}"><i class="fa fa-user"></i> Đăng nhập</a>
@@ -199,7 +196,7 @@
             <div class="hero__categories">
               <div class="hero__categories__all">
                 <i class="fa fa-bars"></i>
-                <span>All departments<i class="fas fa-chevron-down"></i></span>
+                <span style="font-family: 'Poppins', sans-serif;">Thương hiệu<i class="fas fa-chevron-down"></i></span>
               </div>
               <ul style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);">
                 {% for c in categories %}
@@ -231,14 +228,13 @@
                 </div>
               </div>
             </div>
-            {% block index %}
-
-            {% endblock %}
           </div>
         </div>
       </div>
     </section>
+    {% block index %}
 
+    {% endblock %}
     {% block content %}
 
     {% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'partials/user.html' %}
+{% load static %}
+{% block address %}
+  <div>
+    <form class="mb-4" method="POST">
+      {% csrf_token %}
+      <div class="card-hdeader mb-2">
+        <h5 style="font-weight: 700;">Thêm địa chỉ mới</h5>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <input placeholder="Address" required="" class="form-control" name="address" type="text" />
+        </div>
+        <div class="form-group col-md-6">
+          <input placeholder="Phone" required="" class="form-control" name="mobile" />
+        </div>
+        <div class="col-md-12 mt-3">
+          <button type="submit" class="btn btn-success" name="submit" value="Submit">Save Address</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <h2 class="fw-semibold">Thông tin địa chỉ</h2>
+
+  <div class="container border">
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="bg-light">
+        <tr>
+          <th>Địa chỉ</th>
+          <th>Số điện thoại</th>
+          {% comment %} <th>Trạng thái</th> {% endcomment %}
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in address %}
+          <tr>
+            <td style="height: 60px;">
+              <div class="d-flex align-items-center">
+                <p class="fw-medium mb-1">{{ a.address }}</p>
+              </div>
+            </td>
+
+            <td>
+              <div class="d-flex align-items-center">
+                <p class="fw-medium mb-1">{{ a.mobile }}</p>
+              </div>
+            </td>
+            <td class="">
+              {% if a.status %}
+                <i data-address-id="{{ a.id }}" class="fa fa-check-circle text-success check{{ a.id }} check"></i>
+                <button data-address-id="{{ a.id }}" style="display: none;" class="btn btn-success   make-default-address button{{ a.id }} action_btn">Make Default</button>
+              {% else %}
+                <i data-address-id="{{ a.id }}" style="display: none;" class="fa fa-check-circle text-success check check{{ a.id }}"></i>
+                <button data-address-id="{{ a.id }}" class="btn btn-success make-default-address button{{ a.id }} action_btn">Make Default</button>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

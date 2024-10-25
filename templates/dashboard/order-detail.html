@@ -1,0 +1,40 @@
+{% extends 'partials/user.html' %}
+{% load static %}
+{% block order_detail %}
+  <h2>Chi tiết đơn hàng</h2>
+  <div class="container border">
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="bg-light">
+        <tr>
+          <th>ID</th>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for o in order_items %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                {% comment %} <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" /> {% endcomment %}
+                <div class="ms-3">
+                  <p class="fw-medium mb-1">INV-{{ o.id }}</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <img src="{{ o.image }}" style="width: 60px;height: 60px;" alt="" />
+            </td>
+            <td>{{ o.item }}</td>
+            <td>{{ o.price }}</td>
+            <td>{{ o.qty }}</td>
+            <td>{{ o.total }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

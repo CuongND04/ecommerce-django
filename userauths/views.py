@@ -75,13 +75,14 @@ def profile_update(request):
         new_form.user = request.user
         new_form.save()
         messages.success(request, "Cập nhật thành công.")
-        return redirect("core:dashboard")
+        return redirect("dashboard:profile")
     else:
       form = ProfileForm(instance=profile)
     print("form:",form)
     context = {
       "form": form,
       "profile": profile,
+      'active_section': 'edit_profile'
     }
 
     return render(request, "userauths/profile-edit.html", context)

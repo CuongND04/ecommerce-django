@@ -1,10 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Personal Dashboard</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet" />
+    {% comment %} <link rel="preconnect" href="https://fonts.gstatic.com" /> {% endcomment %}
+    {% comment %} <link href="../../css2-4?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" /> {% endcomment %}
+    <!-- Css Styles -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css" />
+
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" />
+
     <style>
       .sidebar {
         height: 100vh;
@@ -27,6 +48,7 @@
       }
       .section-content {
         display: none;
+        opacity: 0.7;
       }
       .active-section {
         display: block;
@@ -37,8 +59,8 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">My Dashboard</a>
-        <span class="navbar-text">Welcome, <strong>{{ username }}</strong></span>
+        <a class="navbar-brand" href="#">Trung tâm tài khoản</a>
+        <span class="navbar-text">Xin chào, <strong>{{ username }}</strong></span>
       </div>
     </nav>
 
@@ -46,107 +68,145 @@
     <div class="container-fluid">
       <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3 col-lg-2 sidebar">
-          <h5 class="text-center">Menu</h5>
-          <a href="{% url 'core:dashboard' %}" onclick="showSection('profile')">Profile</a>
-          <a href="#" onclick="showSection('settings')">Settings</a>
-          <a href="#" onclick="showSection('messages')">Your Order</a>
-          <a class="disabled" href="#" onclick="showSection('detail')">Chi tiết đơn hàng</a>
-          <a href="#" onclick="showSection('analytics')">Analytics</a>
-          <a href="#logout">Logout</a>
+        <div class="col-md-3 col-lg-2 sidebar" style="height: inherit;min-height: 100vh;">
+          {% comment %} <h5 class="text-center">Hoạt động</h5> {% endcomment %}
+          <a href="{% url 'dashboard:index' %}" onclick="">Bảng điều khiển</a>
+          <a href="{% url 'dashboard:profile' %}" onclick="">Thông tin</a>
+          <a href="{% url 'dashboard:order' %}" onclick="">Đơn hàng</a>
+          <a href="{% url 'dashboard:address' %}" onclick="">Địa chỉ</a>
+          <a href="#" onclick="">Analytics</a>
+          <a href="{% url 'core:index' %}">Trở về cửa hàng</a>
         </div>
 
         <!-- Content Area -->
         <div class="col-md-9 col-lg-10 content">
-          <div id="profile" class="section-content active-section">
-            <h2>Profile</h2>
-            <p>This is the profile section where you can view and edit your profile information.</p>
-          </div>
-          <div id="settings" class="section-content">
-            <h2>Settings</h2>
-            <p>This is the settings section where you can adjust your preferences and configurations.</p>
-          </div>
-          <div id="messages" class="section-content">
-            <h2>Your Order</h2>
-            <div class="container border">
-              <table class="table align-middle mb-0 bg-white">
-                <thead class="bg-light">
-                  <tr>
-                    <th>Order</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Paid Status</th>
-                    <th>Total</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for o in orders_list %}
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          {% comment %} <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" /> {% endcomment %}
-                          <div class="ms-3">
-                            <p class="fw-medium mb-1">INVOICE_NO-{{ o.id }}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="fw-normal mb-1">{{ o.order_date }}</p>
-                        {% comment %} <p class="text-muted mb-0">IT department</p> {% endcomment %}
-                      </td>
-                      <td>
-                        {% if o.product_status == 'processing' %}
-                          <span class="badge text-bg-warning">{{ o.product_status|title }}</span>
-                        {% elif o.product_status == 'shipped' %}
-                          <span class="badge text-bg-info">{{ o.product_status|title }}</span>
-                        {% elif o.product_status == 'delivered' %}
-                          <span class="badge text-bg-success">{{ o.product_status|title }}</span>
-                        {% endif %}
-                      </td>
+          <div id="profile" class="section-content {% if active_section == 'index' %}active-section{% endif %}">
+            {% block dashboard %}
 
-                      <td>
-                        {% if o.paid_status %}
-                          <span class="badge text-bg-success">{{ o.paid_status|title }}</span>
-                        {% else %}
-                          <span class="badge text-bg-danger">{{ o.paid_status|title }}</span>
-                        {% endif %}
-                      </td>
-                      <td>${{ o.price }}</td>
-                      <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded"><a href="{% url 'core:order-detail' o.id %}">View</a></button>
-                      </td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-
-            {% comment %} {% block dashboard %}
-
-            {% endblock %} {% endcomment %}
+            {% endblock %}
           </div>
+          <div id="settings" class="section-content {% if active_section == 'profile' %}active-section{% endif %}">
+            {% block profile %}
+
+            {% endblock %}
+          </div>
+          <div id="messages" class="section-content {% if active_section == 'order' %}active-section{% endif %}">
+            {% block order %}
+
+            {% endblock %}
+          </div>
+
+          <div id="edit_profile" class="section-content {% if active_section == 'edit_profile' %}active-section{% endif %}">
+            {% block edit_profile %}
+
+            {% endblock %}
+          </div>
+
+          <div id="detail" class="section-content {% if active_section == 'order_detail' %}active-section{% endif %}">
+            {% block order_detail %}
+
+            {% endblock %}
+          </div>
+
+          <div id="address" class="section-content {% if active_section == 'address' %}active-section{% endif %}">
+            {% block address %}
+
+            {% endblock %}
+          </div>
+
           <div id="analytics" class="section-content">
-            <h2>Analytics</h2>
+            <h2 class="fw-semibold">Analytics</h2>
             <p>This is the analytics section where you can view your performance and other stats.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- JavaScript for Section Toggle -->
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/bootstrap.min.js' %}"></script> {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'assets/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    {# flash message #}
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-      function showSection(sectionId) {
-        // Hide all sections
-        document.querySelectorAll('.section-content').forEach(function (section) {
-          section.classList.remove('active-section')
-        })
-        // Show the selected section
-        document.getElementById(sectionId).classList.add('active-section')
-      }
+      {% for message in messages %}  
+        alertify.set('notifier','position', 'top-right');
+        {% comment %} alertify.success("{{message.tag}}"); {% endcomment %}
+        let displayTime = 5; // Tính bằng giây
+
+        {% if 'success' in message.tags %}
+          showNotification("s","{{ message }}")
+        {% elif 'warning' in message.tags %}
+          showNotification("w","{{ message }}")
+        {% elif 'error' in message.tags %}
+        showNotification("e","{{ message }}")
+        {% else %}
+          showNotification("","{{ message }}")
+        {% endif %}
+    {% endfor %}
     </script>
 
-    <!-- Bootstrap JavaScript Bundle -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const labels = {{ month|safe }}
+
+      const data = {
+        labels: labels,
+        datasets: [{
+          label: 'Đơn hàng',
+          backgroundColor: [
+           
+            'rgba(75, 192, 192, 0.8)',
+          ],
+          borderColor: [
+            'rgba(75, 192, 192, 1)',
+
+          ],
+          borderWidth: 2,
+          data: {{ total_orders|safe }}
+        }],
+
+      };
+
+
+
+      const config = {
+        type: 'line',
+        data: data,
+        options: {
+          tooltips: {enabled: false},
+          hover: {mode: null},
+          plugins: {
+            title: {
+                display: true,
+                text: 'Thống kê số lượng đơn hàng theo tháng',
+                padding: {
+                    top: 10,
+                    bottom: 10
+                },
+                font : {
+                  size: 20
+                }
+            }
+          },
+          scales: {
+            y: {
+                beginAtZero: true
+            }
+          }
+        }
+      };
+
+      const myChart = new Chart(
+          document.getElementById('myChart'),
+          config
+      );
+    </script>
   </body>
 </html>

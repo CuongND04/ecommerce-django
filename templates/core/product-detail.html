@@ -111,10 +111,10 @@
                 {% for p in productLatestOne %}
                   <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                     <div class="latest-product__item__pic">
-                      <img src="{{ p.image.url }}" alt="" />
+                      <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
                     </div>
                     <div class="latest-product__item__text">
-                      <h6>{{ p.title }}</h6>
+                      <h6>{{ p.title|truncatechars:27 }}</h6>
                       <span>${{ p.price }}</span>
                     </div>
                   </a>
@@ -124,10 +124,10 @@
                 {% for p in productLatestTwo %}
                   <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                     <div class="latest-product__item__pic">
-                      <img src="{{ p.image.url }}" alt="" />
+                      <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
                     </div>
                     <div class="latest-product__item__text">
-                      <h6>{{ p.title }}</h6>
+                      <h6>{{ p.title|truncatechars:27 }}</h6>
                       <span>${{ p.price }}</span>
                     </div>
                   </a>
@@ -140,9 +140,9 @@
           <div class="product__details__tab">
             <nav>
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active mx-3" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-                <button class="nav-link mx-3" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                <button class="nav-link mx-3" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                <button class="nav-link active mx-3" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Thông tin sản phẩm</button>
+                <button class="nav-link mx-3" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Bình luận</button>
+                <button class="nav-link mx-3" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Cửa hàng</button>
               </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
