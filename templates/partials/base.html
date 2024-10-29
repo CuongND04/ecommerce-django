@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="zxx">
   <head>
@@ -121,11 +121,11 @@
               <a href="{% url 'core:index' %}"><img src="{% static 'assets/img/logo.png' %}" alt="" /></a>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-6 text-center">
             <nav class="header__menu">
               <ul>
                 <li class="active">
-                  <a href="{% url 'core:index' %}">Home</a>
+                  <a class="text-success" href="{% url 'core:index' %}">Home</a>
                 </li>
                 <li>
                   <a href="{% url 'core:product-list' %}">Shop</a>
@@ -137,7 +137,7 @@
                     {% endfor %}
                   </ul> {% endcomment %}
                 </li>
-                <li>
+                {% comment %} <li>
                   <a href="#">Pages</a>
                   <ul class="header__menu__dropdown">
                     <li>
@@ -159,9 +159,13 @@
                 </li>
                 <li>
                   <a href="./blog.html">Blog</a>
-                </li>
+                </li> {% endcomment %}
+
                 <li>
                   <a href="{% url 'core:contact' %}">Contact</a>
+                </li>
+                <li>
+                  <a href="{% url 'dashboard:index' %}">Dashboard</a>
                 </li>
               </ul>
             </nav>
@@ -170,7 +174,7 @@
             <div class="header__cart">
               <ul>
                 <li>
-                  <a href="{% url 'core:wishlist' %}"><i class="fa fa-heart"></i> <span>{{ wishlist.count }}</span></a>
+                  <a href="{% url 'core:wishlist' %}"><i class="fa fa-heart"></i> <span>{{ wishlist.count|default:0 }}</span></a>
                 </li>
                 <li>
                   <a href="{% url 'core:cart' %}"><i class="fa fa-shopping-bag"></i> <span class="cart-items-count">{{ request.session.cart_data_obj|length }}</span></a>
@@ -194,9 +198,9 @@
         <div class="row">
           <div class="col-lg-3">
             <div class="hero__categories">
-              <div class="hero__categories__all">
+              <div class="hero__categories__all bg-success">
                 <i class="fa fa-bars"></i>
-                <span style="font-family: 'Poppins', sans-serif;">Thương hiệu<i class="fas fa-chevron-down"></i></span>
+                <span class="" style="font-family: 'Poppins', sans-serif;">Thương hiệu<i class="fas fa-chevron-down"></i></span>
               </div>
               <ul style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);">
                 {% for c in categories %}
@@ -215,7 +219,7 @@
               <div class="hero__search__form">
                 <form action="{% url 'core:search' %}" method="GET">
                   <input type="text" name="q" placeholder="Tìm kiếm tại FreshMart" />
-                  <button type="submit" class="site-btn">SEARCH</button>
+                  <button type="submit" class="site-btn bg-success">SEARCH</button>
                 </form>
               </div>
               <div class="hero__search__phone">
@@ -223,18 +227,19 @@
                   <i class="fa fa-phone"></i>
                 </div>
                 <div class="hero__search__phone__text">
-                  <h5>+65 11.188.888</h5>
+                  <h5>024 3756 2186</h5>
                   <span>support 24/7 time</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {% block index %}
+
+        {% endblock %}
       </div>
     </section>
-    {% block index %}
 
-    {% endblock %}
     {% block content %}
 
     {% endblock %}
@@ -242,78 +247,34 @@
     <!-- Footer Section Begin -->
     <footer class="footer spad">
       <div class="container">
-        <div class="row">
+        <div class="row d-flex flex-row justify-content-between">
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="footer__about">
               <div class="footer__about__logo">
-                <a href="./index.html"><img src="{% static 'assets/img/logo.png' %}" alt="" /></a>
+                <a href="{% url 'core:index' %}"><img src="{% static 'assets/img/logo.png' %}" alt="" /></a>
               </div>
+              <!--                             
               <ul>
                 <li>Address: 60-49 Road 11378 New York</li>
                 <li>Phone: +65 11.188.888</li>
                 <li>Email: hello@colorlib.com</li>
               </ul>
+                                           -->
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+          <div class="col-lg-7 col-md-12">
             <div class="footer__widget">
-              <h6>Useful Links</h6>
-              <ul>
-                <li>
-                  <a href="#">About Us</a>
+              <ul style="width: 100%;;">
+                <li class="m-2">
+                  <strong>Số điện thoại liên hệ:</strong> 024 3756 2186
                 </li>
-                <li>
-                  <a href="#">About Our Shop</a>
+                <li class="m-2">
+                  <strong>Email:</strong> ctsv@ptit.edu.vn
                 </li>
-                <li>
-                  <a href="#">Secure Shopping</a>
-                </li>
-                <li>
-                  <a href="#">Delivery infomation</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="#">Our Sitemap</a>
+                <li class="m-2">
+                  <strong>Trụ sở chính:</strong> Km10, Đường Nguyễn Trãi, Q. Hà Đông, Hà Nội
                 </li>
               </ul>
-              <ul>
-                <li>
-                  <a href="#">Who We Are</a>
-                </li>
-                <li>
-                  <a href="#">Our Services</a>
-                </li>
-                <li>
-                  <a href="#">Projects</a>
-                </li>
-                <li>
-                  <a href="{% url 'core:contact' %}">Contact</a>
-                </li>
-                <li>
-                  <a href="#">Innovation</a>
-                </li>
-                <li>
-                  <a href="#">Testimonials</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-12">
-            <div class="footer__widget">
-              <h6>Join Our Newsletter Now</h6>
-              <p>Get E-mail updates about our latest shop and special offers.</p>
-              <form action="#">
-                <input type="text" placeholder="Enter your mail" />
-                <button type="submit" class="site-btn">Subscribe</button>
-              </form>
-              <div class="footer__widget__social">
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
-              </div>
             </div>
           </div>
         </div>
@@ -321,13 +282,7 @@
           <div class="col-lg-12">
             <div class="footer__copyright">
               <div class="footer__copyright__text">
-                <p>
-                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                  Copyright &copy;<script>
-                                    document.write(new Date().getFullYear())
-                                  </script>All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </p>
+                <p></p>
               </div>
               <div class="footer__copyright__payment">
                 <img src="{% static 'assets/img/payment-item.png' %}" alt="" />

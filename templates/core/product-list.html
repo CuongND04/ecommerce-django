@@ -1,5 +1,6 @@
 {% extends 'partials/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
   <head>
     <style>
@@ -34,21 +35,24 @@
     </style>
   </head>
   <!-- Breadcrumb Section Begin -->
-  <section class="breadcrumb-section set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
+  <section class="bg-secondary-subtle">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 text-center">
-          <div class="breadcrumb__text">
-            <h2>Shop</h2>
-            <div class="breadcrumb__option">
-              <a href="{% url 'core:index' %}">Home</a>
-              <span>Shop</span>
-            </div>
-          </div>
+        <div class="col-lg-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb d-flex align-items-center m-0" style="height: 60px;">
+              <li class="breadcrumb-item">
+                <i class="fa-solid fa-house-chimney text-success"></i>
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Home</a>
+              </li>
+              <li class="breadcrumb-item active text-uppercase" aria-current="page">Shop</li>
+            </ol>
+          </nav>
         </div>
       </div>
     </div>
   </section>
+
   <!-- Breadcrumb Section End -->
 
   <!-- Product Section Begin -->
@@ -70,35 +74,24 @@
                 {% endfor %}
               </ul>
             </div>
-            <div class="sidebar__item">
-              <h4>Nhà cung cấp</h4>
-              <ul>
-                {% for v in vendors %}
-                  <li class="d-inline-block">
-                    <span class="d-inline-block bg-secondary-subtle p-2 my-2" href="#">
-                      <input data-filter="vendor" class="form-check-input filter-checkbox" type="checkbox" name="checkbox" id="exampleCheckbox1" value="{{ v.id }}" />
-                      {{ v.title }}
-                    </span>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
+
             <div class="sidebar__item">
               <h4>Price</h4>
               <div class="sidebar-widget price_range range">
                 <div class="price-filter mb-20">
                   <div class="price-filter-inner">
                     <div id="slidder-range" class="mb-20"></div>
-                    <input type="range" name="range" value="{{ min_max_price.price__max|floatformat:2 }}" value="" class="slider-range" id="range" min="{{ min_max_price.price__min|floatformat:2 }}" max="{{ min_max_price.price__max|floatformat:2 }}" oninput="max_price.value=this.value" />
-                    <div class="d-flex justify-content-between" style="width: 200px">
+                    <input type="range" name="range" value="{{ min_max_price.price__max }}" value="" class="slider-range" id="range" min="{{ min_max_price.price__min|floatformat:2 }}" max="{{ min_max_price.price__max|floatformat:2 }}" oninput="max_price.value=this.value" />
+                    <div class="" style="width: 100px">
                       <div class="caption">
-                        From: <strong id="slider-range-value1" class="text-brand">{{ min_max_price.price__min|floatformat:2 }}$</strong>
+                        From: <strong id="slider-range-value1" class="text-brand">{{ min_max_price.price__min|intcomma }}đ</strong>
                       </div>
+                      <br />
                       <div class="caption">
-                        To: <strong id="slider-range-value2" class="text-brand">{{ min_max_price.price__max|floatformat:2 }}$</strong>
+                        To: <strong id="slider-range-value2" class="text-brand">{{ min_max_price.price__max|intcomma }}đ</strong>
                       </div>
                     </div>
-                    <input type="number" name="" value="{{ min_max_price.price__max|floatformat:2 }}" id="max_price" min="{{ min_max_price.price__min|floatformat:2 }}" max="{{ min_max_price.price__max|floatformat:2 }}" placeholder="Current Price" onkeyup="range.value=this.value" />
+                    <input type="number" name="" value="{{ min_max_price.price__max }}" id="max_price" min="{{ min_max_price.price__min|floatformat:2 }}" max="{{ min_max_price.price__max|floatformat:2 }}" placeholder="Current Price" onkeyup="range.value=this.value" />
                   </div>
                 </div>
                 <div class="custome-checkbox mt-2">
@@ -107,7 +100,7 @@
                 </div>
               </div>
             </div>
-
+            <!--               
             <div class="sidebar__item">
               <div class="latest-product__text">
                 <h4>Latest Products</h4>
@@ -115,26 +108,25 @@
                 <div class="latest-product__slider owl-carousel">
                   <div class="latest-prdouct__slider__item">
                     {% for p in productLatestOne %}
-                      <a href="#" class="latest-product__item">
+                      <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                         <div class="latest-product__item__pic">
-                          <img src="{{ p.image.url }}" alt="" />
+                          <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
                         </div>
                         <div class="latest-product__item__text">
-                          <h6>{{ p.title }}</h6>
+                          <h6>{{ p.title|truncatechars:27 }}</h6>
                           <span>${{ p.price }}</span>
                         </div>
                       </a>
                     {% endfor %}
                   </div>
-
                   <div class="latest-prdouct__slider__item">
                     {% for p in productLatestTwo %}
-                      <a href="#" class="latest-product__item">
+                      <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                         <div class="latest-product__item__pic">
-                          <img src="{{ p.image.url }}" alt="" />
+                          <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
                         </div>
                         <div class="latest-product__item__text">
-                          <h6>{{ p.title }}</h6>
+                          <h6>{{ p.title|truncatechars:27 }}</h6>
                           <span>${{ p.price }}</span>
                         </div>
                       </a>
@@ -143,6 +135,7 @@
                 </div>
               </div>
             </div>
+                           -->
           </div>
         </div>
 
@@ -166,50 +159,78 @@
             </div>
           </div>
 
-          <div class="row" id="filtered-product">
+          <div class="container" id="filtered-product">
             {% for p in products %}
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item border border-dark-subtle">
-                  <div class="product__item__pic set-bg" data-setbg="{{ p.image.url }}">
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a aria-label="Add To Wishlist" class="action-btn add-to-wishlist" data-product-item="{{ p.id }}"><i class="fa fa-heart"></i></a>
-                        {% comment %} <a href="#"><i class="fa fa-heart"></i></a> {% endcomment %}
-                      </li>
-                      <li>
-                        <a href="{% url 'core:product-detail' p.pid %}"><i class="fa-solid fa-eye"></i></a>
-                      </li>
-                      <li>
-                        <input type="hidden" value="1" class="product-quantity-{{ p.id }}" />
-                        <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}" />
-                        <input type="hidden" class="product-image-{{ p.id }}" value="{{ p.image.url }}" />
-                        <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}" />
-                        <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}" />
-                        <button data-index="{{ p.id }}" class="bg-transparent border border-0 add add-to-cart-btn" id="add-to-cart-btn">
-                          {% comment %}thêm thuộc tính đê vô hiệu hóa href{% endcomment %}
-                          <a href="#" style="pointer-events: none; color: inherit; text-decoration: none;"><i class="fa fa-shopping-cart"></i></a>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__discount__item__text">
-                    <span>{{ p.category }}</span>
-                    <h5><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h5>
-                    <div class="product__item__price">
-                      ${{ p.price }} <span>${{ p.old_price }}</span>
+              <div class="row justify-content-center mb-3">
+                <div class="col-md-12 col-xl-12">
+                  <div class="card shadow-0 border rounded-3">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                          <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                            <img src="{{ p.image.url }}" class="w-100" />
+                            <a href="#!">
+                              <div class="hover-overlay">
+                                <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                          <h5>{{ p.title }}</h5>
+                          <div class="d-flex flex-row">
+                            <div class="text-danger mb-1 me-2">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                            </div>
+                            {% comment %} <span>310</span> {% endcomment %}
+                          </div>
+                          <div class="mt-1 mb-0 text-muted small">
+                            <span>Màn hình: 15.6"</span>
+                            <span class="text-primary">•</span>
+                            <span>Card: Intel Iris Xe</span>
+                            <span class="text-primary">•</span>
+                            <span>CPU: i5,1334U,1.3GHz<br /></span>
+                          </div>
+                          <div class="mb-2 text-muted small">
+                            <span>Pin: 3-cell, 41Wh</span>
+                          </div>
+                          <p class="text-truncate mb-4 mb-md-0">Các bước để kiểm tra cấu hình laptop {{ p.category }} · 1. Kiểm tra cấu hình laptop Dell Sử dụng</p>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                          <div class="d-flex flex-row mb-1">
+                            <div style="width: 140px;">
+                              <h4 class="fs-5 mb-1 me-1">{{ p.price|intcomma }}</h4>
+                              <h4 class="text-danger fs-6 mb-1 me-1"><del>{{ p.old_price|intcomma }}</del></h4>
+                              VNĐ
+                            </div>
+                            <button style="width: 50px;" data-index="{{ p.id }}" class="bg-transparent border border-0 add add-to-cart-btn" id="add-to-cart-btn">
+                              {% comment %}thêm thuộc tính đê vô hiệu hóa href{% endcomment %}
+                              <a href="#" style="pointer-events: none; color: inherit; text-decoration: none;"><i class="fa fa-shopping-cart"></i></a>
+                            </button>
+                          </div>
+                          <input type="hidden" value="1" class="product-quantity-{{ p.id }}" />
+                          <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}" />
+                          <input type="hidden" class="product-image-{{ p.id }}" value="{{ p.image.url }}" />
+                          <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}" />
+                          <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}" />
+                          <h6 class="text-success">Free shipping</h6>
+                          <div class="d-flex flex-column mt-4">
+                            <a href="{% url 'core:product-detail' p.pid %}" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-sm" type="button">Chi tiết</a>
+                            <a data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-success btn-sm mt-2 add-to-wishlist" data-product-item="{{ p.id }}" type="button">Yêu thích</a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             {% endfor %}
           </div>
-          <div class="product__pagination">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-          </div>
-
+          <!--              
           <div class="product__discount mt-5">
             <div class="section-title product__discount__title">
               <h2>Sale Off</h2>
@@ -245,7 +266,7 @@
                         <span>{{ p.category }}</span>
                         <h5><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h5>
                         <div class="product__item__price">
-                          ${{ p.price }} <span>${{ p.old_price }}</span>
+                          VNĐ{{ p.price }} <span>VNĐ{{ p.old_price }}</span>
                         </div>
                       </div>
                     </div>
@@ -254,6 +275,7 @@
               </div>
             </div>
           </div>
+                        -->
         </div>
       </div>
     </div>

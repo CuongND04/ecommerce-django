@@ -1,5 +1,6 @@
 {% extends 'partials/user.html' %}
 {% load static %}
+{% load humanize %}
 {% block order_detail %}
   <h2>Chi tiết đơn hàng</h2>
   <div class="container border">
@@ -7,11 +8,11 @@
       <thead class="bg-light">
         <tr>
           <th>ID</th>
-          <th>Image</th>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
+          <th>Hình sản phẩm</th>
+          <th>Sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Tổng</th>
         </tr>
       </thead>
       <tbody>
@@ -29,9 +30,9 @@
               <img src="{{ o.image }}" style="width: 60px;height: 60px;" alt="" />
             </td>
             <td>{{ o.item }}</td>
-            <td>{{ o.price }}</td>
+            <td>{{ o.price|intcomma }}đ</td>
             <td>{{ o.qty }}</td>
-            <td>{{ o.total }}</td>
+            <td>{{ o.total|intcomma }}đ</td>
           </tr>
         {% endfor %}
       </tbody>

@@ -1,18 +1,21 @@
 {% extends 'partials/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
   <!-- Breadcrumb Section Begin -->
-  <section class="breadcrumb-section set-bg" style="" data-setbg="{% static 'assets/img/banner/b5.jpg' %}">
+  <section class="bg-secondary-subtle">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 text-center">
-          <div class="breadcrumb__text">
-            <h2>Wishlist</h2>
-            <div class="breadcrumb__option">
-              <a href="./index.html">Home</a>
-              <span>Wishlist</span>
-            </div>
-          </div>
+        <div class="col-lg-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb d-flex align-items-center m-0" style="height: 60px;">
+              <li class="breadcrumb-item">
+                <i class="fa-solid fa-house-chimney text-success"></i>
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Home</a>
+              </li>
+              <li class="breadcrumb-item active text-uppercase" aria-current="page">Wishlist</li>
+            </ol>
+          </nav>
         </div>
       </div>
     </div>
@@ -38,9 +41,9 @@
                   <tr>
                     <td class="shoping__cart__item">
                       <img style="height: 120px;width: 120px;" src="{{ w.product.image.url }}" alt="image" />
-                      <a href="{% url 'core:product-detail' w.product.pid %}"><h5>{{ w.product.title }}</h5></a>
+                      <a href="{% url 'core:product-detail' w.product.pid %}"><h5>{{ w.product.title|truncatechars:60 }}</h5></a>
                     </td>
-                    <td class="shoping__cart__price">${{ w.product.price|floatformat:2 }}</td>
+                    <td class="shoping__cart__price">{{ w.product.price|intcomma }}đ</td>
 
                     <td class="shoping__cart__item" style="width: 100px;">
                       <input type="hidden" value="1" class="product-quantity-{{ w.product.id }}" />

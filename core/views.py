@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse,JsonResponse
-from core.models import CartOrderItems, Coupon,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
+from core.models import CartOrderItems, Coupon,  Product, Category,CartOrder, ProductImages, ProductReview, WishList, Address
 from taggit.models import Tag
 from django.db.models import *
 from core.forms import ProductReviewForm
@@ -35,7 +35,8 @@ def index(request):
   productSaleOff = sorted(productSaleOff, key= lambda Product: -Product.get_percentage())
   context =  {
     "products":products,
-    "productFeatured":productFeatured,
+    "productFeaturedOne":productFeatured[0:3],
+    "productFeaturedTwo":productFeatured[3:6],
     "productLatestOne":productLatest[0:3],
     "productLatestTwo":productLatest[3:6],
     "productSaleOff":productSaleOff[0:4]
@@ -76,23 +77,30 @@ def category_product_list_view(request,cid):
   return render(request,'core/category-product-list.html',context)
 
 def vendor_list_view(request):
-  vendors = Vendor.objects.all();
+  cate = Category.objects.all();
   context = {
-    "vendors" : vendors,
+    "cate" : cate,
   }
   return render(request,"core/vendor-list.html",context)
 
-def vendor_detail_view(request,vid):
-  vendor = Vendor.objects.get(vid=vid);
-  products = Product.objects.filter(product_status="published",vendor=vendor)
-  productLatest = Product.objects.order_by('-date')
-  context = {
-    "vendor" : vendor,
-    "products":products,
-    "productLatestOne":productLatest[0:3],
-    "productLatestTwo":productLatest[3:6],
-  }
-  return render(request,"core/vendor-detail.html",context)
+# def vendor_list_view(request):
+#   vendors = Vendor.objects.all();
+#   context = {
+#     "vendors" : vendors,
+#   }
+#   return render(request,"core/vendor-list.html",context)
+
+# def vendor_detail_view(request,vid):
+#   vendor = Vendor.objects.get(vid=vid);
+#   products = Product.objects.filter(product_status="published",vendor=vendor)
+#   productLatest = Product.objects.order_by('-date')
+#   context = {
+#     "vendor" : vendor,
+#     "products":products,
+#     "productLatestOne":productLatest[0:3],
+#     "productLatestTwo":productLatest[3:6],
+#   }
+#   return render(request,"core/vendor-detail.html",context)
 
 def product_detail_view(request,pid):
   product = Product.objects.get(pid=pid)
@@ -174,7 +182,7 @@ def search_view(request):
 
 def filter_product(request):
     categories = request.GET.getlist("category[]")
-    vendors = request.GET.getlist("vendor[]")
+    # vendors = request.GET.getlist("vendor[]")
 
     min_price = request.GET['min_price']
     max_price = request.GET['max_price']
@@ -185,8 +193,8 @@ def filter_product(request):
 
     if len(categories) > 0:
         products = products.filter(category__id__in=categories).distinct() 
-    if len(vendors) > 0:
-        products = products.filter(vendor__id__in=vendors).distinct() 
+      # if len(vendors) > 0:
+      #     products = products.filter(vendor__id__in=vendors).distinct() 
   
     data = render_to_string("core/async/product-list.html", {"products": products})
     return JsonResponse({"data": data})
@@ -392,6 +400,7 @@ def save_checkout_info(request):
 
 def checkout(request, oid):
   order = CartOrder.objects.get(oid=oid)
+  order_price_divided = order.price / 25000
   order_items = CartOrderItems.objects.filter(order=order)
   old_price = request.session.get('total_amount')
   print("old_price: ",old_price)
@@ -419,6 +428,7 @@ def checkout(request, oid):
   context = {
      "old_price":old_price,
       "order": order,
+      "order_price_divided":order_price_divided,
       "order_items": order_items,
       "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
 

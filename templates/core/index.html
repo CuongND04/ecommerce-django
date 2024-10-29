@@ -1,4 +1,6 @@
 {% extends 'partials/base.html' %}
+
+{% load humanize %}
 {% load static %}
 
 {% block index %}
@@ -57,17 +59,17 @@
           <div class="featured__controls">
             <ul>
               <li class="active" data-filter="*">All</li>
-              <li data-filter=".oranges">Oranges</li>
-              <li data-filter=".fresh-meat">Fresh Meat</li>
-              <li data-filter=".vegetables">Vegetables</li>
-              <li data-filter=".fastfood">Fastfood</li>
+              <li data-filter=".ACER">Acer</li>
+              <li data-filter=".LENOVO">Lenovo</li>
+              <li data-filter=".DELL">Dell</li>
+              <li data-filter=".HP">HP</li>
             </ul>
           </div>
         </div>
       </div>
       <div class="row featured__filter">
         {% for p in products %}
-          <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+          <div class="col-lg-3 col-md-4 col-sm-6 mix border rounded {{ p.category }} m-1" style="width: 280px;">
             <div class="featured__item position-relative">
               <div class="featured__item__pic set-bg" data-setbg="{{ p.image.url }}">
                 <img />
@@ -92,9 +94,9 @@
                 </ul>
               </div>
               <div class="featured__item__text">
-                <h6><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h6>
-                <h5>$<span class="current-product-price-{{ p.id }}">{{ p.price }}</span></h5>
-                <h5><span class="text-body-tertiary">By</span> {{ p.vendor }}</h5>
+                <h6><a href="{% url 'core:product-detail' p.pid %}">{{ p.title|truncatechars:50 }}</a></h6>
+                <h5><span class="current-product-price-{{ p.id }}">{{ p.price|intcomma }}</span> VNĐ</h5>
+                {% comment %} <h5><span class="text-body-tertiary">By</span> {{ p.vendor }}</h5> {% endcomment %}
               </div>
               <div class="featured__item__label">
                 <div class="d-flex justify-content-start align-items-end h-100">
@@ -115,12 +117,12 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="banner__pic">
-            <img src="{% static 'assets/img/banner/banner-1.jpg' %}" alt="" />
+            <img src="https://res.cloudinary.com/dc4bgvfbj/image/upload/v1730213179/0469dd8002f1ab5a4918d41c6907b2d0_mau0ta.png" alt="" />
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="banner__pic">
-            <img src="{% static 'assets/img/banner/banner-2.jpg' %}" alt="" />
+            <img style="height: 140px;" src="https://res.cloudinary.com/dc4bgvfbj/image/upload/v1730213179/Voi-Tan-sinh-vien--1--920x184_rbmr9k.png" alt="" />
           </div>
         </div>
       </div>
@@ -134,17 +136,17 @@
       <div class="row">
         <div class="col-lg-4 col-md-6">
           <div class="latest-product__text">
-            <h4>Latest Products</h4>
+            <h4>Mới nhất</h4>
             <div class="latest-product__slider owl-carousel">
               <div class="latest-prdouct__slider__item">
                 {% for p in productLatestOne %}
                   <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                     <div class="latest-product__item__pic">
-                      <img src="{{ p.image.url }}" alt="" />
+                      <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
                     </div>
                     <div class="latest-product__item__text">
-                      <h6>{{ p.title }}</h6>
-                      <span>${{ p.price }}</span>
+                      <h6>{{ p.title|truncatechars:27 }}</h6>
+                      <span>{{ p.price|intcomma }}đ</span>
                     </div>
                   </a>
                 {% endfor %}
@@ -153,11 +155,11 @@
                 {% for p in productLatestTwo %}
                   <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                     <div class="latest-product__item__pic">
-                      <img src="{{ p.image.url }}" alt="" />
+                      <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
                     </div>
                     <div class="latest-product__item__text">
-                      <h6>{{ p.title }}</h6>
-                      <span>${{ p.price }}</span>
+                      <h6>{{ p.title|truncatechars:27 }}</h6>
+                      <span>{{ p.price|intcomma }}đ</span>
                     </div>
                   </a>
                 {% endfor %}
@@ -168,114 +170,67 @@
 
         <div class="col-lg-4 col-md-6">
           <div class="latest-product__text">
-            <h4>Top Rated Products</h4>
+            <h4>Nổi bật</h4>
             <div class="latest-product__slider owl-carousel">
               <div class="latest-prdouct__slider__item">
-                {% for p in productFeatured %}
+                {% for p in productFeaturedOne %}
                   <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
                     <div class="latest-product__item__pic">
-                      <img src="{{ p.image.url }}" alt="" />
+                      <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
                     </div>
                     <div class="latest-product__item__text">
-                      <h6>{{ p.title }}</h6>
-                      <span>${{ p.price }}</span>
+                      <h6>{{ p.title|truncatechars:27 }}</h6>
+                      <span>{{ p.price|intcomma }}đ</span>
                     </div>
                   </a>
                 {% endfor %}
               </div>
               <div class="latest-prdouct__slider__item">
-                <a href="" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-1.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
-                <a href="" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-2.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
-                <a href="" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-3.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
+                {% for p in productFeaturedTwo %}
+                  <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>{{ p.title|truncatechars:27 }}</h6>
+                      <span>{{ p.price|intcomma }}đ</span>
+                    </div>
+                  </a>
+                {% endfor %}
               </div>
             </div>
           </div>
         </div>
+
         <div class="col-lg-4 col-md-6">
           <div class="latest-product__text">
-            <h4>Review Products</h4>
+            <h4>Đánh giá cao</h4>
             <div class="latest-product__slider owl-carousel">
               <div class="latest-prdouct__slider__item">
-                <a href="#" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-1.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
-                <a href="#" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-2.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
-                <a href="#" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-3.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
+                {% for p in productLatestTwo %}
+                  <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>{{ p.title|truncatechars:27 }}</h6>
+                      <span>{{ p.price|intcomma }}đ</span>
+                    </div>
+                  </a>
+                {% endfor %}
               </div>
               <div class="latest-prdouct__slider__item">
-                <a href="#" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-1.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
-                <a href="#" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-2.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
-                <a href="#" class="latest-product__item">
-                  <div class="latest-product__item__pic">
-                    <img src="{% static 'assets/img/latest-product/lp-3.jpg' %}" alt="" />
-                  </div>
-                  <div class="latest-product__item__text">
-                    <h6>Crab Pool Security</h6>
-                    <span>$30.00</span>
-                  </div>
-                </a>
+                {% for p in productLatestOne %}
+                  <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>{{ p.title|truncatechars:27 }}</h6>
+                      <span>{{ p.price|intcomma }}đ</span>
+                    </div>
+                  </a>
+                {% endfor %}
               </div>
             </div>
           </div>

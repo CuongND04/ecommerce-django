@@ -1,5 +1,6 @@
 {% extends 'partials/user.html' %}
 {% load static %}
+{% load humanize %}
 {% block order %}
   <h2 class="fw-semibold">Đơn hàng</h2>
   <div class="container border">
@@ -46,7 +47,7 @@
                 <span class="badge text-bg-danger">{{ o.paid_status|title }}</span>
               {% endif %}
             </td>
-            <td>${{ o.price }}</td>
+            <td>{{ o.price|intcomma }}đ</td>
             <td>
               <button type="button" class="btn btn-outline-success"><a href="{% url 'dashboard:order-detail' o.id %}">View</a></button>
               {% if o.paid_status %}

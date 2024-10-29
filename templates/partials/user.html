@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -57,7 +58,7 @@
   </head>
   <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-success">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Trung tâm tài khoản</a>
         <span class="navbar-text">Xin chào, <strong>{{ username }}</strong></span>
@@ -70,11 +71,11 @@
         <!-- Sidebar -->
         <div class="col-md-3 col-lg-2 sidebar" style="height: inherit;min-height: 100vh;">
           {% comment %} <h5 class="text-center">Hoạt động</h5> {% endcomment %}
-          <a href="{% url 'dashboard:index' %}" onclick="">Bảng điều khiển</a>
-          <a href="{% url 'dashboard:profile' %}" onclick="">Thông tin</a>
-          <a href="{% url 'dashboard:order' %}" onclick="">Đơn hàng</a>
-          <a href="{% url 'dashboard:address' %}" onclick="">Địa chỉ</a>
-          <a href="#" onclick="">Analytics</a>
+          <a class="{% if active_section == 'index' %}bg-success border rounded{% endif %}" href="{% url 'dashboard:index' %}" onclick="">Bảng điều khiển</a>
+          <a class="{% if active_section == 'profile' or active_section == 'edit_profile' %}bg-success border rounded{% endif %}" href="{% url 'dashboard:profile' %}" onclick="">Thông tin</a>
+          <a class="{% if active_section == 'order' or active_section == 'order_detail' %}bg-success border rounded{% endif %}" href="{% url 'dashboard:order' %}" onclick="">Đơn hàng</a>
+          <a class="{% if active_section == 'address' %}bg-success border rounded{% endif %}" href="{% url 'dashboard:address' %}" onclick="">Địa chỉ</a>
+          <a href="#" onclick="">Liên hệ</a>
           <a href="{% url 'core:index' %}">Trở về cửa hàng</a>
         </div>
 

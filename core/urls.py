@@ -25,9 +25,9 @@ urlpatterns = [
   # category
   path("category/<cid>/",category_product_list_view,name="category-product-list"),
 
-  # vendor
+  # # vendor
   path("vendor/",vendor_list_view,name="vendor-list"),
-  path("vendor/<vid>/",vendor_detail_view,name="vendor-detail"),
+  # path("vendor/<vid>/",vendor_detail_view,name="vendor-detail"),
 
 
   # cart

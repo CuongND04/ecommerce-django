@@ -1,22 +1,26 @@
 {% extends 'partials/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
   <!-- Breadcrumb Section Begin -->
-  <section class="breadcrumb-section set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
+  <section class="bg-secondary-subtle">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 text-center">
-          <div class="breadcrumb__text">
-            <h2>Contact Us</h2>
-            <div class="breadcrumb__option">
-              <a href="./index.html">Home</a>
-              <span>Contact Us</span>
-            </div>
-          </div>
+        <div class="col-lg-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb d-flex align-items-center m-0" style="height: 60px;">
+              <li class="breadcrumb-item">
+                <i class="fa-solid fa-house-chimney text-success"></i>
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Home</a>
+              </li>
+              <li class="breadcrumb-item active text-uppercase" aria-current="page">contact</li>
+            </ol>
+          </nav>
         </div>
       </div>
     </div>
   </section>
+
   <!-- Breadcrumb Section End -->
 
   <!-- Contact Section Begin -->
@@ -27,28 +31,28 @@
           <div class="contact__widget">
             <i style="font-size: 30px;" class="fa-solid fa-phone"></i>
             <h4>Phone</h4>
-            <p>+01-3-8888-6868</p>
+            <p>024 3756 2186</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 text-center">
           <div class="contact__widget">
             <i style="font-size: 30px;" class="fa-solid fa-map-location-dot"></i>
             <h4>Address</h4>
-            <p>60-49 Road 11378 New York</p>
+            <p>Km10, Đường Nguyễn Trãi</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 text-center">
           <div class="contact__widget">
             <i style="font-size: 30px;" class="fa-solid fa-calendar-days"></i>
             <h4>Open time</h4>
-            <p>10:00 am to 23:00 pm</p>
+            <p>support 24/7 time</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 text-center">
           <div class="contact__widget">
             <i style="font-size: 30px;" class="fa-solid fa-envelope"></i>
             <h4>Email</h4>
-            <p>hello@colorlib.com</p>
+            <p>ctsv@ptit.edu.vn</p>
           </div>
         </div>
       </div>
@@ -100,7 +104,7 @@
           </div>
           <div class="col-lg-12 text-center">
             <textarea name="message" id="message" placeholder="Message"></textarea>
-            <button id="contact-form-ajax" class="site-btn" type="submit">Send message</button>
+            <button id="contact-form-ajax" class="site-btn bg-success" type="submit">Gửi</button>
           </div>
         </div>
       </form>

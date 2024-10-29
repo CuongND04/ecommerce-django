@@ -1,18 +1,18 @@
 from django.contrib import admin
-from core.models import CartOrderItems, Coupon,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
+from core.models import CartOrderItems, Coupon,  Product, Category,  CartOrder, ProductImages, ProductReview, WishList, Address
 # Cài đặt các trường hiển thị trong admin của từng model
 class ProductImagesAdmin(admin.TabularInline):
     model = ProductImages
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImagesAdmin]
-    list_display = ['title','user', 'product_image', 'price','category','vendor','featured', 'product_status',"pid"]
+    list_display = ['title', 'product_image', 'price','category','featured', 'product_status',"pid"]
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'category_image']
 
-class VendorAdmin(admin.ModelAdmin):
-    list_display = ['title', 'vendor_image']
+# class VendorAdmin(admin.ModelAdmin):
+#     list_display = ['title', 'vendor_image']
 
 
 class CartOrderAdmin(admin.ModelAdmin):
@@ -39,7 +39,7 @@ class AddressAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Vendor, VendorAdmin)
+# admin.site.register(Vendor, VendorAdmin)
 admin.site.register(CartOrder, CartOrderAdmin)
 admin.site.register(CartOrderItems, CartOrderItemsAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)

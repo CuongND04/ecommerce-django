@@ -1,3 +1,4 @@
+{% load humanize %}
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad" id="wishlist-list">
   <div class="container">
@@ -17,9 +18,9 @@
                 <tr>
                   <td class="shoping__cart__item">
                     <img style="height: 120px;width: 120px;" src="{{ w.product.image.url }}" alt="image" />
-                    <a href="{% url 'core:product-detail' w.product.pid %}"><h5>{{ w.product.title }}</h5></a>
+                    <a href="{% url 'core:product-detail' w.product.pid %}"><h5>{{ w.product.title|truncatechars:60 }}</h5></a>
                   </td>
-                  <td class="shoping__cart__price">${{ w.product.price|floatformat:2 }}</td>
+                  <td class="shoping__cart__price">{{ w.product.price|intcomma }}đ</td>
 
                   <td class="shoping__cart__item" style="width: 100px;">
                     <input type="hidden" value="1" class="product-quantity-{{ w.product.id }}" />

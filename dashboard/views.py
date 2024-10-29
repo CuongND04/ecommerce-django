@@ -1,7 +1,7 @@
 
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse,JsonResponse
-from core.models import CartOrderItems, Coupon,  Product, Category, Vendor, CartOrder, ProductImages, ProductReview, WishList, Address
+from core.models import CartOrderItems, Coupon,  Product, Category, CartOrder, ProductImages, ProductReview, WishList, Address
 from taggit.models import Tag
 from django.db.models import *
 from core.forms import ProductReviewForm
@@ -47,10 +47,6 @@ def customer_dashboard(request):
   for i in orders:
     month.append(calendar.month_name[i["month"]])
     total_orders.append(i["count"])
-
-
-
-  
 
 
   user_profile = Profile.objects.get(user=request.user)

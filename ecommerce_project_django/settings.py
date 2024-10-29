@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    
+    'django.contrib.humanize',
     # thêm thẻ tag vào sản phẩm
     "taggit",
     # tích hợp thanh toán paypal

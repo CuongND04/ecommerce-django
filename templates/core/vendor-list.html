@@ -1,5 +1,6 @@
 {% extends 'partials/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
   <!-- Breadcrumb Section Begin -->
   <section class="breadcrumb-section set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
@@ -21,8 +22,8 @@
   <!-- Breadcrumb Section End -->
   <div class="container my-5">
     <div class="row g-3">
-      {% for v in vendors %}
-        <a class="col-md-4" href="{% url 'core:vendor-detail' v.vid %}">
+      {% for v in cate %}
+        <a class="col-md-4" href="{% url 'core:category-product-list' v.cid %}">
           <div class="card p-3">
             <div class="d-flex align-items-center justify-content-between">
               <div>
@@ -42,7 +43,7 @@
                 <p class="store-rating mb-1">
                   ★★★★★ <small>(26)</small>
                 </p>
-                <span class="product-count">{{ v.product.all.count }} Products</span>
+                <span class="product-count">{{ v.category.count }} Products</span>
               </div>
               <div>
                 <img src="{{ v.image.url }}" class="store-logo" alt="Store Logo" />

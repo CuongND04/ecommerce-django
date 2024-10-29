@@ -513,11 +513,11 @@ $(document).ready(function () {
         let id = $(this).attr("data-address-id")
         let this_val = $(this)
 
-        // console.log("ID is:", id);
-        // console.log("Element is:", this_val);
+        console.log("ID is:", id);
+        console.log("Element is:", this_val);
 
         $.ajax({
-            url: "/make-default-address",
+            url: "/dashboard/address/make-default-address",
             data: {
                 "id": id
             },
@@ -526,7 +526,7 @@ $(document).ready(function () {
                 // alertify.set('notifier', 'position', 'top-right');
                 // alertify.success("Cập nhật địa chỉ thành công!").dismissOthers();
                 showNotification("s", "Cập nhật địa chỉ thành công!")
-                // console.log("Address Made Default....");
+                console.log("Address Made Default....");
                 if (response.boolean == true) {
 
                     $(".check").hide()
