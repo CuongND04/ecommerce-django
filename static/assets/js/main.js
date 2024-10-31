@@ -1,5 +1,4 @@
 
-//
 // hiển thị section
 function showSection(sectionId) {
     // Hide all sections

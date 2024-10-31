@@ -65,6 +65,13 @@ def make_address_default(request):
     id = request.GET['id']
     Address.objects.update(status=False)
     Address.objects.filter(id=id).update(status=True)
+    add = Address.objects.filter(status=True).values().first()
+    if add:  # Kiểm tra nếu có dữ liệu
+      profile = Profile.objects.get(user=request.user)
+      profile.address = add['address']  # Gán giá trị của `address`
+      profile.save()  # Lưu thay đổi
+      # print(profile.values())
+    
     return JsonResponse({"boolean": True})
 
 
@@ -78,6 +85,7 @@ def profile_user(request):
 
 
 def address_view(request):
+  user_profile = Profile.objects.get(user=request.user)
   address = Address.objects.filter(user=request.user)
   if request.method == "POST":
       address = request.POST.get("address")
@@ -95,21 +103,25 @@ def address_view(request):
       print("Error")
   context = {
     "address": address,
+    "user_profile": user_profile,
     'active_section': 'address'
   }
   return render(request,'dashboard/address.html',context)
 
 
 def order_view(request):
+  user_profile = Profile.objects.get(user=request.user)
   orders_list = CartOrder.objects.filter(user=request.user).order_by("-id")
 
   context = {
     "orders_list": orders_list,
+    "user_profile": user_profile,
     'active_section': 'order'
   }
   return render(request,'dashboard/order.html',context)
 
 def order_detail(request, id):
+    
     user_profile = Profile.objects.get(user=request.user)
     orders_list = CartOrder.objects.filter(user=request.user).order_by("-id")
     order = CartOrder.objects.get(user=request.user, id=id)

@@ -3,7 +3,7 @@
 {% load humanize %}
 {% block order_detail %}
   <h2>Chi tiết đơn hàng</h2>
-  <div class="container border">
+  <div class="container border mt-2">
     <table class="table align-middle mb-0 bg-white">
       <thead class="bg-light">
         <tr>
@@ -37,5 +37,42 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+  <div class="row mt-4 container">
+    <h4 class="mb-2">Thông tin người nhận</h4>
+    <div class="row">
+      <div class="form-group col-lg-12">
+        <label for="">Họ và tên</label>
+        <input disabled class="form-control my-2" type="text" required="" name="full_name" value="{{ request.user.username|title }}" placeholder="Full Name" />
+      </div>
+      <div class="form-group col-lg-6">
+        <label for="">Địa chỉ email</label>
+        <input disabled class="form-control my-2" type="text" required="" name="email" placeholder="mobile *" value="{{ request.user.email }}" />
+      </div>
+      <div class="form-group col-lg-6">
+        <label for="">Số điện thoại</label>
+        <input disabled class="form-control my-2" type="text" name="mobile" value="{{ request.user.profile.phone }}" required="" placeholder="Address *" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-12">
+        <label for="">Chi tiết địa chỉ</label>
+        <input disabled class="form-control my-2" type="text" name="address" value="{{ request.user.profile.address }}" placeholder="Address" />
+      </div>
+      <!--               
+      <div class="form-group col-lg-6">
+        <label for="">City</label>
+        <input class="form-control my-2" type="text" name="city" placeholder="City *" value="" />
+      </div>
+      <div class="form-group col-lg-6">
+        <label for="">State</label>
+        <input class="form-control my-2" type="text" name="state" value="" placeholder="State *" />
+      </div>
+      <div class="form-group col-lg-6">
+        <label for="">Country</label>
+        <input class="form-control my-2" type="text" name="country" value="" placeholder="Country *" />
+      </div>
+                     -->
+    </div>
   </div>
 {% endblock %}

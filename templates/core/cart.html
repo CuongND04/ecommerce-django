@@ -25,7 +25,7 @@
 
   <!-- Shoping Cart Section Begin -->
   <section class="shoping-cart spad" id="cart-list">
-    <form action="{% url 'core:save_checkout_info' %}" method="post">
+    <form action="{% url 'core:save_checkout_info' %}" method="POST">
       {% csrf_token %}
       <div class="container">
         <div class="row">
@@ -84,43 +84,6 @@
                 {% comment %}Upadate Cart{% endcomment %}
                 {% comment %}
               </a> {% endcomment %}
-            </div>
-          </div>
-
-          <div class="row mt-4">
-            <h4 class="mb-30">Thông tin người nhận</h4>
-            <div class="row">
-              <div class="form-group col-lg-12">
-                <label for="">Full Name</label>
-                <input disabled class="form-control my-2" type="text" required="" name="full_name" value="{{ request.user.username|title }}" placeholder="Full Name" />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="">Email</label>
-                <input disabled class="form-control my-2" type="text" required="" name="email" placeholder="mobile *" value="{{ request.user.email }}" />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="">Mobile</label>
-                <input disabled class="form-control my-2" type="text" name="mobile" value="{{ request.user.profile.phone }}" required="" placeholder="Address *" />
-              </div>
-            </div>
-            <h4 class="mb-30">Chi tiết địa chỉ</h4>
-            <div class="row">
-              <div class="form-group col-lg-6">
-                <label for="">Address</label>
-                <input class="form-control my-2" type="text" name="address" value="" placeholder="Address" />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="">City</label>
-                <input class="form-control my-2" type="text" name="city" placeholder="City *" value="" />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="">State</label>
-                <input class="form-control my-2" type="text" name="state" value="" placeholder="State *" />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="">Country</label>
-                <input class="form-control my-2" type="text" name="country" value="" placeholder="Country *" />
-              </div>
             </div>
           </div>
 

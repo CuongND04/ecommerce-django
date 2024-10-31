@@ -2,6 +2,21 @@
 {% load static %}
 {% load humanize %}
 {% block dashboard %}
+  <nav aria-label="breadcrumb" class="bg-light p-3 rounded">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Home</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="#">Core</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="#">Cart Order Items</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">CartOrderItems object (288)</li>
+    </ol>
+  </nav>
+
   <h2 class="fw-semibold">Bảng điều khiển</h2>
   <div style="height: 800px; width: 800px; object-fit: cover;">
     <canvas id="myChart"></canvas>

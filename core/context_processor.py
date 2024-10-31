@@ -23,12 +23,18 @@ def default(request):
   else:
       wishlist = 0
 
-
+# tổng tiền giỏ hàng
+  cart_total_amount = 0
+  if 'cart_data_obj' in request.session:
+      for p_id, item in request.session['cart_data_obj'].items():
+          cart_total_amount += int(item['qty']) * float(item['price'])
+  
   return {
     "categories":categories,
     # "vendors":vendors,
     'wishlist':wishlist,
     "min_max_price":min_max_price,
     "username":username,
+    "cart_total_amount":cart_total_amount
     # "profile":profile
   }

@@ -33,13 +33,15 @@ def index(request):
 
   productSaleOff= Product.objects.all()
   productSaleOff = sorted(productSaleOff, key= lambda Product: -Product.get_percentage())
+  
   context =  {
     "products":products,
     "productFeaturedOne":productFeatured[0:3],
     "productFeaturedTwo":productFeatured[3:6],
     "productLatestOne":productLatest[0:3],
     "productLatestTwo":productLatest[3:6],
-    "productSaleOff":productSaleOff[0:4]
+    "productSaleOff":productSaleOff[0:4],
+    
   }
   return render(request,"core/index.html",context)
 
@@ -314,33 +316,35 @@ def update_cart(request):
 
 
 def save_checkout_info(request):
+  messages.success(request, "Mã giảm giá đã được áp dụng thành công!")
   cart_total_amount = 0
   total_amount = 0
   if request.method == "POST":
-    full_name = request.POST.get("full_name")
-    email = request.POST.get("email")
-    mobile = request.POST.get("mobile")
-    address = request.POST.get("address")
-    city = request.POST.get("city")
-    state = request.POST.get("state")
-    country = request.POST.get("country")
+    # full_name = request.POST.get("full_name")
+    # email = request.POST.get("email")
+    # mobile = request.POST.get("mobile")
+    # address = request.POST.get("address")
+    print('đây là phương thức post')
+    # city = request.POST.get("city")
+    # state = request.POST.get("state")
+    # country = request.POST.get("country")
 
-    print(full_name)
-    print(email)
-    print(mobile)
-    print(address)
-    print(city)
-    print(state)
-    print(country)
+    # print("full_name",full_name)
+    # print(email)
+    # print(mobile)
+    # print(address)
+    # print(city)
+    # print(state)
+    # print(country)
 
     # gán các thông tin lấy được vào session
-    request.session['full_name'] = full_name
-    request.session['email'] = email
-    request.session['mobile'] = mobile
-    request.session['address'] = address
-    request.session['city'] = city
-    request.session['state'] = state
-    request.session['country'] = country
+    # request.session['full_name'] = full_name
+    # request.session['email'] = email
+    # request.session['mobile'] = mobile
+    # request.session['address'] = address
+    # request.session['city'] = city
+    # request.session['state'] = state
+    # request.session['country'] = country
 
 
     # Nếu có dữ liệu giỏ hàng cart_data trong session
@@ -353,34 +357,34 @@ def save_checkout_info(request):
 
       request.session['total_amount'] = total_amount
 
-      full_name = request.session['full_name']
-      email = request.session['email']
-      phone = request.session['mobile']
-      address = request.session['address']
-      city = request.session['city']
-      state = request.session['state']
-      country = request.session['country']
+      # full_name = request.session['full_name']
+      # email = request.session['email']
+      # phone = request.session['mobile']
+      # address = request.session['address']
+      # city = request.session['city']
+      # state = request.session['state']
+      # country = request.session['country']
 
-      # Create ORder Object
+      # Create ORder
       order = CartOrder.objects.create(
           user=request.user,
           price=total_amount,
-          full_name=full_name,
-          email=email,
-          phone=phone,
-          address=address,
-          city=city,
-          state=state,
-          country=country,
+          full_name=request.user.profile.full_name,
+          email=request.user.email,
+          phone=request.user.profile.phone,
+          address=request.user.profile.address,
+          # city=city,
+          # state=state,
+          # country=country,
       )
 
-      del request.session['full_name']
-      del request.session['email']
-      del request.session['mobile']
-      del request.session['address']
-      del request.session['city']
-      del request.session['state']
-      del request.session['country']
+      # del request.session['full_name']
+      # del request.session['email']
+      # del request.session['mobile']
+      # del request.session['address']
+      # del request.session['city']
+      # del request.session['state']
+      # del request.session['country']
 
       # Getting total amount for The Cart
       for p_id, item in request.session['cart_data_obj'].items():

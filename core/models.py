@@ -20,11 +20,8 @@ STATUS_CHOICE = (
 
 
 STATUS = (
-    ("draft", "Draft"),
-    ("disabled", "Disabled"),
-    ("rejected", "Rejected"),
-    ("in_review", "In Review"),
-    ("published", "Published"),
+    ("in_review", "Xem xét"),
+    ("published", "công khai"),
 )
 
 

@@ -39,12 +39,12 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-6 col-md-6">
-              <div class="header__top__left">
-                <ul>
+              <div class="header__top__left mt-1" style="width: 800px;">
+                <ul class="d-flex align-text-bottom">
                   <li>
-                    <i class="fa fa-envelope"></i> hello@colorlib.com
+                    <i class="fa fa-envelope"></i> ctsv@ptit.edu.vn
                   </li>
-                  <li>Free Shipping for all Order of $99</li>
+                  <li>Vận chuyển miễn phí toàn quốc cho mọi đơn hàng – Đừng bỏ lỡ!</li>
                 </ul>
               </div>
             </div>
@@ -54,7 +54,7 @@
                   <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                   <a href="#"><i class="fa-brands fa-twitter"></i></a>
                   <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                  <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                  {% comment %} <a href="#"><i class="fa-brands fa-pinterest-p"></i></a> {% endcomment %}
                 </div>
                 {% comment %} <div class="header__top__right__language">
                   <img src="{% static 'assets/img/language.png' %}" alt="" />
@@ -87,7 +87,7 @@
                     </div>
                   </div> {% endcomment %}
                   <div class="menu-container dropdown-center">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Xin chào <strong>{{ username }}</strong></button>
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Xin chào <strong>{{ request.user.profile.full_name }}</strong></button>
                     <ul class="dropdown-menu">
                       <li>
                         <a class="dropdown-item" href="{% url 'dashboard:index' %}">Tài khoản</a>
@@ -181,7 +181,7 @@
                 </li>
               </ul>
               <div class="header__cart__price">
-                item: <span>$150.00</span>
+                Giỏ hàng: <span>{{ cart_total_amount|intcomma }}đ</span>
               </div>
             </div>
           </div>
@@ -253,13 +253,13 @@
               <div class="footer__about__logo">
                 <a href="{% url 'core:index' %}"><img src="{% static 'assets/img/logo.png' %}" alt="" /></a>
               </div>
-              <!--                             
+              <!--                                                       
               <ul>
                 <li>Address: 60-49 Road 11378 New York</li>
                 <li>Phone: +65 11.188.888</li>
                 <li>Email: hello@colorlib.com</li>
               </ul>
-                                           -->
+                                                                     -->
             </div>
           </div>
           <div class="col-lg-7 col-md-12">

@@ -46,7 +46,7 @@ def login_view(request):
 
             if user is not None:
                 login(request, user)
-                messages.success(request, "Bạn vừa đăng nhập thành công.")
+                messages.success(request, "Chào mừng bạn! Đăng nhập thành công, cùng bắt đầu nào!")
                 next_url = request.GET.get("next", 'core:index')
                 return redirect(next_url)
             else:
@@ -63,10 +63,11 @@ def login_view(request):
 
 def logout_view(request):
    logout(request)
-   messages.success(request,"Bạn đã đăng xuất.")
+  #  messages.success(request,"Bạn đã thoát khỏi tài khoản. Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!")
    return redirect("userauths:sign-in")
 
 def profile_update(request):
+    user_profile = Profile.objects.get(user=request.user)
     profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
       form = ProfileForm(request.POST, request.FILES, instance=profile)
@@ -81,6 +82,7 @@ def profile_update(request):
     print("form:",form)
     context = {
       "form": form,
+      "user_profile": user_profile,
       "profile": profile,
       'active_section': 'edit_profile'
     }
