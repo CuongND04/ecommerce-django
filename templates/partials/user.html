@@ -30,19 +30,21 @@
     <style>
       .sidebar {
         height: 100vh;
-        background-color: #343a40;
+        background-color: white;
         color: white;
         padding-top: 20px;
+        border: 1px solid #ededed;
       }
       .sidebar a {
-        color: white;
+        color: black;
         padding: 10px 15px;
         display: block;
         text-decoration: none;
       }
       .sidebar a:hover {
-        background-color: #495057;
+        background-color: #198754;
         color: #fff;
+        border-radius: 5px;
       }
       .content {
         padding: 20px;
@@ -71,16 +73,16 @@
         <!-- Sidebar -->
         <div class="col-md-3 col-lg-2 sidebar" style="height: inherit;min-height: 100vh;">
           {% comment %} <h5 class="text-center">Hoạt động</h5> {% endcomment %}
-          <a class="{% if active_section == 'index' %}bg-success border rounded{% endif %}" href="{% url 'dashboard:index' %}" onclick="">Bảng điều khiển</a>
-          <a class="{% if active_section == 'profile' or active_section == 'edit_profile' %}bg-success border rounded{% endif %}" href="{% url 'dashboard:profile' %}" onclick="">Thông tin</a>
-          <a class="{% if active_section == 'order' or active_section == 'order_detail' %}bg-success border rounded{% endif %}" href="{% url 'dashboard:order' %}" onclick="">Đơn hàng</a>
-          <a class="{% if active_section == 'address' %}bg-success border rounded{% endif %}" href="{% url 'dashboard:address' %}" onclick="">Địa chỉ</a>
+          <a class="{% if active_section == 'index' %}bg-success border rounded text-white{% endif %}" href="{% url 'dashboard:index' %}" onclick="">Bảng điều khiển</a>
+          <a class="{% if active_section == 'profile' or active_section == 'edit_profile' %}bg-success border rounded text-white{% endif %}" href="{% url 'dashboard:profile' %}" onclick="">Thông tin</a>
+          <a class="{% if active_section == 'order' or active_section == 'order_detail' %}bg-success border rounded text-white{% endif %}" href="{% url 'dashboard:order' %}" onclick="">Đơn hàng</a>
+          <a class="{% if active_section == 'address' %}bg-success border rounded text-white{% endif %}" href="{% url 'dashboard:address' %}" onclick="">Địa chỉ</a>
           <a href="#" onclick="">Liên hệ</a>
           <a href="{% url 'core:index' %}">Trở về cửa hàng</a>
         </div>
 
         <!-- Content Area -->
-        <div class="col-md-9 col-lg-10 content">
+        <div class="col-md-9 col-lg-10 content bg-body-tertiary">
           <div id="profile" class="section-content {% if active_section == 'index' %}active-section{% endif %}">
             {% block dashboard %}
 
@@ -160,13 +162,13 @@
       const data = {
         labels: labels,
         datasets: [{
-          label: 'Đơn hàng',
+          label: 'Sô lượng đơn hàng đã đặt trong tháng',
           backgroundColor: [
            
-            'rgba(75, 192, 192, 0.8)',
+            'rgba(25, 135, 84,0.5)',
           ],
           borderColor: [
-            'rgba(75, 192, 192, 1)',
+            'rgba(25, 135, 84,0.9)',
 
           ],
           borderWidth: 2,
@@ -178,7 +180,7 @@
 
 
       const config = {
-        type: 'line',
+        type: 'bar',
         data: data,
         options: {
           tooltips: {enabled: false},
@@ -198,7 +200,10 @@
           },
           scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1 // Tùy chỉnh khoảng cách số nguyên giữa các giá trị
+              }
             }
           }
         }

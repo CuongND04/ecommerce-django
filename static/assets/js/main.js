@@ -1,3 +1,37 @@
+function showDiscountNotification() {
+    console.log("hehe")
+    // Cài đặt vị trí thông báo
+    message = "Laptop Acer đang giảm giá sốc!"
+    alertify.set('notifier', 'position', 'bottom-left');
+    let duration = 0;
+
+
+    // Tạo thông báo tùy chỉnh
+
+    alertify.notify(`
+        <div class="custom-alertify" style="width: 420px;height:130px;padding:5px;" >
+            
+            <img style="width: 100px;height:100px;"  src="https://res.cloudinary.com/dc4bgvfbj/image/upload/v1730446605/fresh_mart/dufkjrxyegjamdcxl13o.jpg" class="alertify-icon" />
+            <div class="alertify-content">
+                <div class="countdown-container">
+                    <div class="countdown">
+                        Còn
+                        <p id="hours"></p>
+                        <span>giờ</span>
+                        <p id="minutes"></p>
+                        <span>phút</span>
+                        <p id="seconds"></p>
+                        <span>giây</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-bolt" style="color: #ffa53d;"></i>
+                <strong>${message}</strong>
+                <a style="margin-top:5px; margin-left:90px;" href="http://127.0.0.1:8000/products/4cgb3d5f1d/" class="btn btn-primary">Xem ngay</a></div>
+            <div class="progress-bar" style="animation-duration: ${duration}s;"></div>
+        </div>
+    `, 'custom', duration).dismissOthers();
+}
+
 
 // hiển thị section
 function showSection(sectionId) {
@@ -292,7 +326,7 @@ $("#commentForm").submit(function (e) {
         success: function (res) {
             console.log("Comment Saved to DB...");
             if (res.bool == true) {
-                $("#review-res").html("Review added successfully.")
+                $("#review-res").html("Đã thêm bình luận của bạn")
                 $(".hide-comment-form").hide()
                 $(".add-review").hide()
                 let rating = "";

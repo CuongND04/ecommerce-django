@@ -268,7 +268,7 @@ def cart_view(request):
           cart_total_amount += int(item['qty']) * float(item['price'])
       return render(request, "core/cart.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
   else:
-      messages.warning(request, "Your cart is empty")
+      messages.warning(request, "Giỏ hàng của bạn hiện đang trống.")
       return redirect("core:index")
   
 def delete_item_from_cart(request):
@@ -316,7 +316,7 @@ def update_cart(request):
 
 
 def save_checkout_info(request):
-  messages.success(request, "Mã giảm giá đã được áp dụng thành công!")
+  messages.success(request, "Đặt hàng thành công!")
   cart_total_amount = 0
   total_amount = 0
   if request.method == "POST":

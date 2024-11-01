@@ -18,7 +18,9 @@ def register_view(request):
       messages.success(request,f"Chúc mừng {username}, tài khoản của bạn đã được tạo thành công. ")
 
       new_user = authenticate(username=form.cleaned_data['email'],password=form.cleaned_data['password1']) # Xác thực thông tin đăng nhập 
+      
       login(request,new_user) #  Nếu xác thực thành công, người dùng sẽ được đăng nhập
+      
       return redirect("core:index")
   else:
     form = UserRegisterForm()

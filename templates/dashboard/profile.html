@@ -2,6 +2,27 @@
 {% load static %}
 {% load humanize %}
 {% block profile %}
+  <!-- Breadcrumb Section Begin -->
+  <section class="border-bottom border-success mb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb d-flex align-items-center m-0" style="height: 60px;">
+              <li class="breadcrumb-item">
+                <i class="fa-solid fa-house-chimney text-success"></i>
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Tài khoản</a>
+              </li>
+              <li class="breadcrumb-item active text-uppercase" aria-current="page">Thông tin</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
   <h2 class="fw-semibold">Thông tin</h2>
 
   <section>

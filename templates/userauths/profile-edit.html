@@ -1,6 +1,30 @@
 {% extends 'partials/user.html' %}
 {% load static %}
 {% block edit_profile %}
+  <!-- Breadcrumb Section Begin -->
+  <section class="border-bottom border-success mb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb d-flex align-items-center m-0" style="height: 60px;">
+              <li class="breadcrumb-item">
+                <i class="fa-solid fa-house-chimney text-success"></i>
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Tài khoản</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Thông tin</a>
+              </li>
+              <li class="breadcrumb-item active text-uppercase" aria-current="page">Chỉnh sửa thông tin</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
   <h2 class="fw-semibold">Chỉnh sửa thông tin</h2>
   <hr />
   <form class="row" method="post" enctype="multipart/form-data">
@@ -14,7 +38,7 @@
           <img src="{% static 'assets/img/Default_pfp.svg.png' %}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
         {% endif %}
 
-        <h6>Thay ảnh đại diện</h6>
+        <h6 class="mt-3">Thay ảnh đại diện</h6>
         {{ form.image }}
       </div>
     </div>
@@ -25,7 +49,7 @@
 
       <div class="form-horizontal" role="form">
         <div class="form-group">
-          <label class="col-lg-3 control-label">First name:</label>
+          <label class="col-lg-3 control-label">Tên đầy đủ:</label>
           <div class="col-lg-8">{{ form.full_name }}</div>
         </div>
         <div class="form-group">
@@ -33,7 +57,7 @@
           <div class="col-lg-8">{{ form.bio }}</div>
         </div>
         <div class="form-group">
-          <label class="col-lg-3 control-label">Phone:</label>
+          <label class="col-lg-3 control-label">Số điện thoại:</label>
           <div class="col-lg-8">{{ form.phone }}</div>
         </div>
 

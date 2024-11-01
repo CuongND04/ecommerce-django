@@ -143,7 +143,7 @@
             </div>
           </div>
         </div>
-        <!--                    
+        <!--                                                                          
         <div class="col-lg-12">
           <div class="product__details__tab">
             <nav>
@@ -165,7 +165,7 @@
                       <h4 class="fw-500">Customer reviews</h4>
                       <div class="d-flex mb-30">
                         <p class="text-warning">★★★★☆</p>
-                        <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} out of 5.0</p>
+                        <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
                       </div>
                     </div>
                   </div>
@@ -258,11 +258,154 @@
             </div>
           </div>
         </div>
-                            -->
+                                                                                  -->
         <div class="bg-white p-2 m-5">
           <div class="tab-pane fade show active text-center" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
             <h6 class="d-inline-flex mb-3 px-2 py-1 fw-semibold text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 fs-2">Thông số kỹ thuật</h6>
             <p>{{ product.description|safe }}</p>
+          </div>
+        </div>
+        <div class="bg-white p-2 m-5">
+          <div class="col-12">
+            <div class="col-12 d-inline-block my-5 me-5">
+              <div class="review-title">
+                <h4 class="fw-500 mb-3">Đánh giá Laptop {{ product.title }}</h4>
+                <div class="d-flex mb-30">
+                  <div class="rating">
+                    {% if average_rating.rating >= 5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 4.5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star-half-stroke" style="color: #ffb83d;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 4 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 3.5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star-half-stroke" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 3 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 2.5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star-half-stroke" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 2 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 1.5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star-half-stroke" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 1 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% else %}
+                      Không có đánh giá
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-title">
+              {% comment %} <h4 class="fw-500">Customer questions & answers</h4> {% endcomment %}
+            </div>
+
+            <div class="review-people">
+              <ul class="review-list">
+                {% for r in reviews %}
+                  <li>
+                    <div class="people-box">
+                      <div>
+                        <div class="people-image">
+                          <img src="https://static-00.iconduck.com/assets.00/avatar-default-icon-1975x2048-2mpk4u9k.png" class="img-fluid blur-up lazyload" alt="" />
+                        </div>
+                      </div>
+
+                      <div class="people-comment">
+                        <a class="name" href="javascript:void(0)">{{ r.user.username|title }}</a>
+                        <div class="date-time">
+                          <h6 class="text-content">{{ r.date|date:'h:i A, d/m/y' }}</h6>
+
+                          <div class="product-rating">
+                            {% comment %} {% Star = { 1: '★☆☆☆☆', 2: '★★☆☆☆', 3: '★★★☆☆', 4: '★★★★☆', 5: '★★★★★' } n=r.rating %} {% endcomment %}
+                            <ul class="rating">
+                              {% for s in r.rating|ljust:r.rating %}
+                                <i class="fas fa-star text-warning"></i>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="reply">
+                          <p>{{ r.review }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% if make_review == True %}
+              {% if request.user.is_authenticated %}
+                <div class="col-6 d-inline-block my-5">
+                  <div class="review-title">
+                    <h4 class="fw-500 add-review">Viết đánh giá</h4>
+                    <strong class="text-success" id="review-res"></strong>
+                  </div>
+
+                  <form class="hide-comment-form" action="{% url 'core:ajax-add-review' product.id %}" id="commentForm" method="POST">
+                    {% csrf_token %}
+                    <div class="row g-4">
+                      <div class="col-md-12">
+                        <div class="form-floating theme-form-floating">{{ review_form.review }}</div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-floating theme-form-floating">{{ review_form.rating }}</div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-3">Gửi</button>
+                  </form>
+                </div>
+              {% endif %}
+            {% endif %}
           </div>
         </div>
       </div>
@@ -276,7 +419,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="section-title related__product__title">
-            <h2>Related Product</h2>
+            <h2>Sản phẩm liên quan</h2>
           </div>
         </div>
       </div>

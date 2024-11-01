@@ -2,26 +2,29 @@
 {% load static %}
 {% load humanize %}
 {% block address %}
-  <div>
-    <form class="mb-4" method="POST">
-      {% csrf_token %}
-      <div class="card-hdeader mb-2">
-        <h5 style="font-weight: 700;">Thêm địa chỉ mới</h5>
-      </div>
+  <!-- Breadcrumb Section Begin -->
+  <section class="border-bottom border-success mb-3">
+    <div class="container">
       <div class="row">
-        <div class="form-group col-md-6">
-          <input placeholder="Address" required="" class="form-control" name="address" type="text" />
-        </div>
-        <div class="form-group col-md-6">
-          <input placeholder="Phone" required="" class="form-control" name="mobile" />
-        </div>
-        <div class="col-md-12 mt-3">
-          <button type="submit" class="btn btn-success" name="submit" value="Submit">Tạo</button>
+        <div class="col-lg-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb d-flex align-items-center m-0" style="height: 60px;">
+              <li class="breadcrumb-item">
+                <i class="fa-solid fa-house-chimney text-success"></i>
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="text-uppercase text-success fw-bold" href="{% url 'core:index' %}">Tài khoản</a>
+              </li>
+              <li class="breadcrumb-item active text-uppercase" aria-current="page">Địa chỉ</li>
+            </ol>
+          </nav>
         </div>
       </div>
-    </form>
-  </div>
-  <h2 class="fw-semibold">Thông tin địa chỉ</h2>
+    </div>
+  </section>
+
+  <h2 class="fw-semibold mb-3">Thông tin địa chỉ</h2>
 
   <div class="container border">
     <table class="table align-middle mb-0 bg-white">
@@ -50,15 +53,35 @@
             <td class="">
               {% if a.status %}
                 <i data-address-id="{{ a.id }}" class="fa fa-check-circle text-success check{{ a.id }} check"></i>
-                <button type="submit" data-address-id="{{ a.id }}" style="display: none;" class="btn btn-success   make-default-address button{{ a.id }} action_btn">Make Default</button>
+                <button type="submit" data-address-id="{{ a.id }}" style="display: none;" class="btn btn-outline-success   make-default-address button{{ a.id }} action_btn">Đặt làm mặc định</button>
               {% else %}
                 <i data-address-id="{{ a.id }}" style="display: none;" class="fa fa-check-circle text-success check check{{ a.id }}"></i>
-                <button type="submit" data-address-id="{{ a.id }}" class="btn btn-success make-default-address button{{ a.id }} action_btn">Make Default</button>
+                <button type="submit" data-address-id="{{ a.id }}" class="btn btn-outline-success make-default-address button{{ a.id }} action_btn">Đặt làm mặc định</button>
               {% endif %}
             </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+  </div>
+
+  <div class="ms-5 mt-4">
+    <form class="mb-4" method="POST">
+      {% csrf_token %}
+      <div class="card-hdeader mb-2">
+        <h5 style="font-weight: 700;">Thêm địa chỉ mới</h5>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <input placeholder="Address" required="" class="form-control" name="address" type="text" />
+        </div>
+        <div class="form-group col-md-6">
+          <input placeholder="Phone" required="" class="form-control" name="mobile" />
+        </div>
+        <div class="col-md-12 mt-3">
+          <button type="submit" class="btn btn-success" name="submit" value="Submit">Tạo</button>
+        </div>
+      </div>
+    </form>
   </div>
 {% endblock %}

@@ -4243,3 +4243,19 @@ ol {
     width: 0;
   }
 }
+
+.countdown-container {
+  text-align: center;
+}
+
+.countdown p {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: black;
+}
+
+.countdown span {
+  font-size: 20px;
+}

@@ -43,9 +43,9 @@ def customer_dashboard(request):
   orders = CartOrder.objects.annotate(month=ExtractMonth("order_date")).values("month").annotate(count=Count("id")).values("month", "count")
   month = []
   total_orders = []
-
+  vietnamese_months = ["", "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]
   for i in orders:
-    month.append(calendar.month_name[i["month"]])
+    month.append(vietnamese_months[i["month"]])
     total_orders.append(i["count"])
 
 
