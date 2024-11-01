@@ -60,13 +60,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-5">
-          <div class="sidebar">
+          <div class="sidebar bg-body-tertiary p-3 rounded-2">
             <div class="sidebar__item">
-              <h4>Phân loại</h4>
-              <ul>
+              <h4>Thương hiệu</h4>
+              <ul class="ms-3">
                 {% for c in categories %}
-                  <li class="d-inline-block">
-                    <span class="d-inline-block bg-secondary-subtle p-2 my-2" href="#">
+                  <li class="" style="">
+                    <span style="width: 150px;" class="d-inline-block bg-white border  rounded p-2 my-2" href="#">
                       <input data-filter="category" class="form-check-input filter-checkbox" type="checkbox" name="checkbox" id="exampleCheckbox2" value="{{ c.id }}" />
                       {{ c.title }}
                     </span>
@@ -100,7 +100,7 @@
                 </div>
               </div>
             </div>
-            <!--               
+            <!--                        
             <div class="sidebar__item">
               <div class="latest-product__text">
                 <h4>Latest Products</h4>
@@ -135,20 +135,27 @@
                 </div>
               </div>
             </div>
-                           -->
+                                    -->
           </div>
         </div>
 
         <div class="col-lg-9 col-md-7">
           <div class="filter__item">
             <div class="row">
-              <div class="col-lg-4 col-md-5">
+              <div class="col-lg-4 col-md-5 ms-3">
                 <div class="filter__sort">
-                  <span>Sort By</span>
-                  <select>
-                    <option value="0">Default</option>
-                    <option value="0">Default</option>
-                  </select>
+                  <div class="dropdown ml-3">
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sắp xếp theo</a>
+
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=ATOZ">Tên, từ A đến Z</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=ZTOA">Tên, từ Z đến A</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=PRICELOWTOHIGH">Giá, từ thấp đến cao</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=PRICEHOWTOLOW">Giá, từ cao đến thấp</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=NEWPRODUCT">Mới nhất</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=OLDPRODUCT">Cũ nhất</a></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
@@ -230,7 +237,7 @@
               </div>
             {% endfor %}
           </div>
-          <!--              
+          <!--                       
           <div class="product__discount mt-5">
             <div class="section-title product__discount__title">
               <h2>Sale Off</h2>
@@ -275,7 +282,7 @@
               </div>
             </div>
           </div>
-                        -->
+                                 -->
         </div>
       </div>
     </div>

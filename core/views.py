@@ -47,7 +47,7 @@ def index(request):
 
 def product_list_view(request):
   # tìm tất cả sản phẩm được phát hành
-  products = Product.objects.filter(product_status="published")
+  products = Product.objects.filter(product_status="published").order_by("-id")
   # lấy ra sản phẩm mới nhất
   productLatest = Product.objects.order_by('-date')
   # lấy ra các sản phẩm được giảm giá nhiều nhất
@@ -55,6 +55,28 @@ def product_list_view(request):
   productSaleOff = sorted(productSaleOff, key= lambda Product: -Product.get_percentage())
   # for p in productSaleOff[0:4]:
   #   print(p.get_percentage())
+  # ATOZID = request.GET.get('ATOZ')
+  # ZTOAID = request.GET.get('ZTOA')
+  # PRICELOWTOHIGH = request.GET.get('PRICELOWTOHIGH')
+  # PRICEHOWTOLOW = request.GET.get('PRICEHOWTOLOW')
+  # NEWPRODUCT = request.GET.get('NEWPRODUCT')
+  # OLDPRODUCT = request.GET.get('OLDPRODUCT')
+  sort = request.GET.get('sort')
+  print(sort)
+  if sort == "ATOZ":
+    print(1)
+    products = Product.objects.filter(product_status="published").order_by('title')
+  elif sort == "ZTOA":
+    print(2)
+    products = Product.objects.filter(product_status="published").order_by('-title')
+  elif sort =="PRICELOWTOHIGH":
+    products = Product.objects.filter(product_status="published").order_by('price')
+  elif sort =="PRICEHOWTOLOW":
+    products = Product.objects.filter(product_status="published").order_by('-price')
+  elif sort =="NEWPRODUCT":
+    products = Product.objects.filter(product_status="published").order_by('-id')
+  elif sort =="OLDPRODUCT":
+    products = Product.objects.filter(product_status="published").order_by('id')
   context = {
     "products":products,
     "productLatestOne":productLatest[0:3],
