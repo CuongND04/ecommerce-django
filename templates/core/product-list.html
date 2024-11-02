@@ -194,12 +194,12 @@
                   <div class="dropdown ml-3">
                     <a class="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sắp xếp theo</a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=ATOZ">Tên, từ A đến Z</a></li>
-                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=ZTOA">Tên, từ Z đến A</a></li>
-                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=PRICELOWTOHIGH">Giá, từ thấp đến cao</a></li>
-                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=PRICEHOWTOLOW">Giá, từ cao đến thấp</a></li>
-                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=NEWPRODUCT">Mới nhất</a></li>
-                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=OLDPRODUCT">Cũ nhất</a></li>
+                      <li><a id="sort-5"  value="NEWPRODUCT" class="filter-checkbox dropdown-item active-section" onclick="checkSort('sort-5')">Mới nhất</a></li>
+                      <li><a id="sort-6" value="OLDPRODUCT" class="filter-checkbox dropdown-item" onclick="checkSort('sort-6')">Cũ nhất</a></li>
+                      <li><a id="sort-3" value="PRICELOWTOHIGH" class="filter-checkbox dropdown-item" onclick="checkSort('sort-3')">Giá, từ thấp đến cao</a></li>
+                      <li><a id="sort-4" value="PRICEHOWTOLOW" class="filter-checkbox dropdown-item" onclick="checkSort('sort-4')">Giá, từ cao đến thấp</a></li>
+                      <li><a id="sort-1" value="ATOZ" class=" filter-checkbox dropdown-item" onclick="checkSort('sort-1')" >Tên, từ A đến Z</a></li>
+                      <li><a id="sort-2" value="ZTOA" class="filter-checkbox dropdown-item" onclick="checkSort('sort-2')" >Tên, từ Z đến A</a></li>
                     </ul>
                   </div>
                 </div>

@@ -4259,3 +4259,8 @@ ol {
 .countdown span {
   font-size: 20px;
 }
+
+.filter-checkbox.active-section{
+  background-color: #198754;
+  color: white;
+}

@@ -375,16 +375,27 @@ function getParameterByName(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+// hiển thị section
+function checkSort(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.dropdown-item').forEach(function (section) {
+        section.classList.remove('active-section')
+    })
+    // Show the selected section
+    document.getElementById(sectionId).classList.add('active-section')
+}
+
 $(document).ready(function () {
     // lọc sản phẩm
     $(".filter-checkbox").on("click", function () {
         cnt123++;
         console.log("lại chạy vào đây lần thứ", cnt123)
         let filter_object = {}
-        let sortValue = getParameterByName('sort');
+        let sortValue = $('.active-section').attr("value")
+        // let sortValue = getParameterByName('sort');
         let min_price = $('input[name="chk[]"]:checked').attr("min")
         let max_price = $('input[name="chk[]"]:checked').attr("max")
-        // console.log(sortValue)
+        console.log(sortValue)  
         let cpu =  $('input[name="cpu[]"]:checked').attr("value")
         // console.log(cpu)
         let ram =  $('input[name="ram[]"]:checked').attr("value")
