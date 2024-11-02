@@ -172,11 +172,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-  "site_title": "FreshMart Admin",
-  'site_header': "Fresh Mart",
-  'site_brand': "Fresh Mart",
+  "site_title": "LapOne Admin",
+  'site_header': "LapOne",
+  'site_brand': "LapOne",
   'site_logo': "/assets/img/haha.jpg" ,
-  'copyright':"freshmart.com",
+  'copyright':"lapone.com",
   "topmenu_links": [
         # external url that opens in a new window (Permissions can be added)
         {"name": "Back To Store", "url": "http://127.0.0.1:8000/", "new_window": True},

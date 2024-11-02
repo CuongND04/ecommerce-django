@@ -77,6 +77,8 @@ def product_list_view(request):
     products = Product.objects.filter(product_status="published").order_by('-id')
   elif sort =="OLDPRODUCT":
     products = Product.objects.filter(product_status="published").order_by('id')
+  else:
+    products = Product.objects.filter(product_status="published").order_by('-id')
   context = {
     "products":products,
     "productLatestOne":productLatest[0:3],
@@ -230,6 +232,8 @@ def filter_product(request):
       products = Product.objects.filter(product_status="published").order_by('-id')
     elif sort =="OLDPRODUCT":
       products = Product.objects.filter(product_status="published").order_by('id')
+    else:
+      products = Product.objects.filter(product_status="published").order_by('-id')
 
 
     # products = Product.objects.filter(product_status="published").order_by("-id").distinct()
