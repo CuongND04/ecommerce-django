@@ -363,8 +363,6 @@ $("#commentForm").submit(function (e) {
         }
     })
 })
-let cnt123 = 0;
-
 // Hàm để lấy giá trị của một tham số từ URL
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -385,11 +383,32 @@ function checkSort(sectionId) {
     document.getElementById(sectionId).classList.add('active-section')
 }
 
+// Hàm gọi AJAX để lấy tổng giá từ server
+function updateCartTotal() {
+    $.ajax({
+        url: "/get-cart-total", // URL của view tính tổng giá
+        method: "GET",
+        success: function(response) {
+            // Cập nhật tổng giá trên giao diện
+            $('#total-amount').text(response.cart_total_amount.toLocaleString()); // Định dạng số
+        },
+        error: function(xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+
+
 $(document).ready(function () {
+
+    updateCartTotal(); // Gọi khi tải trang
+        
+    // Cập nhật mỗi 5 giây (nếu cần liên tục)
+    setInterval(updateCartTotal, 5000);
+
     // lọc sản phẩm
     $(".filter-checkbox").on("click", function () {
-        cnt123++;
-        console.log("lại chạy vào đây lần thứ", cnt123)
         let filter_object = {}
         let sortValue = $('.active-section').attr("value")
         // let sortValue = getParameterByName('sort');

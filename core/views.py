@@ -627,3 +627,10 @@ def ajax_contact_form(request):
 
     return JsonResponse({"data":data})
 
+
+def get_cart_total(request):
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+    return JsonResponse({'cart_total_amount': cart_total_amount})
