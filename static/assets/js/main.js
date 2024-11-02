@@ -363,20 +363,40 @@ $("#commentForm").submit(function (e) {
         }
     })
 })
+let cnt123 = 0;
+
+// Hàm để lấy giá trị của một tham số từ URL
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    const results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
 $(document).ready(function () {
     // lọc sản phẩm
-    $(".filter-checkbox,#price-filter-btn").on("click", function () {
+    $(".filter-checkbox").on("click", function () {
+        cnt123++;
+        console.log("lại chạy vào đây lần thứ", cnt123)
         let filter_object = {}
-        
+        let sortValue = getParameterByName('sort');
         let min_price = $('input[name="chk[]"]:checked').attr("min")
         let max_price = $('input[name="chk[]"]:checked').attr("max")
-        console.log("min_price",+min_price)
-        console.log("max_price",+max_price)
-
+        // console.log(sortValue)
+        let cpu =  $('input[name="cpu[]"]:checked').attr("value")
+        // console.log(cpu)
+        let ram =  $('input[name="ram[]"]:checked').attr("value")
+        // console.log(ram)
+        let tienich =  $('input[name="tienich[]"]:checked').attr("value")
+        // console.log(tienich)
         filter_object.min_price = +min_price
         filter_object.max_price = +max_price
-
+        filter_object.cpu = cpu
+        filter_object.ram = ram
+        filter_object.tienich = tienich
+        filter_object.sort = sortValue
         $(".filter-checkbox").each(function () {
             let filter_value = $(this).val()
             let filter_key = $(this).data("filter")

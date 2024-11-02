@@ -210,8 +210,29 @@ def filter_product(request):
 
     min_price = request.GET['min_price']
     max_price = request.GET['max_price']
+    cpu = request.GET['cpu']
+    ram = request.GET['ram']
+    tienich = request.GET['tienich']
 
-    products = Product.objects.filter(product_status="published").order_by("-id").distinct()
+    sort = request.GET.get('sort')
+    print("sort",sort)
+    if sort == "ATOZ":
+      print(1)
+      products = Product.objects.filter(product_status="published").order_by('title')
+    elif sort == "ZTOA":
+      print(2)
+      products = Product.objects.filter(product_status="published").order_by('-title')
+    elif sort =="PRICELOWTOHIGH":
+      products = Product.objects.filter(product_status="published").order_by('price')
+    elif sort =="PRICEHOWTOLOW":
+      products = Product.objects.filter(product_status="published").order_by('-price')
+    elif sort =="NEWPRODUCT":
+      products = Product.objects.filter(product_status="published").order_by('-id')
+    elif sort =="OLDPRODUCT":
+      products = Product.objects.filter(product_status="published").order_by('id')
+
+
+    # products = Product.objects.filter(product_status="published").order_by("-id").distinct()
     products = products.filter(price__gte = min_price)
     products = products.filter(price__lte = max_price)
 
@@ -219,6 +240,12 @@ def filter_product(request):
         products = products.filter(category__id__in=categories).distinct() 
       # if len(vendors) > 0:
       #     products = products.filter(vendor__id__in=vendors).distinct() 
+    if cpu:
+      products = products.filter(description__icontains=cpu)
+    if ram:
+      products = products.filter(description__icontains=ram)
+    if tienich:
+      products = products.filter(description__icontains=tienich)
   
     data = render_to_string("core/async/product-list.html", {"products": products})
     return JsonResponse({"data": data})

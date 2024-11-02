@@ -62,12 +62,13 @@
         <div class="col-lg-3 col-md-5">
           <div class="sidebar bg-body-tertiary p-3 rounded-2">
             <div class="sidebar__item">
-              <h4>Thương hiệu</h4>
+              <span class="ms-3 text-capitalize text-dark fw-bold">Thương hiệu</span>
+              <hr>
               <ul class="ms-3">
                 {% for c in categories %}
                   <li class="" style="">
-                    <span style="width: 150px;" class="d-inline-block bg-white border  rounded p-2 my-2" href="#">
-                      <input data-filter="category" class="form-check-input filter-checkbox" type="checkbox" name="checkbox" id="exampleCheckbox2" value="{{ c.id }}" />
+                    <span style="width: 150px;" class="d-inline-block bg-white text-secondary border  rounded p-2 my-2" href="#">
+                      <input data-filter="category" class="form-check-input filter-checkbox " type="checkbox" name="checkbox" id="exampleCheckbox2" value="{{ c.id }}" />
                       {{ c.title }}
                     </span>
                   </li>
@@ -76,24 +77,13 @@
             </div>
 
             <div class="sidebar__item">
-              <h4>Price</h4>
+              <span class="ms-3 text-capitalize text-dark fw-bold">Lọc giá</span>
+              <hr>  
               <div class="sidebar-widget price_range range ms-3">
                 <div class="price-filter mb-20">
                   <div class="price-filter-inner">
-                    <div id="slidder-range" class="mb-20"></div>
-                    {% comment %} <input type="range" name="range" value="{{ min_max_price.price__max }}" value="" class="slider-range" id="range" min="{{ min_max_price.price__min|floatformat:2 }}" max="{{ min_max_price.price__max|floatformat:2 }}" oninput="max_price.value=this.value" /> {% endcomment %}
-                    {% comment %} <div class="" style="width: 100px">
-                      <div class="caption">
-                        From: <strong id="slider-range-value1" class="text-brand">{{ min_max_price.price__min|intcomma }}đ</strong>
-                      </div>
-                      <br />
-                      <div class="caption">
-                        To: <strong id="slider-range-value2" class="text-brand">{{ min_max_price.price__max|intcomma }}đ</strong>
-                      </div>
-                    </div> {% endcomment %}
                     
                     <fieldset id="checkArray">
-                      <input hidden name="chk[]" checked  type="radio" value="10 - 15 triệu" class="form-check-input filter-checkbox" min="0" max="999999999"   ></input>
                       <input name="chk[]"  type="radio" value="Dưới 10 triệu" class="form-check-input filter-checkbox" min="500000" max="10000000"   ><span class="ms-2">Dưới 10 triệu</span></input>
                       <br>
                       <input name="chk[]"  type="radio" value="10 - 15 triệu" class="form-check-input filter-checkbox" min="10000001" max="15000000"   ><span class="ms-2">10 - 15 triệu</span></input>
@@ -103,6 +93,8 @@
                       <br>
                       
                       <input name="chk[]"  type="radio" value="Trên 20 triệu" class="form-check-input filter-checkbox" min="20000001" max="999999999"   ><span class="ms-2">Trên 20 triệu</span></input>
+                      <br>
+                      <input  name="chk[]" checked  type="radio" value="10 - 15 triệu" class="form-check-input filter-checkbox" min="0" max="999999999"   ><span class="ms-2">Tất cả</span></input>
                     </fieldset>
                     
                   </div>
@@ -113,53 +105,94 @@
                 </div>
               </div>
             </div>
-            <!--                        
-            <div class="sidebar__item">
-              <div class="latest-product__text">
-                <h4>Latest Products</h4>
 
-                <div class="latest-product__slider owl-carousel">
-                  <div class="latest-prdouct__slider__item">
-                    {% for p in productLatestOne %}
-                      <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
-                        <div class="latest-product__item__pic">
-                          <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
-                        </div>
-                        <div class="latest-product__item__text">
-                          <h6>{{ p.title|truncatechars:27 }}</h6>
-                          <span>${{ p.price }}</span>
-                        </div>
-                      </a>
-                    {% endfor %}
-                  </div>
-                  <div class="latest-prdouct__slider__item">
-                    {% for p in productLatestTwo %}
-                      <a href="{% url 'core:product-detail' p.pid %}" class="latest-product__item">
-                        <div class="latest-product__item__pic">
-                          <img style="height: 110px;width: 110px;object-fit: contain;" src="{{ p.image.url }}" alt="" />
-                        </div>
-                        <div class="latest-product__item__text">
-                          <h6>{{ p.title|truncatechars:27 }}</h6>
-                          <span>${{ p.price }}</span>
-                        </div>
-                      </a>
-                    {% endfor %}
+            <div class="sidebar__item">
+              <span class="ms-3 text-capitalize text-dark fw-bold">Công nghệ CPU</span>
+              <hr>  
+              <div class="sidebar-widget price_range range ms-3">
+                <div class="price-filter mb-20">
+                  <div class="price-filter-inner">
+                    
+                    <fieldset id="checkArray1">
+                      <input name="cpu[]"  type="radio"  class="form-check-input filter-checkbox" value="intel core"    ><span class="ms-2">Intel Core i</span></input>
+                      <br>
+                      <input name="cpu[]"  type="radio"  class="form-check-input filter-checkbox" value="amd ryzen"    ><span class="ms-2">AMD</span></input>
+                      <br>
+                      <input checked name="cpu[]"  type="radio"  class="form-check-input filter-checkbox" value=""    ><span class="ms-2">Tất cả</span></input>
+                      <br>
+                    </fieldset>
+                    
                   </div>
                 </div>
+                
               </div>
-            </div>
-                                    -->
+            </div> 
+
+            <div class="sidebar__item">
+              <span class="ms-3 text-capitalize text-dark fw-bold">RAM</span>
+              <hr>  
+              <div class="sidebar-widget price_range range ms-3">
+                <div class="price-filter mb-20">
+                  <div class="price-filter-inner">
+                    
+                    <fieldset id="checkArray2">
+                      <input name="ram[]"  type="radio"  class="form-check-input filter-checkbox" value="4 GB"    ><span class="ms-2">4 GB</span></input>
+                      <br>
+                      <input name="ram[]"  type="radio"  class="form-check-input filter-checkbox" value="8 GB"    ><span class="ms-2">8 GB</span></input>
+                      <br>
+                      <input name="ram[]"  type="radio"  class="form-check-input filter-checkbox" value="16 GB"    ><span class="ms-2">16 GB</span></input>
+                      <br>
+                      <input name="ram[]"  type="radio"  class="form-check-input filter-checkbox" value="32 GB"    ><span class="ms-2">32 GB</span></input>
+                      <br>
+                      <input checked name="ram[]"  type="radio"  class="form-check-input filter-checkbox" value=""    ><span class="ms-2">Tất cả</span></input>
+                      <br>
+                    </fieldset>
+                  </div>
+                </div>
+                
+              </div>
+            </div> 
+
+            <div class="sidebar__item">
+              <span class="ms-3 text-capitalize text-dark fw-bold">Tiện ích</span>
+              <hr>  
+              <div class="sidebar-widget price_range range ms-3">
+                <div class="price-filter mb-20">
+                  <div class="price-filter-inner">
+                    
+                    <fieldset id="checkArray3">
+                      <input name="tienich[]"  type="radio"  class="form-check-input filter-checkbox" value="Bảo mật vân tay"    ><span class="ms-2">Bảo mật vân tay</span></input>
+                      <br>
+                      <input name="tienich[]"  type="radio"  class="form-check-input filter-checkbox" value="Bảo mật khuôn mặt"    ><span class="ms-2">Bảo mật khuôn mặt</span></input>
+                      <br>
+                      <input name="tienich[]"  type="radio"  class="form-check-input filter-checkbox" value="Có bàn phím số"    ><span class="ms-2">Có bàn phím số</span></input>
+                      <br>
+                      <input name="tienich[]"  type="radio"  class="form-check-input filter-checkbox" value="Có đèn bàn phím"    ><span class="ms-2">Có đèn bàn phím</span></input>
+                      <br>
+                      <input checked name="tienich[]"  type="radio"  class="form-check-input filter-checkbox" value=""    ><span class="ms-2">Không</span></input>
+                      <br>
+                    </fieldset>
+                  </div>
+                </div>
+                
+              </div>
+            </div> 
+
           </div>
         </div>
 
         <div class="col-lg-9 col-md-7">
           <div class="filter__item">
             <div class="row">
-              <div class="col-lg-4 col-md-5 ms-3">
+              <div class="col-lg-7 col-md-4 fs-2">
+                <div class="filter__found text-uppercase fw-semibold text-start ms-2">
+                  Danh sách sản phẩm
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-5 ms-3 text-end">
                 <div class="filter__sort">
                   <div class="dropdown ml-3">
                     <a class="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sắp xếp theo</a>
-
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=ATOZ">Tên, từ A đến Z</a></li>
                       <li><a class="dropdown-item" href="http://127.0.0.1:8000/products/?sort=ZTOA">Tên, từ Z đến A</a></li>
@@ -171,11 +204,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4">
-                <div class="filter__found">
-                  <h6><span>{{ products.count }}</span>sản phẩm</h6>
-                </div>
-              </div>
+              
             </div>
           </div>
 
@@ -209,14 +238,14 @@
                             {% comment %} <span>310</span> {% endcomment %}
                           </div>
                           <div class="mt-1 mb-0 text-muted small">
-                            <span>Màn hình: 15.6"</span>
+                            <span>Full HD (1920 x 1080)</span>
                             <span class="text-primary">•</span>
                             <span>Card: Intel Iris Xe</span>
-                            <span class="text-primary">•</span>
-                            <span>CPU: i5,1334U,1.3GHz<br /></span>
+                            
                           </div>
                           <div class="mb-2 text-muted small">
-                            <span>Pin: 3-cell, 41Wh</span>
+                            <span>Pin: 3-cell, 41Wh</span><span class="text-primary">•</span>
+                            <span>Khối lượng: 1.47 kg<br /></span>
                           </div>
                           <p class="text-truncate mb-4 mb-md-0">Các bước để kiểm tra cấu hình laptop {{ p.category }} · 1. Kiểm tra cấu hình laptop Dell Sử dụng</p>
                         </div>
@@ -250,52 +279,7 @@
               </div>
             {% endfor %}
           </div>
-          <!--                       
-          <div class="product__discount mt-5">
-            <div class="section-title product__discount__title">
-              <h2>Sale Off</h2>
-            </div>
-            <div class="row">
-              <div class="product__discount__slider owl-carousel">
-                {% for p in productSaleOff %}
-                  <div class="">
-                    <div class="product__discount__item">
-                      <div class="product__discount__item__pic set-bg" data-setbg="{{ p.image.url }}">
-                        <div class="product__discount__percent">-{{ p.get_percentage|floatformat:0 }}%</div>
-                        <ul class="featured__item__pic__hover">
-                          <li>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                          </li>
-                          <li>
-                            <a href="{% url 'core:product-detail' p.pid %}"><i class="fa-solid fa-eye"></i></a>
-                          </li>
-                          <li>
-                            <input type="hidden" value="1" class="product-quantity-{{ p.id }}" />
-                            <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}" />
-                            <input type="hidden" class="product-image-{{ p.id }}" value="{{ p.image.url }}" />
-                            <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}" />
-                            <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}" />
-                            <button data-index="{{ p.id }}" class="bg-transparent border border-0 add add-to-cart-btn" id="add-to-cart-btn">
-                              {% comment %}thêm thuộc tính đê vô hiệu hóa href{% endcomment %}
-                              <a href="#" style="pointer-events: none; color: inherit; text-decoration: none;"><i class="fa fa-shopping-cart"></i></a>
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="product__discount__item__text">
-                        <span>{{ p.category }}</span>
-                        <h5><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h5>
-                        <div class="product__item__price">
-                          VNĐ{{ p.price }} <span>VNĐ{{ p.old_price }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-                                 -->
+          
         </div>
       </div>
     </div>
