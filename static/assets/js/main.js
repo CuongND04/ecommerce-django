@@ -368,22 +368,24 @@ $(document).ready(function () {
     // lọc sản phẩm
     $(".filter-checkbox,#price-filter-btn").on("click", function () {
         let filter_object = {}
+        
+        let min_price = $('input[name="chk[]"]:checked').attr("min")
+        let max_price = $('input[name="chk[]"]:checked').attr("max")
+        console.log("min_price",+min_price)
+        console.log("max_price",+max_price)
 
-        let min_price = $("#max_price").attr("min")
-        let max_price = $("#max_price").val()
-
-
-        filter_object.min_price = min_price
-        filter_object.max_price = max_price
+        filter_object.min_price = +min_price
+        filter_object.max_price = +max_price
 
         $(".filter-checkbox").each(function () {
             let filter_value = $(this).val()
             let filter_key = $(this).data("filter")
             filter_object[filter_key] = Array.from(document.querySelectorAll('input[data-filter=' + filter_key + ']:checked')).map(function (element) {
+                // console.log(filter_key,element.value)
                 return element.value
             })
         })
-        console.log(filter_object)
+        console.log("filter_object",filter_object)
         $.ajax({
             url: "/filter-products",
             data: filter_object,
@@ -395,36 +397,36 @@ $(document).ready(function () {
             }
         })
     })
-    // lọc theo giá cao nhất
-    $("#max_price").on("blur", function () {
-        let min_price = $(this).attr("min")
-        let max_price = $(this).attr("max")
-        let current_price = $(this).val()
+    // lọc theo giá cao nhất, khi nó cho số không hợp lệ thì hiện thông báo
+    // $("#max_price").on("blur", function () {
+    //     let min_price = $(this).attr("min")
+    //     let max_price = $(this).attr("max")
+    //     let current_price = $(this).val()
 
-        // console.log("Current Price is:", current_price);
-        // console.log("Max Price is:", max_price);
-        // console.log("Min Price is:", min_price);
+    //     console.log("Current Price is:", current_price);
+    //     console.log("Max Price is:", max_price);
+    //     console.log("Min Price is:", min_price);
 
-        if (current_price < parseInt(min_price) || current_price > parseInt(max_price)) {
-            // console.log("Price Error Occured");
+    //     if (current_price < parseInt(min_price) || current_price > parseInt(max_price)) {
+    //         // console.log("Price Error Occured");
 
-            min_price = Math.round(min_price * 100) / 100
-            max_price = Math.round(max_price * 100) / 100
+    //         min_price = Math.round(min_price * 100) / 100
+    //         max_price = Math.round(max_price * 100) / 100
 
 
-            // console.log("Max Price is:", min_price);
-            // console.log("Min Price is:", max_price);
+    //         // console.log("Max Price is:", min_price);
+    //         // console.log("Min Price is:", max_price);
 
-            alert("Price must between $" + min_price + ' and $' + max_price)
-            $(this).val(min_price)
-            $('#range').val(min_price)
+    //         alert("Price must between $" + min_price + ' and $' + max_price)
+    //         $(this).val(min_price)
+    //         $('#range').val(min_price)
 
-            $(this).focus()
+    //         $(this).focus()
 
-            return false
-        }
+    //         return false
+    //     }
 
-    })
+    // })
     // thêm sản phâm vào giỏ hàng
     $(".add-to-cart-btn").on("click", function () {
         console.log("1")

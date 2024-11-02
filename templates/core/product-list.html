@@ -77,12 +77,12 @@
 
             <div class="sidebar__item">
               <h4>Price</h4>
-              <div class="sidebar-widget price_range range">
+              <div class="sidebar-widget price_range range ms-3">
                 <div class="price-filter mb-20">
                   <div class="price-filter-inner">
                     <div id="slidder-range" class="mb-20"></div>
-                    <input type="range" name="range" value="{{ min_max_price.price__max }}" value="" class="slider-range" id="range" min="{{ min_max_price.price__min|floatformat:2 }}" max="{{ min_max_price.price__max|floatformat:2 }}" oninput="max_price.value=this.value" />
-                    <div class="" style="width: 100px">
+                    {% comment %} <input type="range" name="range" value="{{ min_max_price.price__max }}" value="" class="slider-range" id="range" min="{{ min_max_price.price__min|floatformat:2 }}" max="{{ min_max_price.price__max|floatformat:2 }}" oninput="max_price.value=this.value" /> {% endcomment %}
+                    {% comment %} <div class="" style="width: 100px">
                       <div class="caption">
                         From: <strong id="slider-range-value1" class="text-brand">{{ min_max_price.price__min|intcomma }}đ</strong>
                       </div>
@@ -90,12 +90,25 @@
                       <div class="caption">
                         To: <strong id="slider-range-value2" class="text-brand">{{ min_max_price.price__max|intcomma }}đ</strong>
                       </div>
-                    </div>
-                    <input type="number" name="" value="{{ min_max_price.price__max }}" id="max_price" min="{{ min_max_price.price__min|floatformat:2 }}" max="{{ min_max_price.price__max|floatformat:2 }}" placeholder="Current Price" onkeyup="range.value=this.value" />
+                    </div> {% endcomment %}
+                    
+                    <fieldset id="checkArray">
+                      <input hidden name="chk[]" checked  type="radio" value="10 - 15 triệu" class="form-check-input filter-checkbox" min="0" max="999999999"   ></input>
+                      <input name="chk[]"  type="radio" value="Dưới 10 triệu" class="form-check-input filter-checkbox" min="500000" max="10000000"   ><span class="ms-2">Dưới 10 triệu</span></input>
+                      <br>
+                      <input name="chk[]"  type="radio" value="10 - 15 triệu" class="form-check-input filter-checkbox" min="10000001" max="15000000"   ><span class="ms-2">10 - 15 triệu</span></input>
+                      <br>
+                      
+                      <input name="chk[]"  type="radio" value="15 - 20 triệu" class="form-check-input filter-checkbox" min="15000001" max="20000000"   ><span class="ms-2">15 - 20 triệu</span></input>
+                      <br>
+                      
+                      <input name="chk[]"  type="radio" value="Trên 20 triệu" class="form-check-input filter-checkbox" min="20000001" max="999999999"   ><span class="ms-2">Trên 20 triệu</span></input>
+                    </fieldset>
+                    
                   </div>
                 </div>
                 <div class="custome-checkbox mt-2">
-                  <button class="btn text-white bg-success" type="button" id="price-filter-btn">Filter</button>
+                  {% comment %} <button class="btn text-white bg-success" type="button" id="price-filter-btn">Filter</button> {% endcomment %}
                   <!-- <h3>{{ min_max_price }}</h3> -->
                 </div>
               </div>
