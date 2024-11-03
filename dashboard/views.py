@@ -91,7 +91,10 @@ def make_address_default(request):
 
 def profile_user(request):
   user_profile = Profile.objects.get(user=request.user)
+  a = Address.objects.get(user=request.user,status = True)
+  print(a)
   context = {
+    "a":a,
     "user_profile": user_profile,
     'active_section': 'profile'
   }

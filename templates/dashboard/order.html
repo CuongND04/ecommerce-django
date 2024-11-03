@@ -42,12 +42,12 @@
               <div class="d-flex align-items-center">
                 {% comment %} <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" /> {% endcomment %}
                 <div class="ms-3">
-                  <p class="fw-medium mb-1">FM-{{ o.id }}</p>
+                  <p class="fw-medium mb-1 text-black">LO-{{ o.id }}</p>
                 </div>
               </div>
             </td>
             <td>
-              <p class="fw-normal mb-1">{{ o.order_date }}</p>
+              <p class="text-black mb-1">{{ o.order_date|date:"H:i d/m/Y" }}</p>
               {% comment %} <p class="text-muted mb-0">IT department</p> {% endcomment %}
             </td>
             <td>
