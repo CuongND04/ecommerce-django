@@ -25,9 +25,69 @@
   </section>
 
   <!-- Breadcrumb Section End -->
-
-  <h2 class="fw-semibold">Bảng điều khiển</h2>
-  <div style="height: 800px; width: 800px; object-fit: cover;">
-    <canvas id="myChart"></canvas>
+  <style>
+    .info-box {
+        background-color: rgba(25, 135, 84,0.5); /* màu xanh lá cây */
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        position: relative;
+        height: 150px;
+        border: 1px solid #111;
+    }
+    .info-box h5 {
+        font-weight: bold;
+    }
+    .info-box .icon {
+        font-size: 40px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    .info-box .btn-link {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+    }
+</style>
+  <div class="container my-5">
+    <div class="row text-center">
+        <!-- Box 1 -->
+        <div class="col-md-3 mb-4">
+            <div class="info-box">
+              <h5>Đơn hàng đã đặt</h5>
+              <h2 class="mt-3 text-white">{{total_orders123}}</h2>
+            </div>
+        </div>
+        <!-- Box 2 -->
+        <div class="col-md-3 mb-4">
+            <div class="info-box">
+                <h5>Đơn hàng đã thanh toán</h5>
+                <h2 class="mt-3 text-white">{{paid_orders_count}}</h2>
+            </div>
+        </div>
+        <!-- Box 3 -->
+        <div class="col-md-3 mb-4">
+            <div class="info-box">
+                <h5>Số tiền đã thanh toán</h5>
+                <h2 class="mt-3 text-white">{{total_paid|intcomma}}đ</h2>
+            </div>
+        </div>
+        <!-- Box 4 -->
+        <div class="col-md-3 mb-4">
+            <div class="info-box">
+                <h5>Được giảm giá</h5>
+                <h2 class="mt-3 text-white">{{total_saved|intcomma}}đ</h2>
+            </div>
+        </div>
+    </div>
+</div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
   </div>
+  
 {% endblock %}

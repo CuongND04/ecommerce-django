@@ -1,3 +1,4 @@
+from django.db import models
 
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse,JsonResponse
@@ -40,7 +41,15 @@ def customer_dashboard(request):
   # đại diện cho tổng số đơn hàng trong tháng đó.
 
   # .values("month", "count") được dùng để chỉ lấy hai trường month và count
+  orderCount = CartOrder.objects.count()
+  total_spent = CartOrder.objects.filter(user=request.user).aggregate(total_price=models.Sum('price'))['total_price']
+  total_paid = CartOrder.objects.filter(paid_status=True).aggregate(total=Sum('price'))['total'] or 0
   orders = CartOrder.objects.annotate(month=ExtractMonth("order_date")).values("month").annotate(count=Count("id")).values("month", "count")
+  total_orders123 = CartOrder.objects.filter(user=request.user).count()
+  paid_orders_count = CartOrder.objects.filter(user=request.user, paid_status=True).count()
+  total_saved = CartOrder.objects.filter(user=request.user).aggregate(total_saved=Sum('saved'))['total_saved'] or 0
+
+  
   month = []
   total_orders = []
   vietnamese_months = ["", "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]
@@ -55,6 +64,11 @@ def customer_dashboard(request):
     "orders": orders,
     "month": month,
     "total_orders": total_orders,
+    "total_orders123": total_orders123,
+    "paid_orders_count":paid_orders_count,
+    "total_spent":total_spent,
+    "total_saved":total_saved,
+    "total_paid":total_paid,
     'active_section': 'index'
   }
   return render(request,'dashboard/dashboard.html',context)
@@ -109,7 +123,7 @@ def address_view(request):
   return render(request,'dashboard/address.html',context)
 
 
-def order_view(request):
+def order_view(request):  
   user_profile = Profile.objects.get(user=request.user)
   orders_list = CartOrder.objects.filter(user=request.user).order_by("-id")
 

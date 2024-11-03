@@ -77,7 +77,7 @@
           <a class="{% if active_section == 'profile' or active_section == 'edit_profile' %}bg-success border rounded text-white{% endif %}" href="{% url 'dashboard:profile' %}" onclick="">Thông tin</a>
           <a class="{% if active_section == 'order' or active_section == 'order_detail' %}bg-success border rounded text-white{% endif %}" href="{% url 'dashboard:order' %}" onclick="">Đơn hàng</a>
           <a class="{% if active_section == 'address' %}bg-success border rounded text-white{% endif %}" href="{% url 'dashboard:address' %}" onclick="">Địa chỉ</a>
-          <a href="#" onclick="">Liên hệ</a>
+          <a class="{% if active_section == 'change_password' %}bg-success border rounded text-white{% endif %}" href="{% url 'userauths:change-password' %}"  onclick="">Đổi mật khẩu</a>
           <a href="{% url 'core:index' %}">Trở về cửa hàng</a>
         </div>
 
@@ -117,9 +117,10 @@
             {% endblock %}
           </div>
 
-          <div id="analytics" class="section-content">
-            <h2 class="fw-semibold">Analytics</h2>
-            <p>This is the analytics section where you can view your performance and other stats.</p>
+          <div id="analytics" class="section-content {% if active_section == 'change_password' %}active-section{% endif %}">
+            {% block change  %}
+
+            {% endblock %}
           </div>
         </div>
       </div>

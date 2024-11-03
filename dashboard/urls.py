@@ -14,4 +14,8 @@ urlpatterns = [
   path("order/detail/<int:id>", order_detail, name="order-detail"),
 
   path("address/make-default-address/", make_address_default, name="make-default-address"),
+
+  
+
+
 ]

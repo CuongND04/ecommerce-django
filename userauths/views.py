@@ -90,3 +90,35 @@ def profile_update(request):
     }
 
     return render(request, "userauths/profile-edit.html", context)
+
+
+def change_password(request):
+    user_profile = Profile.objects.get(user=request.user)
+    context={
+       "user_profile": user_profile,
+       'active_section': 'change_password',
+    }
+    # ch = register_table.objects.filter(user__id=request.user.id)
+    # if len(ch)>0:
+    #     data = register_table.objects.get(user__id=request.user.id)
+    #     context["data"] = data
+    if request.method=="POST":
+        current = request.POST["cpwd"]
+        new_pas = request.POST["npwd"]
+        
+        user = User.objects.get(id=request.user.id)
+        un = user.username
+        check = user.check_password(current)
+        print(check)
+        if check==True:
+            user.set_password(new_pas)
+            user.save()
+            context["msz"] = "Đổi mật khẩu thành công!!!!"
+            context["col"] = "alert-success"
+            user = User.objects.get(username=un)
+            login(request,user)
+        else:
+            context["msz"] = "Mật khẩu hiện tại không đúng. Xin vui lòng nhập lại."
+            context["col"] = "alert-danger"
+
+    return render(request,"userauths/change-password.html",context)
