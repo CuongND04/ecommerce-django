@@ -435,6 +435,7 @@ $(document).ready(function () {
                 return element.value
             })
         })
+        
         console.log("filter_object",filter_object)
         $.ajax({
             url: "/filter-products",

@@ -37,9 +37,10 @@
                 <img src="{% static 'assets/img/Default_pfp.svg.png' %}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
               {% endif %}
               <h5 class="my-3">{{ user_profile.full_name }}</h5>
-              <p class="text-muted mb-1">{{ user_profile.bio }}</p>
+              <h6 class="my-3">Bio</h6>
+              <p class="text-muted mb-1">{{ user_profile.bio }}</p> 
               {% comment %} <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> {% endcomment %}
-              <div class="d-flex justify-content-center mb-2">
+              <div class="d-flex justify-content-center mb-2 mt-2">
                 {% comment %} <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Follow</button> {% endcomment %}
                 <a href="{% url 'userauths:profile-update' %}" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-success ms-1">Chỉnh sửa</a>
               </div>
@@ -51,7 +52,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0 text-black">Full Name</p>
+                  <p class="mb-0 text-black">Tên đầy đủ</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{ user_profile.full_name }}</p>
@@ -60,7 +61,7 @@
               <hr />
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0 text-black">Email</p>
+                  <p class="mb-0 text-black">Địa chỉ email</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{ request.user.email }}</p>
@@ -69,12 +70,40 @@
               <hr />
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0 text-black">Phone</p>
+                  <p class="mb-0 text-black">Số điện thoại</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{ user_profile.phone }}</p>
                 </div>
               </div>
+              
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0 text-black">Giới tính</p>
+                </div>
+                <div class="col-sm-9">
+                  {% if user_profile.gender == 'male' %}
+                      <p class="text-muted mb-0">Nam</p>
+                  {% elif user_profile.gender == 'female' %}
+                      <p class="text-muted mb-0">Nữ</p>
+                  {% else %}
+                      <p class="text-muted mb-0">Chưa xác định</p>
+                      {% endif %}
+                </div>
+              </div>
+              
+              <hr />
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0 text-black">Ngày sinh</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user_profile.birthdate|date:"d-m-Y" }}</p>
+                </div>
+              </div>
+              
               <hr />
               {% comment %} <div class="row">
                 <div class="col-sm-3">
@@ -87,7 +116,7 @@
               <hr /> {% endcomment %}
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0 text-black">Address</p>
+                  <p class="mb-0 text-black">Địa chỉ</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{ user_profile.address }}</p>

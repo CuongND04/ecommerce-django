@@ -9,4 +9,9 @@ urlpatterns = [
     
     path("profile/update/", views.profile_update, name="profile-update"),
     path("change-password/",views.change_password, name="change-password"),
+
+    path("forgotpass",views.forgotpass, name="forgotpass"),
+    path("reset_password",views.reset_password,name="reset_password"),
 ]
+
+

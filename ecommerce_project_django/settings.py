@@ -225,3 +225,11 @@ PAYPAL_TEST = True
 
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'uteu237@gmail.com'
+EMAIL_HOST_PASSWORD = "arlk vndz egst xdst"
+EMAIL_USE_TLS = True

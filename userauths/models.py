@@ -30,6 +30,11 @@ class ContactUs(models.Model):
         return self.full_name
     
 class Profile(models.Model):
+
+    GENDER_CHOICES = [
+        ('male', 'Nam'),
+        ('female', 'Nữ'),
+    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = cloudinary.models.CloudinaryField('images', folder="fresh_mart")
     full_name = models.CharField(max_length=200, null=True, blank=True)
@@ -38,7 +43,8 @@ class Profile(models.Model):
     address = models.CharField(max_length=200, null=True, blank=True) 
     country = models.CharField(max_length=200, null=True, blank=True) 
     verified = models.BooleanField(default=False, null=True, blank=True)
-    
+    gender = models.CharField(max_length=6, choices=GENDER_CHOICES, default='male')
+    birthdate = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     def __str__(self):
         return f"{self.user.username} - {self.full_name} - {self.bio}"
     

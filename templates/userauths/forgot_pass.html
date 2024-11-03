@@ -1,0 +1,158 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Fresh Mart" />
+    <meta name="keywords" content="Fresh, Mart, Fresh Mart" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Fresh Mart</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    {% comment %} <link href="../../css2-4?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" /> {% endcomment %}
+    <!-- Css Styles -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css" />
+
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" type="text/css" />
+    {% comment %}dùng cho all departments{% endcomment %}
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" />
+
+    <style>
+      .spinner{
+          height:100px;width:100px;border: 10px solid gray;border-bottom:10px solid  blue;
+          animation:ani 1s linear infinite;border-radius: 50%;margin:auto
+      }
+      @keyframes ani{
+          from{transform:rotate(0deg)}
+          to{transform:rotate(360deg)}
+      }
+  </style>
+  </head>
+
+  <body>
+   
+    
+    <div class="container">
+      <div class="row">
+          <div class="col-md-6 mx-auto">
+              <div class="my-5 p-5" style="box-shadow:0px 0px 10px black;">
+                  <h2>Đặt lại mật khẩu</h2> <hr>
+                  <div id="result"></div>
+                  <form action="" method="post">
+                      {% csrf_token %}
+                      <div class="form-group my-3">
+                          <label>Nhập địa chỉ email của bạn</label>
+                          <input type="texUsernamet" class="form-control" id="un" name="username" placeholder="Nhập username...">
+                      </div>
+                      <button type="button" class="btn btn-warning" onclick="getpass()" id="continue">Bấm để tiếp tục</button>
+                      <div class="mt-2" style="display:none" id="spin">
+                          <div class="spinner"></div>
+                      </div>
+                  
+                      <div class="form-group my-3" style="display:none" id="afterotp">
+                          <label>Nhập mã xác thực</label>
+                          <input type="number" class="form-control" id="uotp" placeholder="Nhập OTP...">
+                          
+                          <button onclick="matchotp()" type="button" class="btn btn-info mt-3">Xác minh</button>
+                      </div>
+
+                      <div style="display:none" id="changepass">
+                          <div class="form-group my-3">
+                              <label>Nhập mật khẩu mới</label>
+                              <input type="password" name="npass" class="form-control" placeholder="Enter New Password...">
+                          </div>
+                          <div class="form-group">
+                              <input type="submit" value="Thay đổi mật khẩu" class="btn btn-success">
+                          </div>
+                      </div>
+                  <input type="hidden"  id="realotp">
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <script>
+      function getpass(){
+          $("#spin").show();
+          let username=$("#un").val();
+          $.ajax({
+              url:"{% url 'userauths:reset_password' %}",
+              type:"get",
+              data:{username:username},
+              success:function(data){
+                  $("#spin").hide();
+                  if(data.status=="failed"){
+                      $("#result").html("<p class='alert alert-danger'>Tài khoản với địa chỉ email không tồn tại.</p>");
+                  }
+                  else if(data.status=="error"){
+                      $("#result").html("<p class='alert alert-danger'>Không thể gửi email tới địa chỉ "+data.email+" Có vấn đề xảy ra!!!</p>");
+                  }
+                  else if(data.status=="sent"){
+                      $("#result").html("<p class='alert alert-success'>Mã OTP đã được gửi tới email xác thực của bạn: "+data.email+"</p>");
+                      $("#continue").hide();
+                      $("#afterotp").slideDown(1000);
+                      $("#realotp").val(data.rotp)
+                  }
+              }
+          })
+      }
+
+      function matchotp(){
+          uotp = $("#uotp").val();
+          rotp = $("#realotp").val();
+
+          if(uotp==rotp){
+              $("#afterotp").hide()
+              $("#changepass").fadeIn(1000);
+              $("#result").html("<p class='alert alert-success'>Xác thực thành công!!!</p>");
+          }else{
+              $("#result").html("<p class='alert alert-danger'>Sai OTP</p>");
+          }
+      }
+  </script>
+
+
+
+
+
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/bootstrap.min.js' %}"></script> {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'assets/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    {# flash message #}
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+    <script>
+        {% for message in messages %}  
+
+            {% if 'success' in message.tags %}
+              showNotification("s","{{ message }}")
+            {% elif 'warning' in message.tags %}
+              showNotification("w","{{ message }}")
+            {% elif 'error' in message.tags %}
+            showNotification("e","{{ message }}")
+            {% else %}
+              showNotification("","{{ message }}")
+            {% endif %}
+        {% endfor %}
+    </script>
+  </body>
+</html>

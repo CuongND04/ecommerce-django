@@ -16,7 +16,13 @@ class ProfileForm(forms.ModelForm):
     full_name = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Full Name",'class':'form-control'}))
     bio = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Bio",'class':'form-control'}))
     phone = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Phone",'class':'form-control'}))
-
+    gender = forms.ChoiceField(
+        choices=[('male', 'Nam'), ('female', 'Nữ')],
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    birthdate = forms.DateField(
+        widget=forms.DateInput(attrs={"placeholder": "Ngày sinh", 'class': 'form-control', 'type': 'date'})
+    )
     class Meta:
         model = Profile
-        fields = ['full_name', 'image', 'bio', 'phone']
+        fields = ['full_name', 'image', 'bio', 'phone', 'gender', 'birthdate']

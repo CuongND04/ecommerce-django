@@ -5,6 +5,9 @@ from django.contrib import messages
 from core.models import *
 from userauths.models import Profile, User
 from .models import User
+from django.shortcuts import render, get_object_or_404, reverse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.core.mail import EmailMessage
 # Create your views here.
 def register_view(request):
   categories  = Category.objects.all()
@@ -122,3 +125,41 @@ def change_password(request):
             context["col"] = "alert-danger"
 
     return render(request,"userauths/change-password.html",context)
+
+def forgotpass(request):
+    context = {}
+    if request.method=="POST":
+        email = request.POST["username"]
+        pwd = request.POST["npass"]
+
+        user = get_object_or_404(User,email=email)
+        user.set_password(pwd)
+        user.save()
+
+        # login(request,user)
+        # if user.is_superuser:
+        #     return HttpResponseRedirect("/admin")
+        # else:
+        return HttpResponseRedirect("/user/sign-in")
+        # context["status"] = "Password Changed Successfully!!!"
+
+    return render(request,"userauths/forgot_pass.html",context)
+
+import random
+
+def reset_password(request):
+    un = request.GET["username"]
+    try:
+        user = get_object_or_404(User,email=un)
+        otp = random.randint(1000,9999)
+        msz = "Xin chào {} \n{} là mã xác thực của bạn (OTP) \nĐừng chia sẻ với bất kì ai \nThanks&Regards \nLapOne".format(user.profile.full_name, otp)
+        try:
+            email = EmailMessage("Xác thực tài khoản",msz,to=[user.email])
+            email.send()
+            return JsonResponse({"status":"sent","email":user.email,"rotp":otp})
+        except Exception as e:
+          import logging
+          logging.error("Lỗi khi gửi email: %s", e)
+          return JsonResponse({"status":"error","email":user.email})
+    except:
+        return JsonResponse({"status":"failed"})
