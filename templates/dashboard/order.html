@@ -2,6 +2,8 @@
 {% load static %}
 {% load humanize %}
 {% block order %}
+
+
   <section class="border-bottom border-success mb-3">
     <div class="container">
       <div class="row">
@@ -52,19 +54,19 @@
             </td>
             <td>
               {% if o.product_status == 'processing' %}
-                <span class="badge text-bg-warning">Đang chuẩn bị hàng</span>
+                <span class="badge text-bg-warning" style="width: 150px;">Đang chuẩn bị hàng</span>
               {% elif o.product_status == 'shipped' %}
-                <span class="badge text-bg-info">Đang giao hàng</span>
+                <span class="badge text-bg-info" style="width: 150px;">Đang giao hàng</span>
               {% elif o.product_status == 'delivered' %}
-                <span class="badge text-bg-success px-2">Đã giao hàng thành công</span>
+                <span class="badge text-bg-success px-2" style="width: 150px;">Đã giao hàng</span>
               {% endif %}
             </td>
 
             <td>
               {% if o.paid_status %}
-                <span class="badge text-bg-success">Thành công</span>
+                <span class="badge text-bg-success" style="width: 130px;">Thành công</span>
               {% else %}
-                <span class="badge text-bg-danger">Chưa thanh toán</span>
+                <span class="badge text-bg-danger" style="width: 130px;">Chưa thanh toán</span>
               {% endif %}
             </td>
             <td>{{ o.price|intcomma }}đ</td>
@@ -83,5 +85,6 @@
     </table>
   </div>
 
+  
 
 {% endblock %}

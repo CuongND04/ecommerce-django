@@ -38,6 +38,7 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -59,6 +60,8 @@ INSTALLED_APPS = [
     'dashboard',
     "ckeditor",
     'ckeditor_uploader',
+    'ChatApp',
+    'channels',
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -108,7 +111,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ecommerce_project_django.wsgi.application'
+ASGI_APPLICATION = "ecommerce_project_django.asgi.application"
 
+CHANNEL_LAYERS = {
+    "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"},
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

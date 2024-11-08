@@ -27,6 +27,7 @@ urlpatterns = [
     path("",include("core.urls")),
     path("user/",include("userauths.urls")),
     path("dashboard/",include("dashboard.urls")),
+    path('chat/', include('ChatApp.urls'))
     
 ]
 if settings.DEBUG:

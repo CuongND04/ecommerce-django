@@ -394,7 +394,7 @@ ol {
 }
 
 .header__menu {
-  padding: 24px 0 0px 50px;
+  padding: 24px 0 0px 0px;
 }
 
 .header__menu ul li {
@@ -4264,3 +4264,119 @@ ol {
   background-color: #198754;
   color: white;
 }
+/* Chat icon style */
+.chat-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 24px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1001; /* Make sure it stays above other elements */
+}
+
+/* Chat popup box style */
+.chat-popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 30%; /* 1/4 of the screen width */
+  height: 100vh; /* Full screen height */
+  background-color: white;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Below the chat icon */
+  overflow-y: auto;
+  border-left: 2px solid #ddd;
+}
+
+/* Chat header with close button */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #4CAF50;
+  color: white;
+  border-top-right-radius: 8px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Chat body styling */
+.chat-body-parent {
+  padding: 10px;
+}
+.sender-name {
+  font-size: 12px;
+}
+.message {
+  max-height: calc(100vh - 224px); /* Adjust to allow space for header and form */
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+.message p {
+  margin: 0;
+}
+#msg {
+  height: 50px;
+}
+.receive, .send {
+  margin-bottom: 5px;
+  padding: 8px;
+  border-radius: 5px;
+  width: 70%;
+}
+
+.receive {
+  background-color: #f1f1f1;
+  text-align: left;
+}
+
+.send {
+  background-color: #c8f7c5;
+  color: white;
+  text-align: right;
+  justify-self: end;
+}
+
+/* Chat input form */
+.form {
+  padding: 10px;
+}
+
+.form textarea {
+  width: 100%;
+  resize: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.form .submit {
+  width: 15%;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  right: 22px;
+}
+
+.timestamp {
+  font-size: 12px;
+}
+

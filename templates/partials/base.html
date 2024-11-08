@@ -30,6 +30,8 @@
     {% comment %}dùng cho all departments{% endcomment %}
     <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" />
+    {% block styleChat %}{% endblock styleChat %}
+
   </head>
 
   <body>
@@ -44,7 +46,7 @@
                   <li>
                     <i class="fa fa-envelope"></i> ctsv@ptit.edu.vn
                   </li>
-                  <li>Vận chuyển miễn phí toàn quốc cho mọi đơn hàng – Đừng bỏ lỡ!</li>
+                  <li style="width: 500px;"><marquee>Vận chuyển miễn phí toàn quốc cho mọi đơn hàng – Đừng bỏ lỡ!    Nhập mã <strong>GIAM10</strong>  để nhận ngay ưu đãi giảm <strong>10%</strong> cho đơn hàng bất kỳ!</marquee></li>
                 </ul>
               </div>
             </div>
@@ -168,6 +170,9 @@
                   <a href="{% url 'core:contact' %}">Contact</a>
                 </li>
                 <li>
+                  <a href="http://127.0.0.1:8000/chat/testchat">Chat</a>
+                </li>
+                <li>
                   <a href="{% url 'dashboard:index' %}">Dashboard</a>
                 </li>
               </ul>
@@ -246,6 +251,47 @@
     {% block content %}
 
     {% endblock %}
+    
+    <div class="chat-popup" id="chatBox">
+      <div class="chat-header">
+          <h2>Chat chung</h2>
+          <button class="close-btn" onclick="toggleChatBox()">×</button>
+      </div>
+      <hr>
+      <div class="chat-body-parent">
+          <div class="chat-body" id="tasks">
+              <div class="message" id="chatContainer">
+                  <!-- received messages and displayed here -->
+                  {% for i in ms %}
+                    {% if i.sender != username %}
+                        <div class="receive">
+            
+                            <p class="message-text">{{ i.message }}</p>
+                            <p class="sender-name">{{ i.sender }} - {{ i.date|date:"H:i" }}</p>
+                        </div>
+                    {% else %}
+                        <div class="send">
+                            <p class="message-text">{{ i.message }}</p>
+                            <p class="sender-name">{{ i.sender }} - {{ i.date|date:"H:i" }}</p>
+                        </div>
+                    {% endif %}
+                  {% endfor %}
+                  <!-- end receive messages -->
+              </div>
+  
+              <div class="form">
+                  <form action="" id="message-form" method="POST">
+                      {% csrf_token %}
+                      <textarea id="msg" cols="30" name="message" rows="10" placeholder="Nhập tin nhắn..." required></textarea>
+                      <button class="submit" type="submit">Send</button>
+                  </form>    
+              </div>
+          </div>
+      </div>
+  </div>
+  <button class="chat-icon" id="chatIcon" onclick="toggleChatBox()">💬</button>
+  
+
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -302,7 +348,110 @@
     {% comment %}thanh toán{% endcomment %}
 
     {% comment %}END thanh toán{% endcomment %}
+    <script>
+      
+      function getCurrentTime() {
+        const now = new Date(); // Get the current date and time
+        const hours = String(now.getHours()).padStart(2, '0'); // Get the hours, ensuring two digits
+        const minutes = String(now.getMinutes()).padStart(2, '0'); // Get the minutes, ensuring two digits
+        return `${hours}:${minutes}`; // Return the formatted time (HH:mm)
+    }
 
+      const chatBody = document.getElementsByClassName("message")[0];
+      
+      function scrollToBottom() {
+        chatBody.scrollTop = chatBody.scrollHeight; 
+      }
+      window.onload = scrollToBottom();
+      const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+      const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/{{room_name}}/`;
+      const socket = new WebSocket(wsEndpoint);
+  
+      document.getElementById('message-form').addEventListener('submit', function(event){
+          event.preventDefault();
+          const message = document.getElementById('msg').value;
+          socket.send(
+              JSON.stringify({
+                  'message': message,
+                  'room_name': '{{room_name}}',
+                  'sender': '{{user}}',
+              })
+          )
+      });
+  
+      // response from consumer on server
+      socket.addEventListener("message", (event) => {
+          const messageData = JSON.parse(event.data)['message'];
+          console.log(messageData);
+          
+          var sender = messageData['sender'];
+          var message = messageData['message'];
+  
+          // empty message input field after message has been sent
+          if (sender){
+              document.getElementById('msg').value = '';
+          }
+          const currentTime = getCurrentTime();
+          // Here's where we append the message to the chatbox.
+          var messageDiv = document.querySelector('.message');
+          if (sender != '{{ user }}') {
+            messageDiv.innerHTML += `
+                <div class="receive">
+                    <p class="message-text">${message}</p>
+                    <p class="sender-name">${sender} - ${currentTime}</p>
+                </div>
+            `;
+        } else {
+            messageDiv.innerHTML += `
+                <div class="send">
+                    <p class="message-text">${message}</p>
+                    <p class="sender-name">${sender} - ${currentTime}</p>
+                </div>
+            `;
+        }
+          scrollToBottom();
+  
+      });
+  
+      socket.onopen = (event) => {
+          console.log("WebSocket connection opened!");
+      };
+  
+      socket.onclose = (event) => {
+          console.log("WebSocket connection closed!");
+      };
+  
+  </script>
+    <script>
+
+      {% comment %} function toggleChat() {
+        const chatBox = document.getElementById("chatBox");
+        if (chatBox.style.display === "none" || chatBox.style.display === "") {
+            chatBox.style.display = "flex";
+        } else {
+            chatBox.style.display = "none";
+        }
+    } {% endcomment %}
+
+    function toggleChatBox() {
+      var chatBox = document.getElementById("chatBox");
+      var chatIcon = document.getElementById("chatIcon");
+      if (chatBox.style.display === "none") {
+        chatBox.style.display = "block";
+        chatIcon.style.display = "none"; // Hide the icon when the chat box is visible
+    } else {
+        chatBox.style.display = "none";
+        chatIcon.style.display = "block"; // Show the icon again when the chat box is hidden
+    }
+      scrollToBottom();
+  }
+  
+  // Make sure to initially hide the chatBox
+  window.onload = function() {
+      document.getElementById("chatBox").style.display = "none";
+  };
+  
+    </script>
     <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
     {% comment %} <script src="{% static 'assets/js/bootstrap.min.js' %}"></script> {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

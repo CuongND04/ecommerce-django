@@ -1,7 +1,7 @@
 from core.models import CartOrderItems,  Product, Category, CartOrder, ProductImages, ProductReview, WishList, Address
 from django.db.models import Min,Max
 from django.contrib import messages 
-
+from ChatApp.models import *
 def default(request):
   categories  = Category.objects.all()
   # vendors = Vendor.objects.all()
@@ -29,12 +29,29 @@ def default(request):
       for p_id, item in request.session['cart_data_obj'].items():
           cart_total_amount += int(item['qty']) * float(item['price'])
   
+
+  room_name = "he"
+  get_room = Room.objects.get(room_name=room_name)
+  username = request.user.username
+  if request.method == 'POST':
+      message = request.POST.get('message')
+      if message:
+      # print(message)
+
+        new_message = Message(room=get_room, sender=username, message=message)
+        new_message.save()
+
+  get_messages= Message.objects.filter(room=get_room)
+  print("get_messages",get_messages)
+  
   return {
     "categories":categories,
     # "vendors":vendors,
     'wishlist':wishlist,
     "min_max_price":min_max_price,
     "username":username,
-    "cart_total_amount":cart_total_amount
-    # "profile":profile
+    "cart_total_amount":cart_total_amount,
+    # "profile":profile,
+    "ms": get_messages,
+    "room_name": room_name,
   }

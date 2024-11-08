@@ -55,13 +55,79 @@
           margin-bottom: 20px;" class="btn btn-outline-danger">{{ product.get_percentage|floatformat:0 }}% Off</button>
           <div class="product__details__text">
             <h3>{{ product.title }}</h3>
-            <div class="product__details__rating">
-              <i class="fa fa-star"></i>
+            <div class="product__details__rating " style="height: 50px;">
+              {% comment %} <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa-solid fa-star-half-stroke"></i>
-              <span>(18 reviews)</span>
+              <span>(18 reviews)</span> {% endcomment %}
+              {% if average_rating.rating >= 5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 4.5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star-half-stroke" style="color: #ffb83d;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 4 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 3.5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star-half-stroke" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 3 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 2.5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star-half-stroke" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 2 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 1.5 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star-half-stroke" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% elif average_rating.rating >= 1 %}
+                      <i class="fa-solid fa-star" style="color: #ffb83d;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      <p class="ms-2 d-inline-block fw-bolder">{{ average_rating.rating|floatformat:1 }} trên 5.0</p>
+                    {% else %}
+                      Không có đánh giá
+                    {% endif %}
             </div>
             <div class="product__details__price text-success fw-bold">
               <span class="current-product-price-{{ product.id }}">{{ product.price|intcomma }}</span>đ<div class="text-decoration-line-through text-muted fs-6">{{ product.old_price|intcomma }}đ</div>
