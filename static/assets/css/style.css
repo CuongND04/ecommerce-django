@@ -4380,3 +4380,8 @@ ol {
   font-size: 12px;
 }
 
+.message-text {
+  word-wrap: break-word; /* Tự động xuống dòng khi từ quá dài */
+  word-break: break-word; /* Đảm bảo không bị tràn */
+  white-space: pre-wrap; /* Giữ khoảng trắng và xuống dòng tự nhiên */
+}
