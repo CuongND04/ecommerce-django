@@ -59,6 +59,10 @@
             <td>{{ o.total|intcomma }}đ</td>
           </tr>
         {% endfor %}
+        <tr>
+          <td></td>
+          <td>Trạng thái: {% if order.paid_status %}<span class="badge text-bg-primary">Thanh toán thành công</span>{% else %}<span class="badge text-bg-secondary">Chưa thanh toán</span>{% endif %}</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -97,6 +101,25 @@
         <input class="form-control my-2" type="text" name="country" value="" placeholder="Country *" />
       </div>
                              -->
+    </div>
+    <div class="row mt-4 container">
+      <div class="progress-step">
+        {% comment %} <div class="step {% if order.product_status in ' processing shipped delivered' %} {% else %}inactive{% endif %}">
+            <div class="step-number">1</div>
+            <div class="step-label">Thanh toán thành công</div>
+        </div> {% endcomment %}
+        <div class="step {% if order.product_status in 'processing shipped delivered' %} {% else %}inactive{% endif %}">
+            <div class="step-number">1</div>
+            <div class="step-label">Đang chuẩn bị hàng</div>
+        </div>
+        <div class="step {% if order.product_status in 'shipped delivered' %} {% else %}inactive{% endif %}">
+            <div class="step-number">2</div>
+            <div class="step-label">Đang giao hàng</div>
+        </div>
+        <div class="step {% if order.product_status in 'delivered' %} {% else %}inactive{% endif %}">
+          <div class="step-number">3</div>
+          <div class="step-label">Giao hàng thành công</div>
+      </div>
     </div>
   </div>
 

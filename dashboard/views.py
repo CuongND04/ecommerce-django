@@ -146,6 +146,7 @@ def order_detail(request, id):
 
     address = Address.objects.filter(user=request.user)
     context = {
+        "order":order,
         "order_items": order_items,
         "user_profile": user_profile,
         "orders_list": orders_list,
